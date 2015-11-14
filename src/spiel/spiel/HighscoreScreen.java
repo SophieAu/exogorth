@@ -6,6 +6,10 @@ import javax.swing.JPanel;
 
 public class HighscoreScreen extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int width = 800, height = 600;
 	
 	/**

@@ -1,5 +1,4 @@
 package spiel;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -42,7 +41,6 @@ public class DefaultScreenOptions {
 		JPanel background = new JPanel();
 		background.setOpaque(true);
 		background.setLayout(null);
-		background.setBackground(Color.DARK_GRAY);
 		background.setSize(width, height);
 		return background;
 	}
@@ -58,7 +56,7 @@ public class DefaultScreenOptions {
 		back.setBounds((width - 300) / 2, (height + 400) / 2, 300, 40);
 		back.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent ev) {
-				JFrame menu = new MenuExo();
+				JFrame menu = new MainMenu();
 				menu.setVisible(true);
 				window.setVisible(false);
 			}

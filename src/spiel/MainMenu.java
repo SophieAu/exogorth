@@ -1,4 +1,5 @@
 package spiel;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -14,27 +15,32 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame implements ActionListener {
-	private Toolkit t;													// Toolkit
-	private static final int SCREEN_WIDTH = 800, SCREEN_HEIGHT = 600;	// Hï¿½he und Breite des Fensters
-	private int xScreen = 0, yScreen = 0;								// Positionsdaten des Programms auf Bildschirm
-	private BufferedImage headlineIMG;									// Spielename
-	private JButton startButton, helpButton, highscoreButton, creditsButton, exitButton;	// Menï¿½-Schaltflï¿½chen
+	// Toolkit
+	private Toolkit t;
+	// Höhe und Breite des Fensters
+	private static final int SCREEN_WIDTH = 800, SCREEN_HEIGHT = 600;
+	// Positionsdaten des Programms auf Bildschirm
+	private int xScreen = 0, yScreen = 0;
+	// Spielname
+	private BufferedImage headlineIMG;
+	// Menü-Schaltflächen
+	private JButton startButton, helpButton, highscoreButton, creditsButton, exitButton;
 
 	/**
-	 * Hauptmenï¿½ zu dem Spiel (Exogorth). Von hier aus gelangt man in sï¿½mtliche Bereiche des Programms: Spiel starten,
-	 * Hilfe, Highscore, Credits und Spiel beenden. Auflï¿½sung der Fenster ist immer 800x600 und es befindet sich
-	 * stets in der mitte des Bildschirms.
+	 * Hauptmenü zu dem Spiel (Exogorth). Von hier aus gelangt man in sämtliche
+	 * Bereiche des Programms: Spiel starten, Hilfe, Highscore, Credits und
+	 * Spiel beenden. Auflösung der Fenster ist immer 800x600 und es befindet
+	 * sich stets in der mitte des Bildschirms.
 	 */
-	@SuppressWarnings("static-access")
 	public MainMenu() {
 		t = t.getDefaultToolkit();
-		// Erstellt Hauptmenï¿½ mit passender Auflï¿½sung, Positionierung und den Schaltfï¿½lchen.
+		// Erstellt Hauptmenü mit passender Auflösung, Positionierung und den
+		// Schaltfälchen.
 		setTitle("Exogorth - Hauptmenü");
 		setLayout(null);
 		calcScreenSize();
 		setBounds(xScreen, yScreen, SCREEN_WIDTH, SCREEN_HEIGHT);
 		setResizable(false);
-		setVisible(true);
 		add(new DefaultBackground());
 
 		try {
@@ -43,7 +49,8 @@ public class MainMenu extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
-		// Erstellt alle fï¿½nf Menï¿½punkt von denen man in die anderen Bereiche des Spiels gelangt.
+		// Erstellt alle fünf Menüpunkt von denen man in die anderen Bereiche
+		// des Spiels gelangt.
 		startButton = new JButton("Spiel Starten");
 		startButton.setBounds((SCREEN_WIDTH - 300) / 2, (SCREEN_HEIGHT - 200) / 2, 300, 40);
 		startButton.addActionListener(this);
@@ -66,31 +73,35 @@ public class MainMenu extends JFrame implements ActionListener {
 		add(exitButton);
 	}
 
-	// Wenn eine der Schaltflï¿½chen gedrï¿½ckt wird, schlieï¿½t sich das Hauptmenï¿½ und das zur Schaltflï¿½che
-	// passende Fenster wird geï¿½ffnet (Spielbildschirm, Hilfe, Highscore, Credits, oder Spiel wird beendet)
-	@Override public void actionPerformed(ActionEvent ev) {
-		if(ev.getSource() == startButton) {
+	// Wenn eine der Schaltflächen gedrückt wird, schließt sich das Hauptmenü
+	// und das zur Schaltfläche
+	// passende Fenster wird geöffnet (Spielbildschirm, Hilfe, Highscore,
+	// Credits, oder Spiel wird beendet)
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		if (ev.getSource() == startButton) {
+			TheMain.mode = 2;
+			TheMain.ablauf.setVisible(true);
 			setVisible(false);
-			TheMain.mode=2;
-		} else if(ev.getSource() == helpButton) {
+		} else if (ev.getSource() == helpButton) {
 			JFrame helpScreen = new HelpScreen();
 			helpScreen.setVisible(true);
 			setVisible(false);
-		} else if(ev.getSource() == highscoreButton) {
+		} else if (ev.getSource() == highscoreButton) {
 			JFrame highscoreScreen = new HighscoreScreen();
 			highscoreScreen.setVisible(true);
 			setVisible(false);
-		} else if(ev.getSource() == creditsButton) {
+		} else if (ev.getSource() == creditsButton) {
 			JFrame creditsScreen = new CreditsScreen();
 			creditsScreen.setVisible(true);
 			setVisible(false);
-		} else if(ev.getSource() == exitButton) {
-			System.exit(0);		// Beendet das Spiel !
+		} else if (ev.getSource() == exitButton) {
+			System.exit(0); // Beendet das Spiel !
 		}
 	}
 
 	/**
-	 * Berechnet die Koordination fï¿½r zentrale Platzierung des Fensters.
+	 * Berechnet die Koordination für zentrale Platzierung des Fensters.
 	 */
 	private void calcScreenSize() {
 		Dimension d = t.getScreenSize();
@@ -98,7 +109,8 @@ public class MainMenu extends JFrame implements ActionListener {
 		yScreen = (d.height - SCREEN_HEIGHT) / 2;
 	}
 
-	@Override public void paint(Graphics g) {
+	@Override
+	public void paint(Graphics g) {
 		super.paint(g);
 		g.drawImage(headlineIMG, 100, 75, null);
 	}

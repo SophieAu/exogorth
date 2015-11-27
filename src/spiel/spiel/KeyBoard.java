@@ -1,5 +1,5 @@
 package spiel;
-
+//Aufruf KeyBoard.knopfgedrueckt(KeyEvent.VK_SPACE))
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

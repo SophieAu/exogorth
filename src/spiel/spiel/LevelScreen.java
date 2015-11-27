@@ -1,9 +1,11 @@
 package spiel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,8 +14,6 @@ import javax.swing.KeyStroke;
 
 public class LevelScreen extends JFrame {
 
-
-	private static final long serialVersionUID = 1L;
 		private Toolkit t;
 		private int width = 800, height = 600;
 		
@@ -34,11 +34,6 @@ public class LevelScreen extends JFrame {
 			// Schließt das Fenster durch Drücken der ESCAPE-Taste (Lösung aus Internet)
 			KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
 			AbstractAction escapeAction = new AbstractAction() {
-					/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-
 					public void actionPerformed(ActionEvent e) {
 						JFrame menu = new MenuExo();
 						menu.setVisible(true);

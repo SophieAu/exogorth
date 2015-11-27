@@ -12,10 +12,6 @@ import javax.swing.JPanel;
 
 public class MenuExo extends JFrame{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private Toolkit t;
 	private int width = 800, height = 600, xScreen = 0, yScreen = 0;
 	

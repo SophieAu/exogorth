@@ -1,13 +1,8 @@
 package spiel;
-
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
-@SuppressWarnings("unused")
 public class Background {
 
 	private float xCord = 0;

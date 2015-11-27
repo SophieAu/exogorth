@@ -20,6 +20,7 @@ public class Bullets {
 	 * 1	: Regenbogen
 	 * 2	: Power-Up Leben
 	 * 3	: Power-Up Doppelter Schaden
+	 * 4/5  : Levelbegrenzungen // noch ohne Bild
 	 */
 	private BufferedImage bulletPicture;
 	

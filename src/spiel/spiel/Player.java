@@ -30,8 +30,6 @@ public class Player {
 	private int reload=0;
 	private int speedBullet=7;
 	private ArrayList<Bullets> bullet;
-	//sonst.
-	private ArrayList<? super Objekte> listOfObjects;
 	//Wahrheitswert dafür das der spieler bei 2/3 der Karte angekommen ist
 	boolean endOfWorld;
 	public int getPlayerY() {
@@ -60,9 +58,7 @@ public class Player {
 		this.playerX = spielerX;
 	}
 
-	public Player(int geschwindigkeit, int startX, int startY, int WeltX, int WeltY,
-			ArrayList<? super Objekte> objekte,ArrayList<Bullets>bullet) throws IOException {
-		this.listOfObjects = objekte;
+	public Player(int geschwindigkeit, int startX, int startY, int WeltX, int WeltY,ArrayList<Bullets>bullet) throws IOException {
 		this.bullet=bullet;
 		// Michelles Grafiken sind gut
 		playerPicture[0] = ImageIO.read(getClass().getClassLoader()
@@ -105,12 +101,19 @@ public class Player {
 				damageTaken();
 				bullet.remove(i);
 				break;
+			case 5://Balken oben
+				damageTaken();
+				break;
+			case 6://Balken unten
+				damageTaken();
+				break;
+			
 			default:  break;	
 			
 			}
 		}}
 		//beschränkung auf der Karte - maximale Bewegung 2/3
-		if (playerX > ((worldX * 2) / 3) && check())
+		if (playerX > ((worldX * 2) / 3))
 			endOfWorld = true;
 		else
 			endOfWorld = false;
@@ -195,53 +198,12 @@ public class Player {
 		bounding.y = y;
 	}
 
-	// Zu Nutzen mit den X und Y Werten 1 und 0
-	// Schleife für perfektion
+	// Zu Nutzen mit den X und Y Werten 1 und 0 -> Schleife
 	private void collision(int x, int y) {
 		bounding.x += x;
 		bounding.y += y;	
-		
-	/*	//for (int i = 0; i < bullet.size(); i++) {
-		Bullets tester = bullet.get(i);
-			
-			if (this.bounding.intersects(tester.getBounding())
-					&& (Math.abs(playerY - tester.getY() + 1) < getPlayerPicture()
-							.getHeight())) {
-				if (x != 0) {
-					bounding.x -= x;
-					if (this.bounding.intersects(tester.getBounding())) {
-						collision(0, 1);
-					}
-				} else if (y != 0) {
-					if (y > 0)
-					bounding.y -= y;
-					if (this.bounding.intersects(tester.getBounding())) {
-						if (y < 0) {
-							collision(0, y + 1);
-						}
-						if (y > 0) {
-							collision(0, y - 1);
-						}
-					}
-				} else
-					break;
-			}
-		}*/
 		playerX = bounding.x;
 		playerY = bounding.y;
-	}
-
-	public boolean check() {
-		for (int i = 0; i < listOfObjects.size(); i++) {
-			Objekte tester = (Objekte) listOfObjects.get(i);
-			if (this.bounding.intersects(tester.getBounding())) {
-				playerX-=speed;
-				bounding.x=(int) playerX;
-				return false;
-			}
-
-		}
-		return true;
 	}
 	public boolean getDmgI(){
 		return dmgI;

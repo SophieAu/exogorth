@@ -1,10 +1,13 @@
 package spiel;
 
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-
+		
 public class TheMain {
+	public static int mode=1;//1:Menï¿½; 2:Spiel; 3: Highscoreint mode=1;//1:Menï¿½; 2:Spiel; 3: Highscore
+	public static MainMenu app;
 	public static void main(String[] args) throws InterruptedException,
 			IOException {
 		int speedPlayer = 5;
@@ -26,7 +29,7 @@ public class TheMain {
 		ablauf.buffer();
 		ablauf.setResizable(false);
 		
-		// Thread für Spieler
+		// Thread fï¿½r Spieler
 		Thread spielerThread = new Thread() {
 			@Override
 			public void run() {
@@ -37,25 +40,45 @@ public class TheMain {
 					e.printStackTrace();
 				}
 			}
-		};		
-		// Threads starten
+		};
+		// Thread fï¿½r Bullet
+			//	Thread bulletThread = new Thread() {
+				//	@Override
+					//public void run() {
+						//for (int i = 0; i < bullet.size(); i++) {
+							//bullet.get(i).update();
+						//}
+					//}
+				//};
+
+		
 		spielerThread.start();
-		while (true) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override public void run() {
+				app = new MainMenu();
+			}
+		});
+		while (true){
+		while (mode==1){
+			app.setVisible(true);}
+		app.setVisible(false);
+		while (mode==2) {
 			// Start
 			double zeit = System.currentTimeMillis();
 
 			// Objekte update
 			// spieler update
 			spielerThread.run();
-			hg.update(player.endOfWorld);
+			hg.update();
 			ablauf.drawAgain();
 			//Kugeln ftw.
+		//	bulletThread.start();
 			for (int i = 0; i < bullet.size(); i++) {
 				bullet.get(i).update();
-				//i--;
 			}
 			while (zeit + 10 > System.currentTimeMillis())
 				Thread.sleep(1);
 		}
 	}
+}
 }

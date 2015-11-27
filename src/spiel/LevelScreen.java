@@ -1,20 +1,17 @@
 package spiel;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 
+@SuppressWarnings("serial")
 public class LevelScreen extends JFrame {
 
-		private Toolkit t;
 		private int width = 800, height = 600;
 		
 		/**
@@ -22,7 +19,6 @@ public class LevelScreen extends JFrame {
 		 * in das Hauptmenü und mit der H-Taste kann man das Hilfe-Fenster öffnen.
 		 */
 		public LevelScreen() {
-			t = Toolkit.getDefaultToolkit();
 			DefaultScreenOptions def = new DefaultScreenOptions(width, height);
 			
 			setTitle("Exogorth");

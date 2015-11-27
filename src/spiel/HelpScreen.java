@@ -4,18 +4,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class CreditsScreen extends JFrame {
+@SuppressWarnings("serial")
+public class HelpScreen extends JFrame {
 
 	private int width = 800, height = 600;
 	
 	/**
-	 * Erzeugt ein neues Fenster mit den Credits zum Spiel. Die Schaltfläche "Zurück" schließt
+	 * Erzeugt ein neues Fenster mit der Spielsteuerung. Die Schaltfläche "Zurück" schließt
 	 * das Hilfe-Menü und öffnet wieder das Hauptmenü.
 	 */
-	public CreditsScreen() {
+	public HelpScreen() {
 		DefaultScreenOptions def = new DefaultScreenOptions(width, height);
 		
-		setTitle("Exogorth - Highscore");
+		setTitle("Exogorth - Hilfe");
 		setLayout(null);
 		setBounds(def.getX(), def.getY(), width, height);
 		setResizable(false);
@@ -26,5 +27,6 @@ public class CreditsScreen extends JFrame {
 		getContentPane().add(backButton);
 	}
 	
-	/* Fehlender Code zum Anzeigen der Credits*/
+	/* Fehlender Code zum Anzeigen der Spielsteuerung*/
+		
 }

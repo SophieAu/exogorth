@@ -5,30 +5,28 @@ import javax.imageio.ImageIO;
 
 public class Background {
 
-	private float xCord = 0;
+	private int xCoord = 0;
 	private int speed;
 	private BufferedImage bgImage;
 
-	public Background(int geschwindigkeit) throws IOException {
-		this.speed = geschwindigkeit;
+	public Background(int speed) throws IOException {
+		this.speed = speed;
 		bgImage = ImageIO.read(getClass().getClassLoader().getResourceAsStream(
 				"bilddateien/background1.jpg "));
-
 	}
 
-	public void update(boolean a) {
-		xCord -= speed;
-			if (xCord < -bgImage.getWidth())
-				xCord = 0;
-			
+	public void update() {
+		xCoord -= speed;
+			if (xCoord < -bgImage.getWidth())
+				xCoord = 0;
 	}
 
-	public BufferedImage getSpielerbild() {
+	public BufferedImage getPlayerImage() {
 		return bgImage;
 
 	}
 
-	public float getHGX() {
-		return xCord;
+	public int getXCoord() {
+		return xCoord;
 	}
 }

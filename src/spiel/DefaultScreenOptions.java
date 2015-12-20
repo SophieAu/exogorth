@@ -1,5 +1,7 @@
 package spiel;
+
 import java.awt.Dimension;
+//import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,12 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 public class DefaultScreenOptions {
 
 	private Toolkit t;
-	private int width = 800, height = 600, xScreen, yScreen;
-	
+	private int width = ScreenDimensions.WIDTH, height = ScreenDimensions.HEIGHT, xScreen, yScreen;
+
 	public DefaultScreenOptions(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -22,7 +23,7 @@ public class DefaultScreenOptions {
 		t = Toolkit.getDefaultToolkit();
 		calcScreenPos();
 	}
-	
+
 	/**
 	 * Berechnet die Koordinaten zur mittigen Positionierung des Fensters
 	 */
@@ -31,10 +32,12 @@ public class DefaultScreenOptions {
 		xScreen = (d.width - width) / 2;
 		yScreen = (d.height - height) / 2;
 	}
-	
+
 	/**
 	 * Erstellt ein JPanel mit schwarzem Hintergrund und der Auflösung 800x600.
-	 * JPanel verfügt über kein Layout. Dies ermöglicht freie Positionierung von Komponenten.
+	 * JPanel verfügt über kein Layout. Dies ermöglicht freie Positionierung von
+	 * Komponenten.
+	 * 
 	 * @return Gibt ein fertigen Hintergrundbildschirm zurück.
 	 */
 	public JPanel createDefaultScreen() {
@@ -44,18 +47,21 @@ public class DefaultScreenOptions {
 		background.setSize(width, height);
 		return background;
 	}
-	
+
 	/**
 	 * Erstellt einen Button der zurück in das Hauptmenü führt. Der Button
 	 * verfügt dabei schon über die richtige Größe, sowie passende Position.
-	 * @param window - JFrame : zu schließendes Fenster
+	 * 
+	 * @param window
+	 *            - JFrame : zu schließendes Fenster
 	 * @return JButton der ins Hauptmenü führt.
 	 */
 	public JButton backToMenu(JFrame window) {
 		JButton back = new JButton("Zurück");
 		back.setBounds((width - 300) / 2, (height + 400) / 2, 300, 40);
 		back.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent ev) {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
 				JFrame menu = new MainMenu();
 				menu.setVisible(true);
 				window.setVisible(false);
@@ -63,17 +69,19 @@ public class DefaultScreenOptions {
 		});
 		return back;
 	}
-	
+
 	/**
 	 * Liefert mittlere x-Koordinate des Bildschirms.
+	 * 
 	 * @return mittlere x-Koordinate des Bildschirms
 	 */
 	public int getX() {
 		return xScreen;
 	}
-	
+
 	/**
 	 * Liefert mittlere y-Koordinate des Bildschirms.
+	 * 
 	 * @return y-Koordinate des Bildschirms
 	 */
 	public int getY() {

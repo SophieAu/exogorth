@@ -1,34 +1,31 @@
 package spiel;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Background {
 
-	private float xCord = 0;
-	private int speed;
-	private BufferedImage bgImage;
+	private int xCoordinate = 0;
+	private int backgroundSpeed;
+	private BufferedImage backgroundImage;
 
-	public Background(int geschwindigkeit) throws IOException {
-		this.speed = geschwindigkeit;
-		bgImage = ImageIO.read(getClass().getClassLoader().getResourceAsStream(
-				"bilddateien/background1.jpg "));
-
+	public Background(int backgroundSpeed) throws IOException {
+		this.backgroundSpeed = backgroundSpeed;
+		backgroundImage = ImageIO.read(getClass().getResourceAsStream("/Images/background1.jpg "));
 	}
 
 	public void update() {
-		xCord -= speed;
-			if (xCord < -bgImage.getWidth())
-				xCord = 0;
-			
+		xCoordinate -= backgroundSpeed;
+		if (xCoordinate < -backgroundImage.getWidth())
+			xCoordinate = 0;
 	}
 
 	public BufferedImage getSpielerbild() {
-		return bgImage;
-
+		return backgroundImage;
 	}
 
-	public float getHGX() {
-		return xCord;
+	public int getBackgroundxCoordinate() {
+		return xCoordinate;
 	}
 }

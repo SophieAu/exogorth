@@ -1,37 +1,36 @@
-package spiel;
+package exogorth.toberefactored;
 
 import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
-/**
- * Julians und Sebs Grafiken sind echt knorke.
- */
+import exogorth.STATE;
+import exogorth.Window;
+import exogorth.gamelogic.LevelBackground;
+import exogorth.menu.MainMenu;
+
+//TODO: replace mode with STATE
 public class TheMain {
-	public static int mode = 1;// 1:Menü; 2:Spiel; 3: Highscoreint
-								// mode=1;//1:Menü; 2:Spiel; 3: Highscore
-	public static MainMenu app;
+	public static JFrame canvas;
+	public static STATE State = STATE.MAINMENU;
 	public static Draws ablauf = null;
-	public static int worldY = 800;
-	public static int worldX = 600;
+	
 	private static boolean bossDefeated = true;
 	private static boolean boss2Defeated = true;
 	private static ArrayList<Bullets> bullet = new ArrayList<Bullets>();
 	private static ArrayList<Npc> npc = new ArrayList<Npc>();
-	//private static float movedDistance = 800;
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		boolean firstTimeStarted = true;
 		int speedPlayer = 4;
-		Player player = new Player(speedPlayer, 200, 300, worldY, worldX, bullet);
+		Player player = new Player(speedPlayer, 200, 300, Window.width, Window.height, bullet);
 		Thread drawLevel = new Thread() {
 			public void run() {
 				// Level 1
 				// ---------------------------------------------------------------------------------------------------
 
 				try {
-
 					bullet.add(new Bullets(-2, 100, 500, 13, bullet)); // Level1_Font
 					bullet.add(new Bullets(-5, 500, 3200, 8, bullet)); // Wand(unten)
 					npc.add(new Npc(1, 3600, 300, bullet, npc)); // Gegner(Dreieck)
@@ -173,12 +172,12 @@ public class TheMain {
 					Bullets worm = new Bullets(1, 100, -600, 12, bullet);
 					bullet.add(new Bullets(-2, 100, 500, 14, bullet)); // Level2_Font
 					bullet.add(ground); // Boden
-					while (ground.getBulletX() != 0) {
+					while (ground.getxPosition() != 0) {
 						sleep(3);
 					}
 					ground.setSpeed(0);
 					bullet.add(worm);
-					while (worm.getBulletX() != -500) {
+					while (worm.getxPosition() != -500) {
 						sleep(3);
 					}
 					worm.setSpeed(0);
@@ -335,7 +334,7 @@ public class TheMain {
 			}
 		};
 		drawLevel.start();
-		Background hg = new Background(speedPlayer);
+		LevelBackground hg = new LevelBackground(speedPlayer);
 		// Thread für Spieler
 		Thread spielerThread = new Thread() {
 			@Override
@@ -377,8 +376,8 @@ public class TheMain {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				MainMenu app = new MainMenu();
-				app.setVisible(true);
+				canvas = new MainMenu();
+				canvas.setVisible(true);
 			}
 		});
 		while (true) {
@@ -390,7 +389,7 @@ public class TheMain {
 			// Wenn erstart, dann baue das Fenster auf;
 			// Start
 			double zeit = System.currentTimeMillis();
-			if (mode == 2) {
+			if (State == STATE.GAME) {
 				spielerThread.run();
 				hg.update();
 				ablauf.drawAgain();

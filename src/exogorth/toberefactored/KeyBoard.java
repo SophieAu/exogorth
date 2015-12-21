@@ -1,4 +1,4 @@
-package spiel;
+package exogorth.toberefactored;
 
 //Aufruf KeyBoard.knopfgedrueckt(KeyEvent.VK_SPACE))
 import java.awt.event.KeyEvent;

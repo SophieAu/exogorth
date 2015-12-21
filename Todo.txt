@@ -1,0 +1,19 @@
+Classes that still need to be refactored:
+-Bullets
+-Draws
+-Game
+-KeyBoard
+-Npc
+-Player
+-TheMain
+
+watch that video tutorial thing i downloaded
+
+check which images I actually need by deleting all and only adding the ones I find in the code, then starting the game
+
+
+Superclass FlyingObject?
+-PowerUp extends FlyingObject
+-Bullet extends FlyingObject
+-Asteroid extends FlyingObject
+-LevelFont extends FlyingObject

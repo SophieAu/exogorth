@@ -1,7 +1,6 @@
-package spiel;
+package exogorth.toberefactored;
 
 import java.awt.Rectangle;
-//import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-//import org.omg.Messaging.SyncScopeHelper;
+import exogorth.Window;
 
 public class Npc {
 	Random rand = new Random();
@@ -27,43 +26,41 @@ public class Npc {
 	private int reload = 0;
 	private int speedBullet = -7;
 	private ArrayList<Bullets> bullet;
-	private ArrayList<Npc> npc;
 	// zufallsbewegung
 	private int direction = 0;
 	private int hor = 0;
 
 	public Npc(int typ, int startX, int startY, ArrayList<Bullets> bullet, ArrayList<Npc> npc) throws IOException {
 		this.typ = typ;
-		this.npc = npc;
 		this.bullet = bullet;
 		switch (this.typ) {
 		// Normaler Gegner: Dreieck
 		case 1:
-			npcPicture = ImageIO.read(getClass().getClassLoader().getResourceAsStream("Images/enemy_triangle.png"));
+			npcPicture = ImageIO.read(getClass().getResourceAsStream("/Images/enemy_triangle.png"));
 			life = 2;
 			speed = 3;
 			break;
 		// Normaler Gegner: Kreis
 		case 2:
-			npcPicture = ImageIO.read(getClass().getClassLoader().getResourceAsStream("Images/enemy_circle.png"));
+			npcPicture = ImageIO.read(getClass().getResourceAsStream("/Images/enemy_circle.png"));
 			life = 2;
 			speed = 3;
 			break;
 		// 1. Boss
 		case 3:
-			npcPicture = ImageIO.read(getClass().getClassLoader().getResourceAsStream("Images/1_Boss.png"));
+			npcPicture = ImageIO.read(getClass().getResourceAsStream("/Images/1_Boss.png"));
 			life = 20;
 			speed = 2;
 			break;
 		// 2. Boss
 		case 4:
-			npcPicture = ImageIO.read(getClass().getClassLoader().getResourceAsStream("Images/2_Boss.png"));
+			npcPicture = ImageIO.read(getClass().getResourceAsStream("/Images/2_Boss.png"));
 			life = 30;
 			speed = 2;
 			break;
 		// Wurm
 		case 5:
-			npcPicture = ImageIO.read(getClass().getClassLoader().getResourceAsStream("Images/exogorth_long.png"));
+			npcPicture = ImageIO.read(getClass().getResourceAsStream("/Images/exogorth_long.png"));
 			life = 10000;
 			speed = 0;
 			break;
@@ -80,7 +77,7 @@ public class Npc {
 		// prüft ob npc objekt berührt
 		for (int i = 0; i < bullet.size(); i++) {
 			Bullets tester = bullet.get(i);
-			if (this.bounding.intersects(tester.getBounding())) {
+			if (this.bounding.intersects(tester.getCollisionBox())) {
 				switch (tester.getType()) {
 				case 0:
 					bullet.remove(i);
@@ -120,8 +117,8 @@ public class Npc {
 			direction--;
 		}
 		// Reaktion bei Weltende
-		if (npcY + bounding.height > TheMain.worldY)
-			npcY = TheMain.worldY - bounding.height;
+		if (npcY + bounding.height > Window.height)
+			npcY = Window.height - bounding.height;
 		if (npcY < npcPicture.getHeight())
 			npcY = npcPicture.getHeight();
 		bounding.x = npcX;

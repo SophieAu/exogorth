@@ -1,4 +1,4 @@
-package spiel;
+package exogorth.toberefactored;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -64,9 +64,9 @@ public class Player {
 			throws IOException {
 		this.bullet = bullet;
 
-		playerPicture[0] = ImageIO.read(getClass().getClassLoader().getResourceAsStream("images/player.png"));
-		playerPicture[1] = ImageIO.read(getClass().getClassLoader().getResourceAsStream("images/player.png"));
-		playerPicture[2] = ImageIO.read(getClass().getClassLoader().getResourceAsStream("images/player.png"));
+		playerPicture[0] = ImageIO.read(getClass().getResourceAsStream("/Images/player.png"));
+		playerPicture[1] = ImageIO.read(getClass().getResourceAsStream("/Images/player.png"));
+		playerPicture[2] = ImageIO.read(getClass().getResourceAsStream("/Images/player.png"));
 		playerPicture[3] = playerPicture[1];
 		bounding = new Rectangle(startX, startY, playerPicture[timeCounterForAnimation].getWidth(),
 				playerPicture[timeCounterForAnimation].getHeight());
@@ -86,7 +86,7 @@ public class Player {
 		// prüft ob spieler objekt berührt
 		for (int i = 0; i < bullet.size(); i++) {
 			Bullets tester = bullet.get(i);
-			if (this.bounding.intersects(tester.getBounding())) {
+			if (this.bounding.intersects(tester.getCollisionBox())) {
 				switch (tester.getType()) {
 				case 2:
 					bullet.remove(i);

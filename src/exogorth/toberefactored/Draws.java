@@ -7,10 +7,10 @@ import javax.swing.JFrame;
 
 import exogorth.gamelogic.LevelBackground;
 
+@SuppressWarnings("serial")
 public class Draws extends JFrame {
 	private final Player player;
 	final private LevelBackground background;
-	private static final long serialVersionUID = 1;
 	private BufferStrategy strat;
 	private ArrayList<Bullets> bullet;
 	private ArrayList<Npc> npc;
@@ -22,7 +22,6 @@ public class Draws extends JFrame {
 		this.background = background;
 		this.bullet = bullet;
 		addKeyListener(new KeyBoard());
-
 	}
 
 	public void buffer() {

@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import exogorth.STATE;
-import exogorth.Window;
 import exogorth.gamelogic.LevelBackground;
 import exogorth.menu.MainMenu;
 
-//TODO: replace mode with STATE
 public class TheMain {
 	public static JFrame canvas;
 	public static STATE State = STATE.MAINMENU;
@@ -20,11 +18,11 @@ public class TheMain {
 	private static boolean boss2Defeated = true;
 	private static ArrayList<Bullets> bullet = new ArrayList<Bullets>();
 	private static ArrayList<Npc> npc = new ArrayList<Npc>();
+	private static int playerSpeed = 4;
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		boolean firstTimeStarted = true;
-		int speedPlayer = 4;
-		Player player = new Player(speedPlayer, 200, 300, Window.width, Window.height, bullet);
+		Player player = new Player(playerSpeed, bullet);
 		Thread drawLevel = new Thread() {
 			public void run() {
 				// Level 1
@@ -334,7 +332,7 @@ public class TheMain {
 			}
 		};
 		drawLevel.start();
-		LevelBackground hg = new LevelBackground(speedPlayer);
+		LevelBackground hg = new LevelBackground(playerSpeed);
 		// Thread für Spieler
 		Thread spielerThread = new Thread() {
 			@Override
@@ -344,7 +342,6 @@ public class TheMain {
 					// movedDistance = player.getPlayerX() ;
 					// System.out.println(movedDistance);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
+import exogorth.gamelogic.Keyboard;
 import exogorth.gamelogic.LevelBackground;
 
 @SuppressWarnings("serial")
@@ -21,7 +22,7 @@ public class Draws extends JFrame {
 		this.player = player;
 		this.background = background;
 		this.bullet = bullet;
-		addKeyListener(new KeyBoard());
+		addKeyListener(new Keyboard());
 	}
 
 	public void buffer() {

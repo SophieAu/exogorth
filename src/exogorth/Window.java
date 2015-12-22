@@ -10,4 +10,6 @@ public class Window {
 	public static final int boxWidth = 350,  boxHeight = 50;
 	public static final int boxX = (Window.width - boxWidth) / 2;
 	public static final int boxYSpace = 80;
+	public static final int titleBarHeight = 26;
+	public static final int borderWidth = 2;
 }

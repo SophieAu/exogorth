@@ -9,10 +9,11 @@ import javax.imageio.ImageIO;
 
 public class Bullets {
 	private Rectangle collisionBox;
+	@SuppressWarnings("unused")
 	private int yPosition, xPosition;
 	private int speed;
 	private ArrayList<Bullets> bullet;
-	//private string type;
+	// private string type;
 	private int type;
 	private BufferedImage image;
 
@@ -97,8 +98,8 @@ public class Bullets {
 	}
 
 	/**
-	 * The bullet is moved "speed" pixels with every call of this method. If the
-	 * bullet moves out of frame, it gets deleted.
+	 * The bullet is moved "speed" pixels with every call of this method. If the bullet moves out of
+	 * frame, it gets deleted.
 	 */
 	public void update() {
 		xPosition += speed;
@@ -110,62 +111,23 @@ public class Bullets {
 			bullet.remove(this);
 	}
 
-	/*
-	 * All the getters and setters (auto-generated)
-	 */
 	public Rectangle getCollisionBox() {
 		return collisionBox;
-	}
-
-	public void setCollisionBox(Rectangle collisionBox) {
-		this.collisionBox = collisionBox;
-	}
-
-	public int getyPosition() {
-		return yPosition;
-	}
-
-	public void setyPosition(int yPosition) {
-		this.yPosition = yPosition;
 	}
 
 	public int getxPosition() {
 		return xPosition;
 	}
 
-	public void setxPosition(int xPosition) {
-		this.xPosition = xPosition;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-
-	public ArrayList<Bullets> getBullet() {
-		return bullet;
-	}
-
-	public void setBullet(ArrayList<Bullets> bullet) {
-		this.bullet = bullet;
-	}
-
 	public int getType() {
 		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
 	}
 
 	public BufferedImage getImage() {
 		return image;
 	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 }

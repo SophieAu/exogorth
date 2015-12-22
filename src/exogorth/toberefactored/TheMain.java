@@ -13,7 +13,7 @@ public class TheMain {
 	public static JFrame canvas;
 	public static STATE State = STATE.MAINMENU;
 	public static Draws ablauf = null;
-	
+
 	private static boolean bossDefeated = true;
 	private static boolean boss2Defeated = true;
 	private static ArrayList<Bullets> bullet = new ArrayList<Bullets>();
@@ -337,13 +337,7 @@ public class TheMain {
 		Thread spielerThread = new Thread() {
 			@Override
 			public void run() {
-				try {
-					player.update();
-					// movedDistance = player.getPlayerX() ;
-					// System.out.println(movedDistance);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				player.update();
 			}
 		};
 		// Thread für Bullet

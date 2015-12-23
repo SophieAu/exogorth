@@ -2,26 +2,19 @@ package exogorth.menu;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 @SuppressWarnings("serial")
-public class HelpScreen extends GenericScreen {
+public class HelpScreen extends MenuScreen {
 	private BufferedImage w, a, s, d, spaceBar;
 
 	public HelpScreen() {
 		super("Exogorth - Hilfe");
 
-		try {
-			w = ImageIO.read(getClass().getResourceAsStream("/Images/Menu/help_W.png"));
-			a = ImageIO.read(getClass().getResourceAsStream("/Images/Menu/help_A.png"));
-			s = ImageIO.read(getClass().getResourceAsStream("/Images/Menu/help_S.png"));
-			d = ImageIO.read(getClass().getResourceAsStream("/Images/Menu/help_D.png"));
-			spaceBar = ImageIO.read(getClass().getResourceAsStream("/Images/Menu/help_SpaceBar.png"));
-		} catch (IOException e) {
-			System.out.println("Mindestens eine Bilddatei wurde nicht gefunden.");
-			e.printStackTrace();
-		}
+		w = loader.load("Menu/helpW");
+		a = loader.load("Menu/helpA");
+		s = loader.load("Menu/helpS");
+		d = loader.load("Menu/helpD");
+		spaceBar = loader.load("Menu/helpSpaceBar");
 	}
 
 	@Override

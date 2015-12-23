@@ -1,10 +1,9 @@
-package exogorth.gamelogic;
+package exogorth.level;
 
-//Aufruf KeyBoard.knopfgedrueckt(KeyEvent.VK_SPACE))
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class Keyboard implements KeyListener {
+public class Keyboard extends KeyAdapter {
 	private static boolean[] keys = new boolean[1024];
 
 	public static boolean pressedKey(int keycode) {

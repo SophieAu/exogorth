@@ -1,22 +1,19 @@
-package exogorth.gamelogic;
+package exogorth.level;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+
+import exogorth.ImageLoader;
 
 public class LevelBackground {
 	private int xCoordinate = 0;
 	private int scrollingSpeed;
+	private ImageLoader loader = ImageLoader.getInstance();
 	private BufferedImage image;
 
-	public LevelBackground(int scrollingSpeed){
+	public LevelBackground(int scrollingSpeed) {
 		this.scrollingSpeed = scrollingSpeed;
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/Images/background.jpg "));
-		} catch (IOException | IllegalArgumentException e) {
-			System.out.println("Level-Hintergrundbild wurde nicht gefunden.");
-			e.printStackTrace();
-		}
+		image = loader.load("background");
 	}
 
 	public void update() {
@@ -31,5 +28,11 @@ public class LevelBackground {
 
 	public int getXCoordinate() {
 		return xCoordinate;
+	}
+
+	public void render(Graphics g) {
+		g.drawImage(image, xCoordinate, 0, null);
+		g.drawImage(image, xCoordinate + image.getWidth(), 0, null);
+		
 	}
 }

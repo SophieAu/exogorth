@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 
 import exogorth.STATE;
 import exogorth.Window;
-import exogorth.toberefactored.TheMain;
+import exogorth.TheMain;
 
 public class MouseInput implements MouseListener {
 
@@ -19,62 +19,50 @@ public class MouseInput implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (TheMain.State != STATE.GAME) {
-			if (e.getX() >= ((Window.width - Window.boxWidth) / 2) && e.getX() <= ((Window.width + Window.boxWidth) / 2)) {
-				if (TheMain.State == STATE.MAINMENU) {
-					mousePressedMainMenu(e, e.getY());
-				} else {
-					mousePressedOtherScreens(e, e.getY());
-				}
-			}
+		if (TheMain.State == STATE.GAME)
+			return;
+
+		if (e.getX() >= MenuScreen.buttonXLeft && e.getX() <= MenuScreen.buttonXRight) {
+			if (TheMain.State == STATE.MAINMENU)
+				mousePressedMainMenu(e, e.getY());
+			else
+				mousePressedOtherScreens(e, e.getY());
 		}
 	}
 
 	private void mousePressedMainMenu(MouseEvent e, int mouseY) {
-		// Spiel starten
-		if (mouseY >= MainMenu.playBoxY && mouseY <= (MainMenu.playBoxY + Window.boxHeight)) {
-			TheMain.canvas.setVisible(false);
+		if (mouseY >= MainMenu.playBoxY && mouseY <= (MainMenu.playBoxY + Window.BOXHEIGHT)) {
 			TheMain.State = STATE.GAME;
-			TheMain.ablauf.setVisible(true);
+			TheMain.currentScreen = TheMain.level;
+			return;
 		}
 
-		// Hilfe
-		if (mouseY >= MainMenu.helpBoxY && mouseY <= (MainMenu.helpBoxY + Window.boxHeight)) {
-			TheMain.canvas.setVisible(false);
-			TheMain.State = STATE.HELP;
-			TheMain.canvas = new HelpScreen();
-			TheMain.canvas.setVisible(true);
+		if (mouseY >= MainMenu.helpBoxY && mouseY <= (MainMenu.helpBoxY + Window.BOXHEIGHT)) {
+			TheMain.State = STATE.MENUSCREENS;
+			TheMain.currentScreen = new HelpScreen();
+			return;
 		}
 
-		// Highscore
-		if (mouseY >= MainMenu.highscoreBoxY && mouseY <= (MainMenu.highscoreBoxY + Window.boxHeight)) {
-			TheMain.canvas.setVisible(false);
-			TheMain.State = STATE.HIGHSCORE;
-			TheMain.canvas = new HighscoreScreen();
-			TheMain.canvas.setVisible(true);
+		if (mouseY >= MainMenu.highscoreBoxY && mouseY <= (MainMenu.highscoreBoxY + Window.BOXHEIGHT)) {
+			TheMain.State = STATE.MENUSCREENS;
+			TheMain.currentScreen = new HighscoreScreen();
+			return;
 		}
 
-		// Credits
-		if (mouseY >= MainMenu.creditsBoxY && mouseY <= (MainMenu.creditsBoxY + Window.boxHeight)) {
-			TheMain.canvas.setVisible(false);
-			TheMain.State = STATE.CREDITS;
-			TheMain.canvas = new CreditsScreen();
-			TheMain.canvas.setVisible(true);
+		if (mouseY >= MainMenu.creditsBoxY && mouseY <= (MainMenu.creditsBoxY + Window.BOXHEIGHT)) {
+			TheMain.State = STATE.MENUSCREENS;
+			TheMain.currentScreen = new CreditsScreen();
+			return;
 		}
 
-		// Spiel verlassen
-		if (mouseY >= GenericScreen.exitBoxY && mouseY <= (GenericScreen.exitBoxY + Window.boxHeight))
+		if (mouseY >= MenuScreen.exitBoxY && mouseY <= (MenuScreen.exitBoxY + Window.BOXHEIGHT))
 			System.exit(0);
-
 	}
 
 	private void mousePressedOtherScreens(MouseEvent e, int mouseY) {
-		// Y COORDINATES TBD
-		if (mouseY >= GenericScreen.exitBoxY && mouseY <= (GenericScreen.exitBoxY + Window.boxHeight)) {
-			TheMain.canvas.setVisible(false);
+		if (mouseY >= MenuScreen.exitBoxY && mouseY <= (MenuScreen.exitBoxY + Window.BOXHEIGHT)) {
 			TheMain.State = STATE.MAINMENU;
-			TheMain.canvas = new MainMenu();
-			TheMain.canvas.setVisible(true);
+			TheMain.currentScreen = new MainMenu();
 		}
 	}
 

@@ -1,7 +1,7 @@
 package exogorth.menu;
 
 @SuppressWarnings("serial")
-public class HighscoreScreen extends GenericScreen {
+public class HighscoreScreen extends MenuScreen {
 
 	public HighscoreScreen() {
 		super("Exogorth - Highscore");

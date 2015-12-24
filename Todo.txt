@@ -1,19 +1,54 @@
-Classes that still need to be refactored:
--Bullets
--Draws
--Game
--KeyBoard
--Npc
--Player
--TheMain
+[ ] COLLISION
+	Three Cases:
+	[ ] enemies colliding with border / each other
+		--> (both) change direction (simple turn around ySign)
+	[ ] bullet hits player
+		--> bullet.remove()
+		--> if(damageGracePeriod != still happening)
+				player.lives--
+				damageGracePeriod = restart
+	[ ] enemy collides with player
+		--> enemy.remove()
+		--> player.lives--
+			damageGracePeriod = restart
+	[ ] bullet (enemy or player) hits enemy
+		--> enemy.lives--
+			if(enemy.lives == 0)
+				enemy.remove()
+				
+[ ] DEATH
+	[ ] if(player.lives == 0)
+		TheMain.State = STATE.DEATH
+	[ ] call new GameOverScreen
+	[ ] on GameOverScreen decide between "back to menu", "quit" and "new game"
 
-watch that video tutorial thing i downloaded
+[ ] END BOSS 1
+	[ ] if (movedDistance ==Level.LENGTH)
+			addBoss();
 
-check which images I actually need by deleting all and only adding the ones I find in the code, then starting the game
+[ ] POWER UPS
+
+[ ] WALLS
+
+[ ] LEVEL 2
+
+[ ] ASTEROIDS
+
+[ ] END BOSS 2
+
+[ ] HIGHSCORE
+
+[ ] EXOGORTH
+
+[ ] PERFORMANCE
+	[ ] look at the boys code, because they did use some threads after all
+
+[ ] FLYING LEVEL FONT
 
 
-Superclass FlyingObject?
--PowerUp extends FlyingObject
--Bullet extends FlyingObject
--Asteroid extends FlyingObject
--LevelFont extends FlyingObject
+
+OPTIONAL
+[ ] re-do the credits and help screen
+[ ] "grab" mouse pointer when hovering over a button
+[ ] name of the current "page" in the title bar (e.g. Exogorth - Level 1; Exogorth - Help)
+[ ] consider making most non-private fields private and adding getters and setters

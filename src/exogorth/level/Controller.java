@@ -10,10 +10,6 @@ public class Controller {
 	private Bullet tempBullet;
 
 	private static ArrayList<Enemy> existingEnemies = new ArrayList<>();
-	public static ArrayList<Enemy> getExistingEnemies() {
-		return existingEnemies;
-	}
-
 	private Enemy tempEnemy;
 
 	// runs through the Bullet list and calls tick for each of the bullets
@@ -63,6 +59,10 @@ public class Controller {
 
 	public void removeEnemy(Enemy enemy) {
 		existingEnemies.remove(enemy);
+	}
+	
+	public ArrayList<Enemy> getExistingEnemies() {
+		return existingEnemies;
 	}
 
 }

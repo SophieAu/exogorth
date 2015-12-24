@@ -19,7 +19,6 @@ public class Controller {
 
 			if (tempBullet.outOfBounds())
 				removeBullet(tempBullet);
-
 			tempBullet.update();
 		}
 		for (int i = 0; i < existingEnemies.size(); i++) {
@@ -27,7 +26,6 @@ public class Controller {
 
 			if (tempEnemy.outOfBounds())
 				removeEnemy(tempEnemy);
-			
 			tempEnemy.update();
 		}
 	}
@@ -35,12 +33,10 @@ public class Controller {
 	public void render(Graphics g) {
 		for (int i = 0; i < existingBullets.size(); i++) {
 			tempBullet = existingBullets.get(i);
-
 			tempBullet.render(g);
 		}
 		for (int i = 0; i < existingEnemies.size(); i++) {
 			tempEnemy = existingEnemies.get(i);
-
 			tempEnemy.render(g);
 		}
 	}
@@ -60,9 +56,4 @@ public class Controller {
 	public void removeEnemy(Enemy enemy) {
 		existingEnemies.remove(enemy);
 	}
-	
-	public ArrayList<Enemy> getExistingEnemies() {
-		return existingEnemies;
-	}
-
 }

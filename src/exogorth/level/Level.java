@@ -8,29 +8,29 @@ import exogorth.level.characters.Player;
 @SuppressWarnings("serial")
 public class Level extends JFrame {
 	public static final int LENGTH = 30000;
-	private Player player;
+	public static Player player;
 	private LevelBackground background;
 	public static Controller bulletsAndEnemies;
 	public static int enemyCounter = 50;
 	public static int circleCounter = enemyCounter / 2, triangleCounter = enemyCounter / 2;
+	private int playerXSpeed = 4;
+	private int enemyXSpeed = 2;
+	private int xPositionFactor = (int) (Level.LENGTH * ((double) enemyXSpeed / playerXSpeed));
+	
 
 	private Enemy testEnemy;
 
 	public Level() {
-		player = new Player(200, 300, 4);
+		player = new Player(200, 300, playerXSpeed);
 		background = new LevelBackground(4);
 		bulletsAndEnemies = new Controller();
-		while (enemyCounter != 0) {
-			testEnemy = new Enemy(2);
-			System.out.println("enemyCounter: " + enemyCounter);
-			System.out.println("triangleCounter: " + triangleCounter);
-			System.out.println("circleCounter: " + circleCounter);
-			System.out.println("Anzahl Gegner: " + bulletsAndEnemies.getExistingEnemies().size());
-		}
+		while (enemyCounter != 0)
+			testEnemy = new Enemy(enemyXSpeed, xPositionFactor);
 	}
 
 	public void update() {
-		background.update();
+		if(player.movedDistance < Level.LENGTH)
+			background.update();
 		player.update();
 		bulletsAndEnemies.update();
 		testEnemy.update();

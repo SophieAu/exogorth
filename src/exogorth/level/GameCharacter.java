@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import exogorth.ImageLoader;
+import exogorth.Window;
 
 public class GameCharacter {
 	protected ImageLoader loader = ImageLoader.getInstance();
@@ -12,7 +13,7 @@ public class GameCharacter {
 	protected Rectangle collisionBox;
 	protected Controller bulletList;
 	protected int xPosition, yPosition;
-	protected int xSpeed, ySpeed;
+	public int xSpeed, ySpeed;
 	protected int movedDistance;
 	protected int reload = 0;
 	protected int reloadTime;
@@ -24,8 +25,8 @@ public class GameCharacter {
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 	}
-	
-	public GameCharacter(int xSpeed){
+
+	public GameCharacter(int xSpeed) {
 		bulletList = new Controller();
 		this.xSpeed = xSpeed;
 		ySpeed = xSpeed - 2;
@@ -39,14 +40,15 @@ public class GameCharacter {
 	protected void shooting() {
 	}
 
-	protected void render(Graphics g){
-		g.drawImage(image, xPosition, yPosition, null);
+	protected void render(Graphics g) {
+		if (xPosition < Window.WIDTH)
+			g.drawImage(image, xPosition, yPosition, null);
 	}
 
-	protected void movement(){
+	protected void movement() {
 	}
-	
-	protected boolean reloading(){
+
+	protected boolean reloading() {
 		if (reload < reloadTime) {
 			reload++;
 			return true;

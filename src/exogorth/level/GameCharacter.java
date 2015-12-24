@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import exogorth.ImageLoader;
-import exogorth.level.flyingobject.Controller;
 
 public class GameCharacter {
 	protected ImageLoader loader = ImageLoader.getInstance();
@@ -21,9 +20,13 @@ public class GameCharacter {
 	protected int lives;
 
 	public GameCharacter(int xPosition, int yPosition, int xSpeed) {
-		bulletList = new Controller();
+		this(xSpeed);
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
+	}
+	
+	public GameCharacter(int xSpeed){
+		bulletList = new Controller();
 		this.xSpeed = xSpeed;
 		ySpeed = xSpeed - 2;
 	}

@@ -37,6 +37,6 @@ public class Bullet {
 	}
 
 	public boolean outOfBounds() {
-		return ((xPosition < image.getWidth()) || (xPosition > Window.WIDTH + image.getWidth()));
+		return (((xPosition + image.getWidth()) < 0) || (xPosition > Window.WIDTH + image.getWidth()));
 	}
 }

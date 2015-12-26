@@ -23,7 +23,7 @@
 	[ ] on GameOverScreen decide between "back to menu", "quit" and "new game"
 
 [ ] END BOSS 1
-	[ ] if (movedDistance ==Level.LENGTH)
+	[ ] if (movedDistance == Level.LENGTH)
 			addBoss();
 
 [ ] POWER UPS
@@ -45,10 +45,16 @@
 
 [ ] FLYING LEVEL FONT
 
+[ ] REMOVING CODE SMELL
+	[ ] consider making most non-private fields private and adding getters and setters
+	[ ] replace most extends classes with interfaces or leave the out all together
+	[ ] try to go around getters and setters as much as possible
+	[ ] all code should be as encapsulated as possible
+	[ ] using a Pointer for x and y coordinates?
+
 
 
 OPTIONAL
 [ ] re-do the credits and help screen
 [ ] "grab" mouse pointer when hovering over a button
 [ ] name of the current "page" in the title bar (e.g. Exogorth - Level 1; Exogorth - Help)
-[ ] consider making most non-private fields private and adding getters and setters

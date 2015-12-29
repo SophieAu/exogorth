@@ -15,7 +15,7 @@
 		--> enemy.lives--
 			if(enemy.lives == 0)
 				enemy.remove()
-	[ ] enemy bullet hits enemy
+	[X] enemy bullet hits enemy
 		--> enemy.lives--
 			if(enemy.lives == 0)
 				enemy.remove()

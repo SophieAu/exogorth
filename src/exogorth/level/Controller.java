@@ -18,7 +18,7 @@ public class Controller {
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
 			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet)) {
-				removeBullet(tempBullet);
+				existingBullets.remove(i);
 				continue;
 			}
 			tempBullet.update();
@@ -27,9 +27,10 @@ public class Controller {
 
 		for (int i = 0; i < existingEnemies.size();) {
 			tempEnemy = existingEnemies.get(i);
+			//enemyEnemyCollision(i, existingEnemies);
 			enemyBulletCollision(tempEnemy, existingBullets);
 			if (tempEnemy.outOfBounds() || playerEnemyCollision(tempEnemy) || tempEnemy.lives == 0) {
-				removeEnemy(tempEnemy);
+				existingEnemies.remove(i);
 				continue;
 			}
 			tempEnemy.update();
@@ -49,16 +50,8 @@ public class Controller {
 		existingBullets.add(bullet);
 	}
 
-	public void removeBullet(Bullet bullet) {
-		existingBullets.remove(bullet);
-	}
-
 	public void addEnemy(Enemy enemy) {
 		existingEnemies.add(enemy);
-	}
-
-	public void removeEnemy(Enemy enemy) {
-		existingEnemies.remove(enemy);
 	}
 
 	public boolean playerBulletCollision(Bullet bullet) {
@@ -74,7 +67,6 @@ public class Controller {
 			return false;
 
 		Level.player.hit();
-		;
 		return true;
 	}
 
@@ -85,17 +77,29 @@ public class Controller {
 			if (enemy.collisionBox.intersects(tempBullet.collisionBox) && tempBullet.Owner == TYPE.PLAYER) {
 				enemy.lives--;
 				bullets.remove(i);
+				return;
 			}
-
-//			if (enemy.collisionBox.intersects(tempBullet.collisionBox) && !(tempBullet.xPosition + tempBullet.image.getWidth() < enemy.xPosition)) {
-//				enemy.lives--;
-//				bullets.remove(i);
-//			}
+			// very in-elegant solution but it works (for now)
+			if (enemy.collisionBox.intersects(tempBullet.collisionBox)
+					&& (tempBullet.xPosition + tempBullet.image.getWidth()) > (enemy.xPosition + enemy.image.getWidth())) {
+				enemy.lives--;
+				bullets.remove(i);
+				return;
+			}
 		}
 	}
 
-	public void enemyEnemyCollision() {
-
+	public void enemyEnemyCollision(int index, ArrayList<Enemy> enemies) {
+		Enemy enemy = enemies.get(index);
+		for (int i = 0; i < enemies.size(); i++) {
+			Enemy tempEnemy = enemies.get(i);
+			if (enemy.collisionBox.intersects(tempEnemy.collisionBox) && index != i && enemy.xPosition< 100) {
+				enemy.ySign *= -1;
+				tempEnemy.ySign *= -1;
+				System.out.println("collision avoided");
+				return;
+			}
+		}
 	}
 
 }

@@ -1,6 +1,6 @@
-[ ] COLLISION
+[X] COLLISION
 	Five Cases:
-	[ ] enemies colliding with border / each other
+	[X] enemies colliding with border
 		--> (both) change direction (simply turn around ySign)
 	[X] bullet hits player
 		--> bullet.remove()
@@ -48,6 +48,10 @@
 	[ ] look at the boys' code, because they did use some threads after all
 
 [ ] FLYING LEVEL FONT
+
+[ ] FINAL TWEAKS
+	[ ] enemies colliding with each other
+		--> (both) change direction (simply turn around ySign)
 
 [ ] REMOVING CODE SMELL
 	[ ] consider making most non-private fields private and adding getters and setters

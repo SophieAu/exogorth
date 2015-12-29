@@ -20,29 +20,33 @@
 			if(enemy.lives == 0)
 				enemy.remove()
 				
+[ ] END BOSS 1
+	[ ] if (movedDistance == Level.LENGTH)
+			addBoss();
+
+[ ] WALLS
+
+[ ] LEVEL 2
+
+[ ] END BOSS 2
+
+[ ] EXOGORTH
+
+
+
 [ ] DEATH
 	[ ] if(player.lives == 0)
 		TheMain.State = STATE.DEATH
 	[ ] call new GameOverScreen
 	[ ] on GameOverScreen decide between "back to menu", "quit" and "new game"
 
-[ ] END BOSS 1
-	[ ] if (movedDistance == Level.LENGTH)
-			addBoss();
-
 [ ] POWER UPS
-
-[ ] WALLS
-
-[ ] LEVEL 2
-
-[ ] ASTEROIDS
-
-[ ] END BOSS 2
 
 [ ] HIGHSCORE
 
-[ ] EXOGORTH
+[ ] ASTEROIDS
+
+
 
 [ ] PERFORMANCE
 	[ ] look at the boys' code, because they did use some threads after all

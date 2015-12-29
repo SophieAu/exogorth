@@ -5,13 +5,13 @@ import java.awt.event.KeyEvent;
 import exogorth.Window;
 import exogorth.level.GameCharacter;
 import exogorth.level.Keyboard;
+import exogorth.level.Level;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
 public class Player extends GameCharacter {
 
-//	private int damageGracePeriod = 3;
-//	private int lives = 3;
+	public int damageGracePeriod = 3*60;
 //	private boolean doubleDamage;
 
 	public Player(int xPosition, int yPosition, int xSpeed) {
@@ -56,12 +56,38 @@ public class Player extends GameCharacter {
 				yPosition = Window.REALHEIGHT - collisionBox.height;
 		}
 
-		// collisionBox.x = playerX;
-		// collisionBox.y = playerY;
+		collisionBox.x = xPosition;
+		collisionBox.y = yPosition;
 		movedDistance += xSpeed;
 
 		// ONLY HERE FOR TESTING PURPOSES
 		if (movedDistance % 100 == 0)
 			System.out.println(movedDistance);
+	}
+
+	public void damage() {
+		lives--;
+		if(lives == 0)
+			death();
+		System.out.println("Lives left: " + lives);
+	}
+
+	@Override
+	public void update(){
+		super.update();
+		if(damageGracePeriod < 180)
+			damageGracePeriod++;
+	}
+	
+	private void death() {
+		System.out.println("YOU JUST DIED");
+		
+	}
+
+	public void hit() {
+		if(Level.player.damageGracePeriod < 180)
+			return;
+		Level.player.damage();
+		Level.player.damageGracePeriod = 0;
 	}
 }

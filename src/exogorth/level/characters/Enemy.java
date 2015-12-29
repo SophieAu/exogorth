@@ -12,7 +12,7 @@ import exogorth.level.flyingobject.TYPE;
 public class Enemy extends GameCharacter {
 	private ENEMYTYPE EnemyType;
 	private Random random = new Random();
-	private int ySign;
+	public int ySign;
 	private int directionChangeCountdown;
 	private int randomType;
 
@@ -46,6 +46,7 @@ public class Enemy extends GameCharacter {
 
 		reloadTime = 25;
 		bulletSpeed = 7;
+		lives = 2;
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
 		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight());
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
@@ -73,18 +74,16 @@ public class Enemy extends GameCharacter {
 		if (directionChangeCountdown != 0) {
 			yPosition += 2 * ySign;
 			directionChangeCountdown--;
-			if (yPosition < 0)
-				yPosition = 0;
-			else if (yPosition + image.getHeight() > Window.REALHEIGHT)
-				yPosition = Window.REALHEIGHT - image.getHeight();
+			if (yPosition < 0 || yPosition + image.getHeight() > Window.REALHEIGHT)
+				ySign *= -1;
 		} else {
 			yPosition++;
 			ySign = -1 * (random.nextInt(3) - 1);
 			directionChangeCountdown = random.nextInt(100);
 		}
 
-		// collisionBox.x = playerX;
-		// collisionBox.y = playerY;
+		collisionBox.x = xPosition;
+		collisionBox.y = yPosition;
 	}
 
 	public boolean outOfBounds() {

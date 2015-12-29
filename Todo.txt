@@ -1,17 +1,21 @@
-[ ] COLLISION
-	Three Cases:
-	[ ] enemies colliding with border / each other
-		--> (both) change direction (simple turn around ySign)
-	[ ] bullet hits player
+[X] COLLISION
+	Five Cases:
+	[X] enemies colliding with border
+		--> (both) change direction (simply turn around ySign)
+	[X] bullet hits player
 		--> bullet.remove()
 		--> if(damageGracePeriod != still happening)
 				player.lives--
 				damageGracePeriod = restart
-	[ ] enemy collides with player
+	[X] enemy collides with player
 		--> enemy.remove()
 		--> player.lives--
 			damageGracePeriod = restart
-	[ ] bullet (enemy or player) hits enemy
+	[X] player bullet hits enemy
+		--> enemy.lives--
+			if(enemy.lives == 0)
+				enemy.remove()
+	[X] enemy bullet hits enemy
 		--> enemy.lives--
 			if(enemy.lives == 0)
 				enemy.remove()
@@ -23,7 +27,7 @@
 	[ ] on GameOverScreen decide between "back to menu", "quit" and "new game"
 
 [ ] END BOSS 1
-	[ ] if (movedDistance ==Level.LENGTH)
+	[ ] if (movedDistance == Level.LENGTH)
 			addBoss();
 
 [ ] POWER UPS
@@ -41,9 +45,20 @@
 [ ] EXOGORTH
 
 [ ] PERFORMANCE
-	[ ] look at the boys code, because they did use some threads after all
+	[ ] look at the boys' code, because they did use some threads after all
 
 [ ] FLYING LEVEL FONT
+
+[ ] FINAL TWEAKS
+	[ ] enemies colliding with each other
+		--> (both) change direction (simply turn around ySign)
+
+[ ] REMOVING CODE SMELL
+	[ ] consider making most non-private fields private and adding getters and setters
+	[ ] replace most extends classes with interfaces or leave the out all together
+	[ ] try to go around getters and setters as much as possible
+	[ ] all code should be as encapsulated as possible
+	[ ] using a Pointer for x and y coordinates?
 
 
 
@@ -51,4 +66,3 @@ OPTIONAL
 [ ] re-do the credits and help screen
 [ ] "grab" mouse pointer when hovering over a button
 [ ] name of the current "page" in the title bar (e.g. Exogorth - Level 1; Exogorth - Help)
-[ ] consider making most non-private fields private and adding getters and setters

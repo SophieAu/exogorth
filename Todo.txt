@@ -1,17 +1,21 @@
 [ ] COLLISION
-	Three Cases:
+	Five Cases:
 	[ ] enemies colliding with border / each other
-		--> (both) change direction (simple turn around ySign)
-	[ ] bullet hits player
+		--> (both) change direction (simply turn around ySign)
+	[X] bullet hits player
 		--> bullet.remove()
 		--> if(damageGracePeriod != still happening)
 				player.lives--
 				damageGracePeriod = restart
-	[ ] enemy collides with player
+	[X] enemy collides with player
 		--> enemy.remove()
 		--> player.lives--
 			damageGracePeriod = restart
-	[ ] bullet (enemy or player) hits enemy
+	[X] player bullet hits enemy
+		--> enemy.lives--
+			if(enemy.lives == 0)
+				enemy.remove()
+	[ ] enemy bullet hits enemy
 		--> enemy.lives--
 			if(enemy.lives == 0)
 				enemy.remove()
@@ -41,7 +45,7 @@
 [ ] EXOGORTH
 
 [ ] PERFORMANCE
-	[ ] look at the boys code, because they did use some threads after all
+	[ ] look at the boys' code, because they did use some threads after all
 
 [ ] FLYING LEVEL FONT
 

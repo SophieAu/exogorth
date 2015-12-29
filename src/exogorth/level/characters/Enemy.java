@@ -46,6 +46,7 @@ public class Enemy extends GameCharacter {
 
 		reloadTime = 25;
 		bulletSpeed = 7;
+		lives = 2;
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
 		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight());
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
@@ -83,8 +84,8 @@ public class Enemy extends GameCharacter {
 			directionChangeCountdown = random.nextInt(100);
 		}
 
-		// collisionBox.x = playerX;
-		// collisionBox.y = playerY;
+		collisionBox.x = xPosition;
+		collisionBox.y = yPosition;
 	}
 
 	public boolean outOfBounds() {

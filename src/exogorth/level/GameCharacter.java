@@ -55,4 +55,11 @@ public class GameCharacter {
 		}
 		return false;
 	}
+	
+	public Rectangle getCollisionBox(){
+		return collisionBox;
+	}
+
+	public static void getDamage() {
+	}
 }

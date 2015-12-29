@@ -1,17 +1,24 @@
 package exogorth.level.flyingobject;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import exogorth.ImageLoader;
 import exogorth.Window;
+import exogorth.level.Controller;
+import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.TYPE;
 
 public class Bullet {
-	private int xPosition, yPosition;
+	public int xPosition;
+	private int yPosition;
 	private int bulletSpeed;
-	private TYPE Owner;
+	public TYPE Owner;
+	public Rectangle collisionBox;
 
-	private BufferedImage image;
+	public BufferedImage image;
 	private ImageLoader loader = ImageLoader.getInstance();
 
 	public Bullet(int xPosition, int yPosition, int bulletSpeed, TYPE Owner) {
@@ -26,10 +33,12 @@ public class Bullet {
 			this.bulletSpeed = -bulletSpeed;
 			image = loader.load("Game/bulletEnemy");
 		}
+		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
 	public void update() {
 		xPosition += bulletSpeed;
+		collisionBox.x = xPosition;
 	}
 
 	public void render(Graphics g) {
@@ -38,5 +47,16 @@ public class Bullet {
 
 	public boolean outOfBounds() {
 		return (((xPosition + image.getWidth()) < 0) || (xPosition > Window.WIDTH + image.getWidth()));
+	}
+
+	public boolean collision() {
+		ArrayList<Enemy> existingEnemies = Controller.existingEnemies;
+		for(int i = 0; i<existingEnemies.size();){
+			if(this.collisionBox.intersects(existingEnemies.get(i).getCollisionBox())){
+				existingEnemies.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 }

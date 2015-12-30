@@ -20,7 +20,8 @@ public class Player extends GameCharacter {
 		movedDistance = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
-		lives = 3;
+		lives = 5;
+		ySpeed = xSpeed;
 		
 		image = loader.load("Game/player");
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());

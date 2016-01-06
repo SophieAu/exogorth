@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import exogorth.level.characters.Boss;
 import exogorth.level.characters.Enemy;
 import exogorth.level.characters.Player;
-import exogorth.level.characters.WallController;
 
 @SuppressWarnings("serial")
 public class Level extends JFrame {

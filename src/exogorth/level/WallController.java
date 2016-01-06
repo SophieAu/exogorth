@@ -1,4 +1,4 @@
-package exogorth.level.characters;
+package exogorth.level;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

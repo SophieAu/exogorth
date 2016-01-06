@@ -67,18 +67,19 @@ public class Enemy extends GameCharacter {
 	}
 
 	private void yMovementPatter() {
-		if (directionChangeCountdown != 0) {
-			yPosition += 2 * ySign;
-			directionChangeCountdown--;
-			if (yPosition < 0 || yPosition + image.getHeight() > Window.REALHEIGHT){
-				yPosition = yPosition == 0? 0 : (Window.REALHEIGHT - collisionBox.height);
-				ySign *= -1;
-			}
+		if (directionChangeCountdown == 0) {
+			yPosition++;
+			ySign = -1 * (random.nextInt(3) - 1);
+			directionChangeCountdown = random.nextInt(100);
 			return;
 		}
-		yPosition++;
-		ySign = -1 * (random.nextInt(3) - 1);
-		directionChangeCountdown = random.nextInt(100);
+		
+		yPosition += 2 * ySign;
+		if (yPosition < 0 || yPosition + collisionBox.height > Window.REALHEIGHT) {
+			yPosition = yPosition <= 0 ? 0 : (Window.REALHEIGHT - collisionBox.height);
+			ySign *= -1;
+		}
+		directionChangeCountdown--;
 	}
 
 	public boolean outOfBounds() {

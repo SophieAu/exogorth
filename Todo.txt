@@ -26,6 +26,9 @@
 		//IMPLEMENTED DIFFERENTLY
 
 [ ] WALLS
+	[X] throughout the level, always rock, either at top or at bottom
+	[ ] enemies try not to hit rock
+	[ ] hitting rock damages player
 
 [ ] LEVEL 2
 

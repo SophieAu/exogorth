@@ -20,7 +20,8 @@ public class Player extends GameCharacter {
 		movedDistance = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
-		lives = 3;
+		lives = 5;
+		ySpeed = xSpeed;
 		
 		image = loader.load("Game/player");
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
@@ -62,7 +63,7 @@ public class Player extends GameCharacter {
 
 		// ONLY HERE FOR TESTING PURPOSES
 		if (movedDistance % 100 == 0)
-			System.out.println(movedDistance);
+			System.out.println("Player Position" + movedDistance);
 	}
 
 	public void damage() {

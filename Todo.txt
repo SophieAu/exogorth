@@ -20,9 +20,10 @@
 			if(enemy.lives == 0)
 				enemy.remove()
 				
-[ ] END BOSS 1
-	[ ] if (movedDistance == Level.LENGTH)
+[X] END BOSS 1
+	[-] if (movedDistance == Level.LENGTH)
 			addBoss();
+		//IMPLEMENTED DIFFERENTLY
 
 [ ] WALLS
 

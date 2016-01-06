@@ -20,7 +20,7 @@ public class Boss extends GameCharacter {
 		xSpeed = 0;
 		ySpeed = 0;
 
-		image = loader.load("Game/BossOne");
+		image = loader.load("Game/bossOne");
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 
 		reloadTime = 25;

@@ -30,20 +30,8 @@ public class Boss extends GameCharacter {
 	}
 
 	public void movement() {
-		if (xPosition <= Window.WIDTH) {
-			if (directionChangeCountdown != 0) {
-				yPosition += 2 * ySign;
-				if (yPosition < 0 || yPosition + collisionBox.height > Window.REALHEIGHT){
-					yPosition = yPosition <= 0? 0 : (Window.REALHEIGHT - collisionBox.height);
-					ySign *= -1;
-				}
-				directionChangeCountdown--;
-			} else {
-				yPosition++;
-				ySign = -1 * (random.nextInt(3) - 1);
-				directionChangeCountdown = random.nextInt(100);
-			}
-		}
+		if (xPosition <= Window.WIDTH)
+			yMovementPattern();
 
 		if (xPosition > (Window.WIDTH - image.getWidth() / 2))
 			xPosition += xSpeed;
@@ -56,11 +44,27 @@ public class Boss extends GameCharacter {
 			System.out.println("Boss Position: " + xPosition);
 	}
 
+	private void yMovementPattern() {
+		if (directionChangeCountdown == 0) {
+			yPosition++;
+			ySign = -1 * (random.nextInt(3) - 1);
+			directionChangeCountdown = random.nextInt(100);
+			return;
+		}
+		
+		yPosition += 2 * ySign;
+		if (yPosition < 0 || yPosition + collisionBox.height > Window.REALHEIGHT) {
+			yPosition = yPosition <= 0 ? 0 : (Window.REALHEIGHT - collisionBox.height);
+			ySign *= -1;
+		}
+		directionChangeCountdown--;
+	}
+
 	protected void shooting() {
 		if (reloading())
 			return;
 
-		//FOR NOW ONLY THE CIRCLEBULLET PATTERN
+		// FOR NOW ONLY THE CIRCLEBULLET PATTERN
 		reload = random.nextInt(10) - random.nextInt(10);
 		bulletList.addBullet(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
 	}

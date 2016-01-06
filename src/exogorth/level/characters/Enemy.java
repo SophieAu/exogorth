@@ -18,37 +18,25 @@ public class Enemy extends GameCharacter {
 
 	public Enemy(int xSpeed, int xPositionFactor) {
 		super(xSpeed);
-		if (Level.enemyCounter == 0)
-			return;
 
 		randomType = random.nextInt(2);
-		lives = 2;
-		if (randomType == 0)
-			EnemyType = ENEMYTYPE.CIRCLE;
-		else if (randomType == 1)
-			EnemyType = ENEMYTYPE.TRIANGLE;
 
-		if ((EnemyType == ENEMYTYPE.CIRCLE || Level.triangleCounter == 0) && Level.circleCounter != 0) {
+		if ((randomType == 0 || Level.triangleCounter == 0) && Level.circleCounter != 0) {
 			EnemyType = ENEMYTYPE.CIRCLE;
 			image = loader.load("Game/enemyCircle");
-		}
-
-		else if ((EnemyType == ENEMYTYPE.TRIANGLE || Level.circleCounter == 0) && Level.triangleCounter != 0) {
+			Level.circleCounter--;
+		} else if ((randomType == 1 || Level.circleCounter == 0) && Level.triangleCounter != 0) {
 			EnemyType = ENEMYTYPE.TRIANGLE;
 			image = loader.load("Game/enemyTriangle");
-		}
-
-		if (EnemyType == ENEMYTYPE.TRIANGLE)
 			Level.triangleCounter--;
-		else if (EnemyType == ENEMYTYPE.CIRCLE)
-			Level.circleCounter--;
+		}
 		Level.enemyCounter--;
 
 		reloadTime = 25;
 		bulletSpeed = 7;
 		lives = 2;
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
-		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight());
+		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight()-10); //10 is an error margin
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 		Level.bulletsAndEnemies.addEnemy(this);
 	}
@@ -71,19 +59,26 @@ public class Enemy extends GameCharacter {
 	public void movement() {
 		xPosition -= xSpeed;
 
-		if (directionChangeCountdown != 0) {
-			yPosition += 2 * ySign;
-			directionChangeCountdown--;
-			if (yPosition < 0 || yPosition + image.getHeight() > Window.REALHEIGHT)
-				ySign *= -1;
-		} else {
-			yPosition++;
-			ySign = -1 * (random.nextInt(3) - 1);
-			directionChangeCountdown = random.nextInt(100);
-		}
+		if (xPosition <= Window.WIDTH)
+			yMovementPatter();
 
 		collisionBox.x = xPosition;
 		collisionBox.y = yPosition;
+	}
+
+	private void yMovementPatter() {
+		if (directionChangeCountdown != 0) {
+			yPosition += 2 * ySign;
+			directionChangeCountdown--;
+			if (yPosition < 0 || yPosition + image.getHeight() > Window.REALHEIGHT){
+				yPosition = yPosition == 0? 0 : (Window.REALHEIGHT - collisionBox.height);
+				ySign *= -1;
+			}
+			return;
+		}
+		yPosition++;
+		ySign = -1 * (random.nextInt(3) - 1);
+		directionChangeCountdown = random.nextInt(100);
 	}
 
 	public boolean outOfBounds() {

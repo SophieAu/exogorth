@@ -7,33 +7,39 @@ import exogorth.level.flyingobject.Walls;
 
 public class WallController {
 	ArrayList<Walls> wallArray = new ArrayList<>(37);
+	static Walls currentFirst;
+	static Walls currentSecond;
 
 	public WallController(int playerXSpeed) {
-		for (int i = 0; i < 37; i++)
+		//36 because (30000-800)/800=36.5 and I won't use half walls (too much of a bother)
+		for (int i = 0; i < 36; i++)
 			wallArray.add(new Walls(playerXSpeed, 800));
+		
+		currentFirst = wallArray.get(0);
+		currentSecond = wallArray.get(1);
 	}
 
 	public void update() {
-		if (Level.progress < Level.LENGTH + 400) {
-			Walls toUpdate = wallArray.get(0);
-			toUpdate.update();
+		if (!wallArray.isEmpty()) {
+			currentFirst.update();
 
-			if (toUpdate.xPosition <= 0 && Level.progress < Level.LENGTH - 400)
-				wallArray.get(1).update();
+			if (currentFirst.xPosition <= 0 && wallArray.size() >= 2)
+				currentSecond.update();
 
-			if (toUpdate.xPosition + toUpdate.image.getWidth() <= 0)
-				wallArray.remove(toUpdate);
+			if (currentFirst.xPosition + currentFirst.image.getWidth() <= 0 && wallArray.size() > 2){
+				wallArray.remove(currentFirst);
+				currentFirst = currentSecond;
+				currentSecond = wallArray.get(1);
+			}
 		}
 	}
 
 	public void render(Graphics g) {
-		if (Level.progress < Level.LENGTH + 400) {
-			Walls toUpdate = wallArray.get(0);
+		if (!wallArray.isEmpty()) {
+			currentFirst.render(g);
 
-			toUpdate.render(g);
-
-			if (toUpdate.xPosition <= 0 && Level.progress < Level.LENGTH - 400)
-				wallArray.get(1).render(g);
+			if (currentFirst.xPosition <= 0 && wallArray.size() >= 2)
+				currentSecond.render(g);
 		}
 	}
 

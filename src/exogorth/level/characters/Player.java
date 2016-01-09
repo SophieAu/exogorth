@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import exogorth.Window;
 import exogorth.level.GameCharacter;
 import exogorth.level.Keyboard;
+import exogorth.level.Level;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
@@ -16,7 +17,7 @@ public class Player extends GameCharacter {
 	public Player(int xPosition, int yPosition, int xSpeed) {
 		super(xPosition, yPosition, xSpeed);
 
-		movedDistance = xPosition;
+		Level.progress = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
 		lives = 5;
@@ -60,11 +61,11 @@ public class Player extends GameCharacter {
 
 		collisionBox.x = xPosition;
 		collisionBox.y = yPosition;
-		movedDistance += xSpeed;
+		Level.progress += xSpeed;
 
 		// ONLY HERE FOR TESTING PURPOSES
-		if (movedDistance % 100 == 0)
-			System.out.println("Player Position" + movedDistance);
+		if (Level.progress % 100 == 0)
+			System.out.println("Player Position: " + Level.progress);
 	}
 
 	public void damage() {

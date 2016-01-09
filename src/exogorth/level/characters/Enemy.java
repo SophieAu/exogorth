@@ -15,26 +15,30 @@ public class Enemy extends GameCharacter {
 	public int ySign;
 	private int directionChangeCountdown;
 	private int randomType;
+	private int xPositionFactor;
 
-	public Enemy(int xSpeed, int xPositionFactor) {
+	public static int circleCounter = Level.enemyCounter / 2, triangleCounter = Level.enemyCounter / 2;
+
+	public Enemy(int xSpeed, int playerXSpeed) {
 		super(xSpeed);
-
 		randomType = random.nextInt(2);
 
-		if ((randomType == 0 || Level.triangleCounter == 0) && Level.circleCounter != 0) {
+		if ((randomType == 0 || triangleCounter == 0) && circleCounter != 0) {
 			EnemyType = ENEMYTYPE.CIRCLE;
 			image = loader.load("Game/enemyCircle");
-			Level.circleCounter--;
-		} else if ((randomType == 1 || Level.circleCounter == 0) && Level.triangleCounter != 0) {
+			circleCounter--;
+		} else if ((randomType == 1 || circleCounter == 0) && triangleCounter != 0) {
 			EnemyType = ENEMYTYPE.TRIANGLE;
 			image = loader.load("Game/enemyTriangle");
-			Level.triangleCounter--;
+			triangleCounter--;
 		}
 		Level.enemyCounter--;
 
 		reloadTime = 25;
 		bulletSpeed = 7;
 		lives = 2;
+		
+		xPositionFactor = (int) (Level.LENGTH * ((double) xSpeed / playerXSpeed));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
 		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight()-10); //10 is an error margin
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());

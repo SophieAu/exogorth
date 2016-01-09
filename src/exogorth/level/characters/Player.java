@@ -5,24 +5,23 @@ import java.awt.event.KeyEvent;
 import exogorth.Window;
 import exogorth.level.GameCharacter;
 import exogorth.level.Keyboard;
-import exogorth.level.Level;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
 public class Player extends GameCharacter {
 
-	public int damageGracePeriod = 3*60;
-//	private boolean doubleDamage;
+	public int damageGracePeriod = 3 * 60;
+	// private boolean doubleDamage;
 
 	public Player(int xPosition, int yPosition, int xSpeed) {
 		super(xPosition, yPosition, xSpeed);
-		
+
 		movedDistance = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
 		lives = 5;
 		ySpeed = xSpeed;
-		
+
 		image = loader.load("Game/player");
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
@@ -35,6 +34,8 @@ public class Player extends GameCharacter {
 		}
 	}
 
+	// extract the "check for hitting the border" if statements and put them into a method
+	// blahblah(int position);
 	public void movement() {
 		if (Keyboard.pressedKey(KeyEvent.VK_LEFT) || Keyboard.pressedKey(KeyEvent.VK_A)) {
 			xPosition -= this.xSpeed;
@@ -68,27 +69,27 @@ public class Player extends GameCharacter {
 
 	public void damage() {
 		lives--;
-		if(lives == 0)
+		if (lives == 0)
 			death();
 		System.out.println("Lives left: " + lives);
 	}
 
 	@Override
-	public void update(){
+	public void update() {
 		super.update();
-		if(damageGracePeriod < 180)
+		if (damageGracePeriod < 180)
 			damageGracePeriod++;
 	}
-	
+
 	private void death() {
 		System.out.println("YOU JUST DIED");
-		
+
 	}
 
 	public void hit() {
-		if(Level.player.damageGracePeriod < 180)
+		if (damageGracePeriod < 180)
 			return;
-		Level.player.damage();
-		Level.player.damageGracePeriod = 0;
+		damage();
+		damageGracePeriod = 0;
 	}
 }

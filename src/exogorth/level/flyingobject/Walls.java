@@ -7,9 +7,8 @@ import java.util.Random;
 
 import exogorth.ImageLoader;
 import exogorth.Window;
-import exogorth.level.FlyingObject;
 
-public class Walls extends FlyingObject {
+public class Walls {
 	public Rectangle collisionBox;
 	private Random random = new Random();
 

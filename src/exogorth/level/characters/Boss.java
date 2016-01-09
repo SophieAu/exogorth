@@ -21,9 +21,9 @@ public class Boss extends GameCharacter {
 		reloadTime = 25;
 		lives = 20;
 
+		image = loader.load("Game/bossOne");
 		xPosition = Level.LENGTH;
 		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight());
-		image = loader.load("Game/bossOne");
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 

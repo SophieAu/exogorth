@@ -14,24 +14,27 @@ public class WallController {
 	}
 
 	public void update() {
-		Walls toUpdate = wallArray.get(0);
+		if (Level.progress < Level.LENGTH + 400) {
+			Walls toUpdate = wallArray.get(0);
+			toUpdate.update();
 
-		toUpdate.update();
+			if (toUpdate.xPosition <= 0 && Level.progress < Level.LENGTH - 400)
+				wallArray.get(1).update();
 
-		if (toUpdate.xPosition <= 0)
-			wallArray.get(1).update();
-
-		if (toUpdate.xPosition + toUpdate.image.getWidth() <= 0)
-			wallArray.remove(toUpdate);
+			if (toUpdate.xPosition + toUpdate.image.getWidth() <= 0)
+				wallArray.remove(toUpdate);
+		}
 	}
 
 	public void render(Graphics g) {
-		Walls toUpdate = wallArray.get(0);
+		if (Level.progress < Level.LENGTH + 400) {
+			Walls toUpdate = wallArray.get(0);
 
-		toUpdate.render(g);
+			toUpdate.render(g);
 
-		if (toUpdate.xPosition <= 0)
-			wallArray.get(1).render(g);
+			if (toUpdate.xPosition <= 0 && Level.progress < Level.LENGTH - 400)
+				wallArray.get(1).render(g);
+		}
 	}
 
 }

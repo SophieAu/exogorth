@@ -31,6 +31,11 @@ public class GameCharacter {
 		this.xSpeed = xSpeed;
 		ySpeed = xSpeed - 2;
 	}
+	
+	public GameCharacter() {
+		bulletList = new Controller();
+	}
+
 
 	public void update() {
 		shooting();

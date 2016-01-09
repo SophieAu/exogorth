@@ -18,14 +18,13 @@ public class Boss extends GameCharacter {
 	public Boss(int xSpeed) {
 		super(-xSpeed);
 		ySpeed = 0;
-
-		image = loader.load("Game/bossOne");
-		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
-
 		reloadTime = 25;
 		lives = 20;
+
 		xPosition = Level.LENGTH;
 		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight());
+		image = loader.load("Game/bossOne");
+		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
 	public void movement() {

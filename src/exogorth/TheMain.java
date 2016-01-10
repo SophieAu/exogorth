@@ -19,8 +19,6 @@ public class TheMain extends Canvas {
 	private BufferStrategy bufferStrategy;
 	private Thread renderer;
 	private Thread updater;
-	private Renderer rendererS;
-	private Updater updaterS;
 
 	public static void main(String args[]) {
 		TheMain game = new TheMain();
@@ -47,8 +45,6 @@ public class TheMain extends Canvas {
 			return;
 
 		running = true;
-		rendererS = new Renderer();
-		updaterS = new Updater();
 		createRenderer();
 		createUpdater();
 		startGameLoop();

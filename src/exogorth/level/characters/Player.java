@@ -76,7 +76,7 @@ public class Player extends GameCharacter {
 	}
 
 	@Override
-	public void update() {
+	public synchronized void update() {
 		super.update();
 		if (damageGracePeriod < 180)
 			damageGracePeriod++;

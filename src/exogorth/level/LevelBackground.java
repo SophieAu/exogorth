@@ -16,13 +16,13 @@ public class LevelBackground {
 		image = loader.load("background");
 	}
 
-	public void update() {
+	public synchronized void update() {
 		xPosition -= scrollingSpeed;
 		if (xPosition < -image.getWidth())
 			xPosition = 0;
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		g.drawImage(image, xPosition, 0, null);
 		g.drawImage(image, xPosition + image.getWidth(), 0, null);
 		

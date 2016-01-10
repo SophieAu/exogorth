@@ -16,7 +16,7 @@ public class Controller {
 	public static ArrayList<Enemy> existingEnemies = new ArrayList<>();
 	private Enemy tempEnemy;
 
-	public void update() {
+	public synchronized void update() {
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
 			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
@@ -40,7 +40,7 @@ public class Controller {
 		}
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		for (Bullet tempBullet : existingBullets)
 			tempBullet.render(g);
 

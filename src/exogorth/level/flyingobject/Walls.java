@@ -9,6 +9,7 @@ import exogorth.ImageLoader;
 import exogorth.Window;
 
 public class Walls {
+	public static int width = 800;
 	public Rectangle collisionBox;
 	private Random random = new Random();
 
@@ -35,12 +36,12 @@ public class Walls {
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
-	public void update() {
+	public synchronized void update() {
 		xPosition -= scrollingSpeed;
 		collisionBox.x = xPosition;
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		g.drawImage(image, xPosition, yPosition, null);
 	}
 }

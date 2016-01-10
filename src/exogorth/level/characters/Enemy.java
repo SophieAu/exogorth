@@ -44,11 +44,7 @@ public class Enemy extends GameCharacter {
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 		Level.bulletsAndEnemies.addEnemy(this);
 	}
-
-	public void update() {
-		super.update();
-	}
-
+	
 	protected void shooting() {
 		if (reloading())
 			return;

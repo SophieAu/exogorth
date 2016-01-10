@@ -33,7 +33,7 @@ public class Level extends JFrame {
 			enemy = new Enemy(enemyXSpeed, playerXSpeed);
 	}
 
-	public void update() {
+	public synchronized void update() {
 		if (progress < LENGTH)
 			background.update();
 		wall.update();
@@ -44,7 +44,7 @@ public class Level extends JFrame {
 			enemy.update();
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		background.render(g);
 		wall.render(g);
 		bulletsAndEnemies.render(g);

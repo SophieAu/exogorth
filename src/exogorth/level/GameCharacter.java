@@ -37,7 +37,7 @@ public class GameCharacter {
 	}
 
 
-	public void update() {
+	public synchronized void update() {
 		shooting();
 		movement();
 	}
@@ -45,7 +45,7 @@ public class GameCharacter {
 	protected void shooting() {
 	}
 
-	protected void render(Graphics g) {
+	protected synchronized void render(Graphics g) {
 		if (xPosition < Window.WIDTH)
 			g.drawImage(image, xPosition, yPosition, null);
 	}

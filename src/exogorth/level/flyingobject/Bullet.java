@@ -36,12 +36,12 @@ public class Bullet {
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
-	public void update() {
+	public synchronized void update() {
 		xPosition += bulletSpeed;
 		collisionBox.x = xPosition;
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		g.drawImage(image, xPosition, yPosition, null);
 	}
 

@@ -9,7 +9,7 @@ import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
-public class Controller {
+public class CollisionController {
 	public static ArrayList<Bullet> existingBullets = new ArrayList<>();
 	private Bullet tempBullet;
 

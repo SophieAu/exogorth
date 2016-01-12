@@ -17,7 +17,7 @@ public class Level extends JFrame {
 	public static Player player;
 	public static Boss boss;
 	private Enemy enemy;
-	public static Controller bulletsAndEnemies;
+	public static CollisionController bulletsAndEnemies;
 
 	public static int enemyCounter = 50;
 	private int playerXSpeed = 4;
@@ -26,7 +26,7 @@ public class Level extends JFrame {
 	public Level() {
 		player = new Player(200, 300, playerXSpeed);
 		background = new LevelBackground(playerXSpeed);
-		bulletsAndEnemies = new Controller();
+		bulletsAndEnemies = new CollisionController();
 		boss = new Boss(playerXSpeed);
 		wall = new WallController(playerXSpeed);
 		while (enemyCounter != 0)

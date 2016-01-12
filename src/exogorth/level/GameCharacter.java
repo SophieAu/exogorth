@@ -11,7 +11,7 @@ public class GameCharacter {
 	protected ImageLoader loader = ImageLoader.getInstance();
 	protected BufferedImage image;
 	protected Rectangle collisionBox;
-	protected Controller bulletList;
+	protected CollisionController bulletList;
 	protected int xPosition, yPosition;
 	public int xSpeed, ySpeed;
 	protected int movedDistance;
@@ -27,13 +27,13 @@ public class GameCharacter {
 	}
 
 	public GameCharacter(int xSpeed) {
-		bulletList = new Controller();
+		bulletList = new CollisionController();
 		this.xSpeed = xSpeed;
 		ySpeed = xSpeed - 2;
 	}
 	
 	public GameCharacter() {
-		bulletList = new Controller();
+		bulletList = new CollisionController();
 	}
 
 

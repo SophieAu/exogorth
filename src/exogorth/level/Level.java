@@ -10,41 +10,48 @@ import exogorth.level.characters.Player;
 @SuppressWarnings("serial")
 public class Level extends JFrame {
 	public static final int LENGTH = 30000;
-	public static Player player;
+	public static int progress;
+
 	private LevelBackground background;
-	public static Controller bulletsAndEnemies;
+	public static WallController wall;
+	public static Player player;
 	public static Boss boss;
+	private Enemy enemy;
+	public static CollisionController bulletsAndEnemies;
+
 	public static int enemyCounter = 50;
-	public static int circleCounter = enemyCounter / 2, triangleCounter = enemyCounter / 2;
 	private int playerXSpeed = 4;
 	private int enemyXSpeed = 2;
-	private int xPositionFactor = (int) (Level.LENGTH * ((double) enemyXSpeed / playerXSpeed));
-
-	private Enemy testEnemy;
 
 	public Level() {
 		player = new Player(200, 300, playerXSpeed);
-		background = new LevelBackground(4);
-		bulletsAndEnemies = new Controller();
+		background = new LevelBackground(playerXSpeed);
+		bulletsAndEnemies = new CollisionController();
 		boss = new Boss(playerXSpeed);
+		wall = new WallController(playerXSpeed);
 		while (enemyCounter != 0)
-			testEnemy = new Enemy(enemyXSpeed, xPositionFactor);
+			enemy = new Enemy(enemyXSpeed, playerXSpeed);
 	}
 
-	public void update() {
-		if (player.movedDistance < Level.LENGTH)
+	public synchronized void update() {
+		if (progress < LENGTH)
 			background.update();
+		wall.update();
 		player.update();
 		bulletsAndEnemies.update();
 		boss.update();
-		testEnemy.update();
+		if (player.movedDistance <= LENGTH)
+			enemy.update();
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		background.render(g);
+		wall.render(g);
 		bulletsAndEnemies.render(g);
 		player.render(g);
 		boss.render(g);
-		testEnemy.render(g);
+		if (progress <= LENGTH)
+			enemy.render(g);
+
 	}
 }

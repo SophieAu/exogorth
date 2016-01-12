@@ -10,8 +10,8 @@ import exogorth.Window;
 public class GameCharacter {
 	protected ImageLoader loader = ImageLoader.getInstance();
 	protected BufferedImage image;
-	protected Rectangle collisionBox;
-	protected Controller bulletList;
+	public Rectangle collisionBox;
+	protected CollisionController bulletList;
 	protected int xPosition, yPosition;
 	public int xSpeed, ySpeed;
 	protected int movedDistance;
@@ -27,12 +27,17 @@ public class GameCharacter {
 	}
 
 	public GameCharacter(int xSpeed) {
-		bulletList = new Controller();
+		bulletList = new CollisionController();
 		this.xSpeed = xSpeed;
 		ySpeed = xSpeed - 2;
 	}
+	
+	public GameCharacter() {
+		bulletList = new CollisionController();
+	}
 
-	public void update() {
+
+	public synchronized void update() {
 		shooting();
 		movement();
 	}
@@ -40,7 +45,7 @@ public class GameCharacter {
 	protected void shooting() {
 	}
 
-	protected void render(Graphics g) {
+	protected synchronized void render(Graphics g) {
 		if (xPosition < Window.WIDTH)
 			g.drawImage(image, xPosition, yPosition, null);
 	}
@@ -56,10 +61,6 @@ public class GameCharacter {
 		return false;
 	}
 	
-	public Rectangle getCollisionBox(){
-		return collisionBox;
-	}
-
 	public static void getDamage() {
 	}
 }

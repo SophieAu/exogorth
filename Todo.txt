@@ -25,7 +25,10 @@
 			addBoss();
 		//IMPLEMENTED DIFFERENTLY
 
-[ ] WALLS
+[X] WALLS
+	[X] throughout the level, always rock, either at top or at bottom
+	[X] enemies try not to hit rock
+	[X] hitting rock damages player
 
 [ ] LEVEL 2
 

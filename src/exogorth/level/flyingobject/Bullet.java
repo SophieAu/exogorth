@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import exogorth.ImageLoader;
 import exogorth.Window;
-import exogorth.level.Controller;
+import exogorth.level.CollisionController;
 import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.TYPE;
 
@@ -36,12 +36,12 @@ public class Bullet {
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
-	public void update() {
+	public synchronized void update() {
 		xPosition += bulletSpeed;
 		collisionBox.x = xPosition;
 	}
 
-	public void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		g.drawImage(image, xPosition, yPosition, null);
 	}
 
@@ -50,9 +50,9 @@ public class Bullet {
 	}
 
 	public boolean collision() {
-		ArrayList<Enemy> existingEnemies = Controller.existingEnemies;
+		ArrayList<Enemy> existingEnemies = CollisionController.existingEnemies;
 		for(int i = 0; i<existingEnemies.size();){
-			if(this.collisionBox.intersects(existingEnemies.get(i).getCollisionBox())){
+			if(this.collisionBox.intersects(existingEnemies.get(i).collisionBox)){
 				existingEnemies.remove(i);
 				return true;
 			}

@@ -6,23 +6,27 @@ import exogorth.Window;
 import exogorth.level.GameCharacter;
 import exogorth.level.Keyboard;
 import exogorth.level.Level;
+import exogorth.level.WallController;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
+import exogorth.level.flyingobject.Walls;
 
 public class Player extends GameCharacter {
 
-	public int damageGracePeriod = 3*60;
-//	private boolean doubleDamage;
+	private int damageGracePeriod = 120;
+	public int gracePeriodCounter;
+	// private boolean doubleDamage;
 
 	public Player(int xPosition, int yPosition, int xSpeed) {
 		super(xPosition, yPosition, xSpeed);
-		
-		movedDistance = xPosition;
+
+		Level.progress = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
 		lives = 5;
 		ySpeed = xSpeed;
-		
+		gracePeriodCounter = damageGracePeriod;
+
 		image = loader.load("Game/player");
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
@@ -35,9 +39,11 @@ public class Player extends GameCharacter {
 		}
 	}
 
+	// extract the "check for hitting the border" if statements and put them into a method
+	// blahblah(int position);
 	public void movement() {
 		if (Keyboard.pressedKey(KeyEvent.VK_LEFT) || Keyboard.pressedKey(KeyEvent.VK_A)) {
-			xPosition -= this.xSpeed;
+			xPosition -= xSpeed;
 			if (xPosition < 0)
 				xPosition = 0;
 		}
@@ -59,36 +65,51 @@ public class Player extends GameCharacter {
 
 		collisionBox.x = xPosition;
 		collisionBox.y = yPosition;
-		movedDistance += xSpeed;
+
+		if (wallCollision())
+			yPosition = yPosition <= 400 ? Walls.height : Window.REALHEIGHT - Walls.height - image.getHeight();
+		
+		collisionBox.y = yPosition;
+
+		Level.progress += xSpeed;
 
 		// ONLY HERE FOR TESTING PURPOSES
-		if (movedDistance % 100 == 0)
-			System.out.println("Player Position" + movedDistance);
+		if (Level.progress % 100 == 0)
+			System.out.println("Player Position: " + Level.progress);
+
+	}
+
+	private boolean wallCollision() {
+		if (collisionBox.intersects(WallController.currentFirst.collisionBox) || collisionBox.intersects(WallController.currentSecond.collisionBox)) {
+			hit();
+			return true;
+		}
+		return false;
 	}
 
 	public void damage() {
 		lives--;
-		if(lives == 0)
+		if (lives == 0)
 			death();
 		System.out.println("Lives left: " + lives);
 	}
 
 	@Override
-	public void update(){
+	public synchronized void update() {
 		super.update();
-		if(damageGracePeriod < 180)
-			damageGracePeriod++;
+		if (gracePeriodCounter < damageGracePeriod)
+			gracePeriodCounter++;
 	}
-	
+
 	private void death() {
 		System.out.println("YOU JUST DIED");
-		
+
 	}
 
 	public void hit() {
-		if(Level.player.damageGracePeriod < 180)
+		if (gracePeriodCounter < damageGracePeriod)
 			return;
-		Level.player.damage();
-		Level.player.damageGracePeriod = 0;
+		damage();
+		gracePeriodCounter = 0;
 	}
 }

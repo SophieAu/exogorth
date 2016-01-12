@@ -12,21 +12,19 @@ import exogorth.level.flyingobject.TYPE;
 public class Boss extends GameCharacter {
 	int startPosition;
 	private Random random = new Random();
-	public int ySign;
+	public int yDirection;
 	private int directionChangeCountdown;
 
 	public Boss(int xSpeed) {
 		super(-xSpeed);
-		xSpeed = 0;
 		ySpeed = 0;
-
-		image = loader.load("Game/BossOne");
-		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
-
 		reloadTime = 25;
 		lives = 20;
+
+		image = loader.load("Game/bossOne");
 		xPosition = Level.LENGTH;
 		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight());
+		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
 	public void movement() {
@@ -47,15 +45,15 @@ public class Boss extends GameCharacter {
 	private void yMovementPattern() {
 		if (directionChangeCountdown == 0) {
 			yPosition++;
-			ySign = -1 * (random.nextInt(3) - 1);
+			yDirection = -1 * (random.nextInt(3) - 1);
 			directionChangeCountdown = random.nextInt(100);
 			return;
 		}
 		
-		yPosition += 2 * ySign;
+		yPosition += 2 * yDirection;
 		if (yPosition < 0 || yPosition + collisionBox.height > Window.REALHEIGHT) {
 			yPosition = yPosition <= 0 ? 0 : (Window.REALHEIGHT - collisionBox.height);
-			ySign *= -1;
+			yDirection *= -1;
 		}
 		directionChangeCountdown--;
 	}

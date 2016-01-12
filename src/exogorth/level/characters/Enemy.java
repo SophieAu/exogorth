@@ -1,11 +1,13 @@
 package exogorth.level.characters;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
 import exogorth.Window;
 import exogorth.level.GameCharacter;
 import exogorth.level.Level;
+import exogorth.level.WallController;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
@@ -15,34 +17,35 @@ public class Enemy extends GameCharacter {
 	public int ySign;
 	private int directionChangeCountdown;
 	private int randomType;
+	private int xPositionFactor;
 
-	public Enemy(int xSpeed, int xPositionFactor) {
+	public static int circleCounter = Level.enemyCounter / 2, triangleCounter = Level.enemyCounter / 2;
+
+	public Enemy(int xSpeed, int playerXSpeed) {
 		super(xSpeed);
-
 		randomType = random.nextInt(2);
 
-		if ((randomType == 0 || Level.triangleCounter == 0) && Level.circleCounter != 0) {
+		if ((randomType == 0 || triangleCounter == 0) && circleCounter != 0) {
 			EnemyType = ENEMYTYPE.CIRCLE;
 			image = loader.load("Game/enemyCircle");
-			Level.circleCounter--;
-		} else if ((randomType == 1 || Level.circleCounter == 0) && Level.triangleCounter != 0) {
+			circleCounter--;
+		} else if ((randomType == 1 || circleCounter == 0) && triangleCounter != 0) {
 			EnemyType = ENEMYTYPE.TRIANGLE;
 			image = loader.load("Game/enemyTriangle");
-			Level.triangleCounter--;
+			triangleCounter--;
 		}
 		Level.enemyCounter--;
 
 		reloadTime = 25;
 		bulletSpeed = 7;
 		lives = 2;
+
+		xPositionFactor = (int) (Level.LENGTH * ((double) xSpeed / playerXSpeed));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
-		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight()-10); //10 is an error margin
+		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight() - 10); // 10 is an error
+																				// margin
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 		Level.bulletsAndEnemies.addEnemy(this);
-	}
-
-	public void update() {
-		super.update();
 	}
 
 	protected void shooting() {
@@ -56,6 +59,7 @@ public class Enemy extends GameCharacter {
 		// IMPLEMENT TRIANGLE PATTERN HERE
 	}
 
+	@Override
 	public void movement() {
 		xPosition -= xSpeed;
 
@@ -73,16 +77,30 @@ public class Enemy extends GameCharacter {
 			directionChangeCountdown = random.nextInt(100);
 			return;
 		}
-		
+
 		yPosition += 2 * ySign;
 		if (yPosition < 0 || yPosition + collisionBox.height > Window.REALHEIGHT) {
 			yPosition = yPosition <= 0 ? 0 : (Window.REALHEIGHT - collisionBox.height);
 			ySign *= -1;
 		}
+		if (wallCollision()){
+			ySign = yPosition <= 400 ? 1 : -1;
+		}
+		
 		directionChangeCountdown--;
+	}
+
+	private boolean wallCollision() {
+		return (collisionBox.intersects(WallController.currentFirst.collisionBox) || collisionBox.intersects(WallController.currentSecond.collisionBox));
 	}
 
 	public boolean outOfBounds() {
 		return ((xPosition + image.getWidth()) < 0);
+	}
+
+	@Override
+	public void render(Graphics g) {
+		if (xPosition <= Window.WIDTH)
+			super.render(g);
 	}
 }

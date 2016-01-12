@@ -9,43 +9,39 @@ import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
-public class Controller {
+public class CollisionController {
 	public static ArrayList<Bullet> existingBullets = new ArrayList<>();
 	private Bullet tempBullet;
 
 	public static ArrayList<Enemy> existingEnemies = new ArrayList<>();
 	private Enemy tempEnemy;
 
-	public void update() {
+	public synchronized void update() {
+
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
-			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
+			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet))
 				existingBullets.remove(i);
-				continue;
-			}
-			tempBullet.update();
+			else
+				tempBullet.update();
 			i++;
 		}
 
 		for (int i = 0; i < existingEnemies.size();) {
 			tempEnemy = existingEnemies.get(i);
-			// enemyEnemyCollision(i, existingEnemies);
-			enemyBulletCollision(tempEnemy, existingBullets);
-			if (tempEnemy.outOfBounds() || playerEnemyCollision(tempEnemy) || tempEnemy.lives == 0) {
-				existingEnemies.remove(i);
-				continue;
-			}
-			tempEnemy.update();
+			if (enemyCollision(tempEnemy))
+				existingEnemies.remove(tempEnemy);
+			else
+				tempEnemy.update();
 			i++;
 		}
+
 	}
 
-	public void render(Graphics g) {
-		for (Bullet tempBullet : existingBullets)
-			tempBullet.render(g);
-
-		for (Enemy tempEnemy : existingEnemies)
-			tempEnemy.render(g);
+	private boolean enemyCollision(Enemy enemy) {
+		// enemyEnemyCollision(i, existingEnemies);
+		enemyBulletCollision(enemy, existingBullets);
+		return (enemy.outOfBounds() || playerEnemyCollision(enemy) || enemy.lives <= 0);
 	}
 
 	public void addBullet(Bullet bullet) {
@@ -105,13 +101,22 @@ public class Controller {
 	}
 
 	public boolean bossBulletCollision(Bullet bullet) {
-		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER){
-		Level.boss.lives--;
-		System.out.println("Boss Lives: " + Level.boss.lives);
-		if(Level.boss.lives==0)
-			TheMain.State=STATE.MAINMENU;
-		return true;
+		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER) {
+			Level.boss.lives--;
+			System.out.println("Boss Lives: " + Level.boss.lives);
+			if (Level.boss.lives == 0)
+				TheMain.State = STATE.MAINMENU;
+			return true;
 		}
 		return false;
 	}
+
+	public synchronized void render(Graphics g) {
+		for (Bullet tempBullet : existingBullets)
+			tempBullet.render(g);
+
+		for (Enemy tempEnemy : existingEnemies)
+			tempEnemy.render(g);
+	}
+
 }

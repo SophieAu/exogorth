@@ -7,8 +7,8 @@ import exogorth.level.flyingobject.Walls;
 
 public class WallController {
 	ArrayList<Walls> wallArray = new ArrayList<>(36);
-	static Walls currentFirst;
-	static Walls currentSecond;
+	public static Walls currentFirst;
+	public static Walls currentSecond;
 	int wallArraySize;
 
 	public WallController(int playerXSpeed) {

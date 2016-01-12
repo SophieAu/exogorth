@@ -7,6 +7,7 @@ import java.util.Random;
 import exogorth.Window;
 import exogorth.level.GameCharacter;
 import exogorth.level.Level;
+import exogorth.level.WallController;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
@@ -82,7 +83,15 @@ public class Enemy extends GameCharacter {
 			yPosition = yPosition <= 0 ? 0 : (Window.REALHEIGHT - collisionBox.height);
 			ySign *= -1;
 		}
+		if (wallCollision()){
+			ySign = yPosition <= 400 ? 1 : -1;
+		}
+		
 		directionChangeCountdown--;
+	}
+
+	private boolean wallCollision() {
+		return (collisionBox.intersects(WallController.currentFirst.collisionBox) || collisionBox.intersects(WallController.currentSecond.collisionBox));
 	}
 
 	public boolean outOfBounds() {

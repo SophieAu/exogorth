@@ -8,7 +8,6 @@ import exogorth.TheMain;
 import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
-import exogorth.level.flyingobject.Walls;
 
 public class CollisionController {
 	public static ArrayList<Bullet> existingBullets = new ArrayList<>();
@@ -18,7 +17,6 @@ public class CollisionController {
 	private Enemy tempEnemy;
 
 	public synchronized void update() {
-		playerWallCollision();
 
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
@@ -43,27 +41,7 @@ public class CollisionController {
 	private boolean enemyCollision(Enemy enemy) {
 		// enemyEnemyCollision(i, existingEnemies);
 		enemyBulletCollision(enemy, existingBullets);
-		// enemyWallCollision(enemy);
 		return (enemy.outOfBounds() || playerEnemyCollision(enemy) || enemy.lives <= 0);
-	}
-
-	private void playerWallCollision() {
-		if (Level.player.collisionBox.intersects(WallController.currentFirst.collisionBox)
-				|| Level.player.collisionBox.intersects(WallController.currentFirst.collisionBox)) {
-			Level.player.hit();
-			if (Level.player.yPosition < Walls.height && WallController.currentFirst.yPosition == 0)
-				Level.player.yPosition = Walls.height;
-			else
-				Level.player.yPosition = WallController.currentFirst.yPosition - Level.player.image.getHeight();
-		}
-	}
-
-	public synchronized void render(Graphics g) {
-		for (Bullet tempBullet : existingBullets)
-			tempBullet.render(g);
-
-		for (Enemy tempEnemy : existingEnemies)
-			tempEnemy.render(g);
 	}
 
 	public void addBullet(Bullet bullet) {
@@ -133,17 +111,12 @@ public class CollisionController {
 		return false;
 	}
 
-	public void enemyWallCollision(Enemy enemy) {
-		if (enemy.collisionBox.intersects(WallController.currentFirst.collisionBox)
-				|| enemy.collisionBox.intersects(WallController.currentSecond.collisionBox)) {
-			if (enemy.xPosition <= WallController.currentFirst.xPosition + WallController.currentFirst.image.getHeight()
-					&& enemy.xPosition >= WallController.currentFirst.xPosition) {
-				enemy.lives = 0;
-			}
-			enemy.ySign *= -1;
+	public synchronized void render(Graphics g) {
+		for (Bullet tempBullet : existingBullets)
+			tempBullet.render(g);
 
-		}
-
+		for (Enemy tempEnemy : existingEnemies)
+			tempEnemy.render(g);
 	}
 
 }

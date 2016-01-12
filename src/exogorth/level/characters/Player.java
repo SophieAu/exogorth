@@ -6,12 +6,15 @@ import exogorth.Window;
 import exogorth.level.GameCharacter;
 import exogorth.level.Keyboard;
 import exogorth.level.Level;
+import exogorth.level.WallController;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
+import exogorth.level.flyingobject.Walls;
 
 public class Player extends GameCharacter {
 
-	public int damageGracePeriod = 3 * 60;
+	private int damageGracePeriod = 120;
+	public int gracePeriodCounter;
 	// private boolean doubleDamage;
 
 	public Player(int xPosition, int yPosition, int xSpeed) {
@@ -22,6 +25,7 @@ public class Player extends GameCharacter {
 		reloadTime = 20;
 		lives = 5;
 		ySpeed = xSpeed;
+		gracePeriodCounter = damageGracePeriod;
 
 		image = loader.load("Game/player");
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
@@ -61,11 +65,26 @@ public class Player extends GameCharacter {
 
 		collisionBox.x = xPosition;
 		collisionBox.y = yPosition;
+
+		if (wallCollision())
+			yPosition = yPosition <= 400 ? Walls.height : Window.REALHEIGHT - Walls.height - image.getHeight();
+		
+		collisionBox.y = yPosition;
+
 		Level.progress += xSpeed;
 
 		// ONLY HERE FOR TESTING PURPOSES
 		if (Level.progress % 100 == 0)
 			System.out.println("Player Position: " + Level.progress);
+
+	}
+
+	private boolean wallCollision() {
+		if (collisionBox.intersects(WallController.currentFirst.collisionBox) || collisionBox.intersects(WallController.currentSecond.collisionBox)) {
+			hit();
+			return true;
+		}
+		return false;
 	}
 
 	public void damage() {
@@ -78,8 +97,8 @@ public class Player extends GameCharacter {
 	@Override
 	public synchronized void update() {
 		super.update();
-		if (damageGracePeriod < 180)
-			damageGracePeriod++;
+		if (gracePeriodCounter < damageGracePeriod)
+			gracePeriodCounter++;
 	}
 
 	private void death() {
@@ -88,9 +107,9 @@ public class Player extends GameCharacter {
 	}
 
 	public void hit() {
-		if (damageGracePeriod < 180)
+		if (gracePeriodCounter < damageGracePeriod)
 			return;
 		damage();
-		damageGracePeriod = 0;
+		gracePeriodCounter = 0;
 	}
 }

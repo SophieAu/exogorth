@@ -8,6 +8,7 @@ import exogorth.TheMain;
 import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
+import exogorth.level.flyingobject.Walls;
 
 public class CollisionController {
 	public static ArrayList<Bullet> existingBullets = new ArrayList<>();
@@ -17,26 +18,43 @@ public class CollisionController {
 	private Enemy tempEnemy;
 
 	public synchronized void update() {
+		playerWallCollision();
+
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
-			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
+			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet))
 				existingBullets.remove(i);
-				continue;
-			}
-			tempBullet.update();
+			else
+				tempBullet.update();
 			i++;
 		}
 
 		for (int i = 0; i < existingEnemies.size();) {
 			tempEnemy = existingEnemies.get(i);
-			// enemyEnemyCollision(i, existingEnemies);
-			enemyBulletCollision(tempEnemy, existingBullets);
-			if (tempEnemy.outOfBounds() || playerEnemyCollision(tempEnemy) || tempEnemy.lives == 0) {
-				existingEnemies.remove(i);
-				continue;
-			}
-			tempEnemy.update();
+			if (enemyCollision(tempEnemy))
+				existingEnemies.remove(tempEnemy);
+			else
+				tempEnemy.update();
 			i++;
+		}
+
+	}
+
+	private boolean enemyCollision(Enemy enemy) {
+		// enemyEnemyCollision(i, existingEnemies);
+		enemyBulletCollision(enemy, existingBullets);
+		// enemyWallCollision(enemy);
+		return (enemy.outOfBounds() || playerEnemyCollision(enemy) || enemy.lives <= 0);
+	}
+
+	private void playerWallCollision() {
+		if (Level.player.collisionBox.intersects(WallController.currentFirst.collisionBox)
+				|| Level.player.collisionBox.intersects(WallController.currentFirst.collisionBox)) {
+			Level.player.hit();
+			if (Level.player.yPosition < Walls.height && WallController.currentFirst.yPosition == 0)
+				Level.player.yPosition = Walls.height;
+			else
+				Level.player.yPosition = WallController.currentFirst.yPosition - Level.player.image.getHeight();
 		}
 	}
 
@@ -105,13 +123,27 @@ public class CollisionController {
 	}
 
 	public boolean bossBulletCollision(Bullet bullet) {
-		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER){
-		Level.boss.lives--;
-		System.out.println("Boss Lives: " + Level.boss.lives);
-		if(Level.boss.lives==0)
-			TheMain.State=STATE.MAINMENU;
-		return true;
+		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER) {
+			Level.boss.lives--;
+			System.out.println("Boss Lives: " + Level.boss.lives);
+			if (Level.boss.lives == 0)
+				TheMain.State = STATE.MAINMENU;
+			return true;
 		}
 		return false;
 	}
+
+	public void enemyWallCollision(Enemy enemy) {
+		if (enemy.collisionBox.intersects(WallController.currentFirst.collisionBox)
+				|| enemy.collisionBox.intersects(WallController.currentSecond.collisionBox)) {
+			if (enemy.xPosition <= WallController.currentFirst.xPosition + WallController.currentFirst.image.getHeight()
+					&& enemy.xPosition >= WallController.currentFirst.xPosition) {
+				enemy.lives = 0;
+			}
+			enemy.ySign *= -1;
+
+		}
+
+	}
+
 }

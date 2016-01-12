@@ -10,7 +10,7 @@ import exogorth.Window;
 public class GameCharacter {
 	protected ImageLoader loader = ImageLoader.getInstance();
 	protected BufferedImage image;
-	protected Rectangle collisionBox;
+	public Rectangle collisionBox;
 	protected CollisionController bulletList;
 	protected int xPosition, yPosition;
 	public int xSpeed, ySpeed;
@@ -61,10 +61,6 @@ public class GameCharacter {
 		return false;
 	}
 	
-	public Rectangle getCollisionBox(){
-		return collisionBox;
-	}
-
 	public static void getDamage() {
 	}
 }

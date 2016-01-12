@@ -9,13 +9,13 @@ import exogorth.ImageLoader;
 import exogorth.Window;
 
 public class Walls {
-	public static int width = 800;
+	public static int width = 800, height = 100;
 	public Rectangle collisionBox;
 	private Random random = new Random();
 
 	public BufferedImage image;
 	private ImageLoader loader = ImageLoader.getInstance();
-	private int yPosition;
+	public int yPosition;
 	public int xPosition;
 	private int scrollingSpeed;
 
@@ -32,8 +32,10 @@ public class Walls {
 			yPosition = Window.REALHEIGHT - image.getHeight();
 		}
 		
+		height = image.getHeight();
+		width = image.getWidth();
 		this.xPosition = xPosition;
-		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
+		collisionBox = new Rectangle(xPosition, yPosition, width, height);
 	}
 
 	public synchronized void update() {

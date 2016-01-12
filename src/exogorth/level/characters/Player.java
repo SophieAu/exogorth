@@ -39,7 +39,7 @@ public class Player extends GameCharacter {
 	// blahblah(int position);
 	public void movement() {
 		if (Keyboard.pressedKey(KeyEvent.VK_LEFT) || Keyboard.pressedKey(KeyEvent.VK_A)) {
-			xPosition -= this.xSpeed;
+			xPosition -= xSpeed;
 			if (xPosition < 0)
 				xPosition = 0;
 		}

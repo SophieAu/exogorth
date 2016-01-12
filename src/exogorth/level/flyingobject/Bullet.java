@@ -52,7 +52,7 @@ public class Bullet {
 	public boolean collision() {
 		ArrayList<Enemy> existingEnemies = CollisionController.existingEnemies;
 		for(int i = 0; i<existingEnemies.size();){
-			if(this.collisionBox.intersects(existingEnemies.get(i).getCollisionBox())){
+			if(this.collisionBox.intersects(existingEnemies.get(i).collisionBox)){
 				existingEnemies.remove(i);
 				return true;
 			}

@@ -1,5 +1,6 @@
 package exogorth.level.characters;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
@@ -37,14 +38,15 @@ public class Enemy extends GameCharacter {
 		reloadTime = 25;
 		bulletSpeed = 7;
 		lives = 2;
-		
+
 		xPositionFactor = (int) (Level.LENGTH * ((double) xSpeed / playerXSpeed));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
-		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight()-10); //10 is an error margin
+		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight() - 10); // 10 is an error
+																				// margin
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 		Level.bulletsAndEnemies.addEnemy(this);
 	}
-	
+
 	protected void shooting() {
 		if (reloading())
 			return;
@@ -56,6 +58,7 @@ public class Enemy extends GameCharacter {
 		// IMPLEMENT TRIANGLE PATTERN HERE
 	}
 
+	@Override
 	public void movement() {
 		xPosition -= xSpeed;
 
@@ -73,7 +76,7 @@ public class Enemy extends GameCharacter {
 			directionChangeCountdown = random.nextInt(100);
 			return;
 		}
-		
+
 		yPosition += 2 * ySign;
 		if (yPosition < 0 || yPosition + collisionBox.height > Window.REALHEIGHT) {
 			yPosition = yPosition <= 0 ? 0 : (Window.REALHEIGHT - collisionBox.height);
@@ -84,5 +87,11 @@ public class Enemy extends GameCharacter {
 
 	public boolean outOfBounds() {
 		return ((xPosition + image.getWidth()) < 0);
+	}
+
+	@Override
+	public void render(Graphics g) {
+		if (xPosition <= Window.WIDTH)
+			super.render(g);
 	}
 }

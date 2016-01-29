@@ -12,7 +12,6 @@ import exogorth.level.flyingobject.TYPE;
 import exogorth.level.flyingobject.Walls;
 
 public class Player extends GameCharacter {
-
 	private int damageGracePeriod = 120;
 	public int gracePeriodCounter;
 	// private boolean doubleDamage;
@@ -23,7 +22,7 @@ public class Player extends GameCharacter {
 		Level.progress = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
-		lives = 5;
+		lives = 3;
 		ySpeed = xSpeed;
 		gracePeriodCounter = damageGracePeriod;
 
@@ -41,7 +40,8 @@ public class Player extends GameCharacter {
 
 	// extract the "check for hitting the border" if statements and put them into a method
 	// blahblah(int position);
-	public void movement() {
+	@Override
+	protected void movement() {
 		if (Keyboard.pressedKey(KeyEvent.VK_LEFT) || Keyboard.pressedKey(KeyEvent.VK_A)) {
 			xPosition -= xSpeed;
 			if (xPosition < 0)
@@ -59,16 +59,16 @@ public class Player extends GameCharacter {
 
 		if (Keyboard.pressedKey(KeyEvent.VK_DOWN) || Keyboard.pressedKey(KeyEvent.VK_S)) {
 			yPosition += ySpeed;
-			if (yPosition + collisionBox.height > Window.REALHEIGHT)
-				yPosition = Window.REALHEIGHT - collisionBox.height;
+			if (yPosition + collisionBox.height > Window.HEIGHT)
+				yPosition = Window.HEIGHT - collisionBox.height;
 		}
 
 		collisionBox.x = xPosition;
 		collisionBox.y = yPosition;
 
 		if (wallCollision())
-			yPosition = yPosition <= 400 ? Walls.height : Window.REALHEIGHT - Walls.height - image.getHeight();
-		
+			yPosition = yPosition <= 400 ? Walls.height : Window.HEIGHT - Walls.height - image.getHeight();
+
 		collisionBox.y = yPosition;
 
 		Level.progress += xSpeed;
@@ -76,7 +76,6 @@ public class Player extends GameCharacter {
 		// ONLY HERE FOR TESTING PURPOSES
 		if (Level.progress % 100 == 0)
 			System.out.println("Player Position: " + Level.progress);
-
 	}
 
 	private boolean wallCollision() {
@@ -89,7 +88,7 @@ public class Player extends GameCharacter {
 
 	public void damage() {
 		lives--;
-		if (lives == 0)
+		if (lives <= 0)
 			death();
 		System.out.println("Lives left: " + lives);
 	}
@@ -103,7 +102,7 @@ public class Player extends GameCharacter {
 
 	private void death() {
 		System.out.println("YOU JUST DIED");
-
+		Level.backToMenu();
 	}
 
 	public void hit() {

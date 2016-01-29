@@ -14,7 +14,6 @@ public class GameCharacter {
 	protected CollisionController bulletList;
 	protected int xPosition, yPosition;
 	public int xSpeed, ySpeed;
-	protected int movedDistance;
 	protected int reload = 0;
 	protected int reloadTime;
 	protected int bulletSpeed;
@@ -27,15 +26,14 @@ public class GameCharacter {
 	}
 
 	public GameCharacter(int xSpeed) {
-		bulletList = new CollisionController();
+		this();
 		this.xSpeed = xSpeed;
 		ySpeed = xSpeed - 2;
 	}
-	
-	public GameCharacter() {
-		bulletList = new CollisionController();
-	}
 
+	public GameCharacter() {
+		bulletList = Level.bulletsAndEnemies;
+	}
 
 	public synchronized void update() {
 		shooting();
@@ -45,7 +43,7 @@ public class GameCharacter {
 	protected void shooting() {
 	}
 
-	protected synchronized void render(Graphics g) {
+	public synchronized void render(Graphics g) {
 		if (xPosition < Window.WIDTH)
 			g.drawImage(image, xPosition, yPosition, null);
 	}
@@ -60,7 +58,7 @@ public class GameCharacter {
 		}
 		return false;
 	}
-	
+
 	public static void getDamage() {
 	}
 }

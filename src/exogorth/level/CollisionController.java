@@ -10,14 +10,19 @@ import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
 public class CollisionController {
-	public static ArrayList<Bullet> existingBullets = new ArrayList<>();
+	public static ArrayList<Bullet> existingBullets/* = new ArrayList<>()*/;
 	private Bullet tempBullet;
 
-	public static ArrayList<Enemy> existingEnemies = new ArrayList<>();
+	public static ArrayList<Enemy> existingEnemies/* = new ArrayList<>()*/;
 	private Enemy tempEnemy;
+	
+	
+	public CollisionController(){
+		existingBullets = new ArrayList<>();
+		existingEnemies = new ArrayList<>();
+	}
 
 	public synchronized void update() {
-
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
 			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet))

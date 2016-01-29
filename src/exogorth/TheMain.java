@@ -31,6 +31,7 @@ public class TheMain extends Canvas {
 	private static void createFrame(TheMain game) {
 		JFrame frame = new JFrame("Exogorth");
 		frame.add(game);
+		frame.setUndecorated(true);
 		frame.pack();
 		frame.setSize(Window.WIDTH, Window.HEIGHT);
 		frame.setResizable(false);
@@ -98,7 +99,7 @@ public class TheMain extends Canvas {
 	}
 
 	private void init() {
-		level = new Level();
+//		level = new Level();
 		currentScreen = new MainMenu();
 	}
 

@@ -10,6 +10,7 @@ import exogorth.level.Level;
 import exogorth.level.WallController;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
+import exogorth.level.flyingobject.Walls;
 
 public class Enemy extends GameCharacter {
 	private ENEMYTYPE EnemyType;
@@ -19,20 +20,18 @@ public class Enemy extends GameCharacter {
 	private int randomType;
 	private int xPositionFactor;
 
-	public static int circleCounter = Level.enemyCounter / 2, triangleCounter = Level.enemyCounter / 2;
-
 	public Enemy(int xSpeed, int playerXSpeed) {
 		super(xSpeed);
 		randomType = random.nextInt(2);
 
-		if ((randomType == 0 || triangleCounter == 0) && circleCounter != 0) {
+		if ((randomType == 0 || Level.triangleCounter == 0) && Level.circleCounter != 0) {
 			EnemyType = ENEMYTYPE.CIRCLE;
 			image = loader.load("Game/enemyCircle");
-			circleCounter--;
-		} else if ((randomType == 1 || circleCounter == 0) && triangleCounter != 0) {
+			Level.circleCounter--;
+		} else if ((randomType == 1 || Level.circleCounter == 0) && Level.triangleCounter != 0) {
 			EnemyType = ENEMYTYPE.TRIANGLE;
 			image = loader.load("Game/enemyTriangle");
-			triangleCounter--;
+			Level.triangleCounter--;
 		}
 		Level.enemyCounter--;
 
@@ -42,10 +41,8 @@ public class Enemy extends GameCharacter {
 
 		xPositionFactor = (int) (Level.LENGTH * ((double) xSpeed / playerXSpeed));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
-		yPosition = random.nextInt(Window.REALHEIGHT - image.getHeight() - 10); // 10 is an error
-																				// margin
+		yPosition = (random.nextInt(Window.HEIGHT - image.getHeight() - 2 * Walls.height) + Walls.height);
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
-		Level.bulletsAndEnemies.addEnemy(this);
 	}
 
 	protected void shooting() {
@@ -56,11 +53,11 @@ public class Enemy extends GameCharacter {
 			reload = random.nextInt(10) - random.nextInt(10);
 			bulletList.addBullet(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
 		}
-		// IMPLEMENT TRIANGLE PATTERN HERE
+		// TODO: IMPLEMENT TRIANGLE PATTERN HERE
 	}
 
 	@Override
-	public void movement() {
+	protected void movement() {
 		xPosition -= xSpeed;
 
 		if (xPosition <= Window.WIDTH)
@@ -72,26 +69,26 @@ public class Enemy extends GameCharacter {
 
 	private void yMovementPatter() {
 		if (directionChangeCountdown == 0) {
-			yPosition++;
+			yPosition++; // TODO: CHECK IF I CAN DELETE THIS
 			ySign = -1 * (random.nextInt(3) - 1);
 			directionChangeCountdown = random.nextInt(100);
 			return;
 		}
 
 		yPosition += 2 * ySign;
-		if (yPosition < 0 || yPosition + collisionBox.height > Window.REALHEIGHT) {
-			yPosition = yPosition <= 0 ? 0 : (Window.REALHEIGHT - collisionBox.height);
+		if (yPosition < 0 || yPosition + collisionBox.height > Window.HEIGHT) {
+			yPosition = yPosition <= 0 ? 0 : (Window.HEIGHT - collisionBox.height);
 			ySign *= -1;
 		}
-		if (wallCollision()){
-			ySign = yPosition <= 400 ? 1 : -1;
-		}
-		
+		if (wallCollision())
+			ySign = yPosition <= 400 ? 1 : -1; // TODO: Die 400 ist eher nicht so ideal
+
 		directionChangeCountdown--;
 	}
 
 	private boolean wallCollision() {
-		return (collisionBox.intersects(WallController.currentFirst.collisionBox) || collisionBox.intersects(WallController.currentSecond.collisionBox));
+		return (collisionBox.intersects(WallController.currentFirst.collisionBox)
+				|| collisionBox.intersects(WallController.currentSecond.collisionBox));
 	}
 
 	public boolean outOfBounds() {

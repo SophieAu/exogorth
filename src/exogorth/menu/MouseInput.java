@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import exogorth.STATE;
 import exogorth.Window;
+import exogorth.level.Level;
 import exogorth.TheMain;
 
 public class MouseInput implements MouseListener {
@@ -32,6 +33,7 @@ public class MouseInput implements MouseListener {
 
 	private void mousePressedMainMenu(MouseEvent e, int mouseY) {
 		if (mouseY >= MainMenu.playBoxY && mouseY <= (MainMenu.playBoxY + Window.BOXHEIGHT)) {
+			TheMain.level = new Level();
 			TheMain.State = STATE.GAME;
 			TheMain.currentScreen = TheMain.level;
 			return;

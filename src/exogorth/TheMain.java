@@ -19,6 +19,7 @@ public class TheMain extends Canvas {
 	private BufferStrategy bufferStrategy;
 	private Thread renderer;
 	private Thread updater;
+	public static boolean isFirstStart;
 
 	public static void main(String args[]) {
 		TheMain game = new TheMain();
@@ -46,61 +47,56 @@ public class TheMain extends Canvas {
 			return;
 
 		running = true;
-		createRenderer();
-		createUpdater();
+		initRenderer();
+		initUpdater();
 		startGameLoop();
 	}
 
-	private void createRenderer() {
+	private void initRenderer() {
 		renderer = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				renderRunner();
+				while (running)
+					render();
+				stop(renderer);
 			}
 		});
 	}
 
-	private void renderRunner() {
-		while (running)
-			render();
-		stop(renderer);
-	}
 
-	private void createUpdater() {
+	private void initUpdater() {
 		updater = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				updateRunner();
+				long lastTime = System.nanoTime();
+				double nanoSecondsPerFrame = 1000000000 / 60;
+				double delta = 0;
+				long currentTime;
+				while (running) {
+					currentTime = System.nanoTime();
+					delta += (currentTime - lastTime) / nanoSecondsPerFrame;
+					lastTime = currentTime;
+					if (delta >= 1) {
+						update();
+						delta--;
+					}
+				}
+				stop(updater);
 			}
 		});
 	}
 
-	private void updateRunner() {
-		long lastTime = System.nanoTime();
-		double nanoSecondsPerFrame = 1000000000 / 60;
-		double delta = 0;
-		long currentTime;
-		while (running) {
-			currentTime = System.nanoTime();
-			delta += (currentTime - lastTime) / nanoSecondsPerFrame;
-			lastTime = currentTime;
-			if (delta >= 1) {
-				update();
-				delta--;
-			}
-		}
-		stop(updater);
-	}
 
 	private void startGameLoop() {
-		init();
+		initGame();
 		renderer.start();
 		updater.start();
 	}
 
-	private void init() {
-//		level = new Level();
+	private void initGame() {
+		level = new Level();
 		currentScreen = new MainMenu();
+		isFirstStart = true;
 	}
 
 	private void render() {

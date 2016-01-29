@@ -11,14 +11,6 @@ import exogorth.TheMain;
 public class MouseInput implements MouseListener {
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-	}
-
-	@Override
 	public void mousePressed(MouseEvent e) {
 		if (TheMain.State == STATE.GAME)
 			return;
@@ -33,9 +25,11 @@ public class MouseInput implements MouseListener {
 
 	private void mousePressedMainMenu(MouseEvent e, int mouseY) {
 		if (mouseY >= MainMenu.playBoxY && mouseY <= (MainMenu.playBoxY + Window.BOXHEIGHT)) {
-			TheMain.level = new Level();
+			if (!TheMain.isFirstStart)
+				TheMain.level = new Level();
 			TheMain.State = STATE.GAME;
 			TheMain.currentScreen = TheMain.level;
+			TheMain.isFirstStart = false;
 			return;
 		}
 
@@ -66,6 +60,14 @@ public class MouseInput implements MouseListener {
 			TheMain.State = STATE.MAINMENU;
 			TheMain.currentScreen = new MainMenu();
 		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
 	}
 
 	@Override

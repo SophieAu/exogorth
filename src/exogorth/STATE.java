@@ -1,5 +1,5 @@
 package exogorth;
 
 public enum STATE {
-	MAINMENU, GAME, MENUSCREENS
+	MAINMENU, GAME, MENUSCREENS, LEVELTWO
 }

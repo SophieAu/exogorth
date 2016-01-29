@@ -10,10 +10,10 @@ import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
 public class CollisionController {
-	public static ArrayList<Bullet> existingBullets/* = new ArrayList<>()*/;
+	public static ArrayList<Bullet> existingBullets;
 	private Bullet tempBullet;
 
-	public static ArrayList<Enemy> existingEnemies/* = new ArrayList<>()*/;
+	public static ArrayList<Enemy> existingEnemies;
 	private Enemy tempEnemy;
 	
 	
@@ -110,7 +110,7 @@ public class CollisionController {
 			Level.boss.lives--;
 			System.out.println("Boss Lives: " + Level.boss.lives);
 			if (Level.boss.lives == 0)
-				TheMain.State = STATE.MAINMENU;
+				TheMain.State = STATE.LEVELTWO;
 			return true;
 		}
 		return false;

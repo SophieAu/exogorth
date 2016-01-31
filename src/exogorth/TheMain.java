@@ -86,7 +86,7 @@ public class TheMain extends Canvas {
 	}
 
 	private void startGameLoop() {
-		level = new Level(STATE.LEVELONE);
+		level = new Level(1);
 		currentScreen = new MainMenu();
 		isFirstStart = true;
 
@@ -102,7 +102,7 @@ public class TheMain extends Canvas {
 		}
 		Graphics g = bufferStrategy.getDrawGraphics();
 
-		if (State == STATE.LEVELONE)
+		if (State == STATE.GAME)
 			level.render(g);
 		else
 			currentScreen.paint(g);
@@ -112,7 +112,7 @@ public class TheMain extends Canvas {
 	}
 
 	private void update() {
-		if (State == STATE.LEVELONE)
+		if (State == STATE.GAME)
 			level.update();
 	}
 
@@ -129,4 +129,5 @@ public class TheMain extends Canvas {
 		}
 		System.exit(1);
 	}
+
 }

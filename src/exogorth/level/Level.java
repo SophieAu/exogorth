@@ -14,6 +14,7 @@ import exogorth.menu.MainMenu;
 public class Level extends JFrame {
 	public static final int LENGTH = 3000;
 	public static int progress;
+	static int level;
 
 	private static LevelBackground background;
 	public static WallController wall;
@@ -25,8 +26,7 @@ public class Level extends JFrame {
 	private static int playerXSpeed = 4;
 	private static int enemyXSpeed = 2;
 
-	public Level(STATE levelNumber) {
-		TheMain.State = levelNumber;
+	public Level(int levelNumber) {
 		reset();
 	}
 

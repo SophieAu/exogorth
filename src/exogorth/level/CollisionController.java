@@ -3,7 +3,6 @@ package exogorth.level;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import exogorth.STATE;
 import exogorth.TheMain;
 import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.Bullet;
@@ -26,9 +25,8 @@ public class CollisionController {
 			tempBullet = existingBullets.get(i);
 			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
 				existingBullets.remove(i);
-				if (Level.boss.lives == 0){
-					System.out.println("LEVEL 2");
-					TheMain.level = new Level(STATE.LEVELTWO);
+				if (Level.boss.lives == 0) {
+					TheMain.level = new Level(2);
 				}
 			} else
 				tempBullet.update();

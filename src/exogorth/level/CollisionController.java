@@ -15,9 +15,8 @@ public class CollisionController {
 
 	public static ArrayList<Enemy> existingEnemies;
 	private Enemy tempEnemy;
-	
-	
-	public CollisionController(){
+
+	public CollisionController() {
 		existingBullets = new ArrayList<>();
 		existingEnemies = new ArrayList<>();
 	}
@@ -25,9 +24,13 @@ public class CollisionController {
 	public synchronized void update() {
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
-			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet))
+			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
 				existingBullets.remove(i);
-			else
+				if (Level.boss.lives == 0){
+					System.out.println("LEVEL 2");
+					TheMain.level = new Level(STATE.LEVELTWO);
+				}
+			} else
 				tempBullet.update();
 			i++;
 		}
@@ -106,11 +109,11 @@ public class CollisionController {
 	}
 
 	public boolean bossBulletCollision(Bullet bullet) {
-		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER) {
+		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER && Level.boss.xPosition < 800) {
 			Level.boss.lives--;
 			System.out.println("Boss Lives: " + Level.boss.lives);
-			if (Level.boss.lives == 0)
-				TheMain.State = STATE.LEVELTWO;
+			// if (Level.boss.lives == 0)
+			// Level.initLevelTwo();
 			return true;
 		}
 		return false;

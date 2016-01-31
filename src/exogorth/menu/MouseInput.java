@@ -12,7 +12,7 @@ public class MouseInput implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (TheMain.State == STATE.GAME)
+		if (TheMain.State == STATE.LEVELONE)
 			return;
 
 		if (e.getX() >= MenuScreen.buttonXLeft && e.getX() <= MenuScreen.buttonXRight) {
@@ -26,8 +26,8 @@ public class MouseInput implements MouseListener {
 	private void mousePressedMainMenu(MouseEvent e, int mouseY) {
 		if (mouseY >= MainMenu.playBoxY && mouseY <= (MainMenu.playBoxY + Window.BOXHEIGHT)) {
 			if (!TheMain.isFirstStart)
-				TheMain.level = new Level();
-			TheMain.State = STATE.GAME;
+				TheMain.level = new Level(STATE.LEVELONE);
+			TheMain.State = STATE.LEVELONE;
 			TheMain.currentScreen = TheMain.level;
 			TheMain.isFirstStart = false;
 			return;

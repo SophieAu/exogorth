@@ -89,7 +89,8 @@ public class Player extends GameCharacter {
 	public void damage() {
 		lives--;
 		if (lives <= 0)
-			death();
+			// death();
+			System.out.println("You just died");
 		System.out.println("Lives left: " + lives);
 	}
 

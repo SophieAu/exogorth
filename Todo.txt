@@ -30,7 +30,7 @@
 	[X] enemies try not to hit rock
 	[X] hitting rock damages player
 
-[ ] LEVEL 2
+[X] LEVEL 2
 
 [ ] END BOSS 2
 

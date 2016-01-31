@@ -21,26 +21,28 @@ public class Level extends JFrame {
 	public static Boss boss;
 	public static CollisionController bulletsAndEnemies;
 
-	public static int enemyCounter = 50;
-	public static int circleCounter = Level.enemyCounter / 2, triangleCounter = Level.enemyCounter / 2;
+	public static int enemyCounter, circleCounter, triangleCounter;
 	private static int playerXSpeed = 4;
 	private static int enemyXSpeed = 2;
 
-	public Level() {
+	public Level(STATE levelNumber) {
+		TheMain.State = levelNumber;
+		reset();
+	}
+
+	private static void reset() {
 		enemyCounter = 50;
 		circleCounter = Level.enemyCounter / 2;
 		triangleCounter = Level.enemyCounter / 2;
+		bulletsAndEnemies = new CollisionController();
+		background = new LevelBackground(playerXSpeed);
+		wall = new WallController(playerXSpeed);
+
 		System.out.println("Reset");
 		player = new Player(200, 300, playerXSpeed);
-		System.out.println("Progress: " + progress);
-		background = new LevelBackground(playerXSpeed);
-		bulletsAndEnemies = new CollisionController();
-		System.out.println("Enemy-Zahl vorher: " + CollisionController.existingEnemies.size());
 		boss = new Boss(playerXSpeed);
-		wall = new WallController(playerXSpeed);
 		while (enemyCounter != 0)
 			bulletsAndEnemies.addEnemy(new Enemy(enemyXSpeed, playerXSpeed));
-		System.out.println("Enemy-Zahl: " + CollisionController.existingEnemies.size());
 	}
 
 	public synchronized void update() {

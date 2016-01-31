@@ -63,7 +63,6 @@ public class TheMain extends Canvas {
 		});
 	}
 
-
 	private void initUpdater() {
 		updater = new Thread(new Runnable() {
 			@Override
@@ -86,17 +85,13 @@ public class TheMain extends Canvas {
 		});
 	}
 
-
 	private void startGameLoop() {
-		initGame();
-		renderer.start();
-		updater.start();
-	}
-
-	private void initGame() {
-		level = new Level();
+		level = new Level(STATE.LEVELONE);
 		currentScreen = new MainMenu();
 		isFirstStart = true;
+
+		renderer.start();
+		updater.start();
 	}
 
 	private void render() {
@@ -107,7 +102,7 @@ public class TheMain extends Canvas {
 		}
 		Graphics g = bufferStrategy.getDrawGraphics();
 
-		if (State == STATE.GAME)
+		if (State == STATE.LEVELONE)
 			level.render(g);
 		else
 			currentScreen.paint(g);
@@ -117,7 +112,7 @@ public class TheMain extends Canvas {
 	}
 
 	private void update() {
-		if (State == STATE.GAME)
+		if (State == STATE.LEVELONE)
 			level.update();
 	}
 

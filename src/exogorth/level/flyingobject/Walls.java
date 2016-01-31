@@ -29,7 +29,7 @@ public class Walls {
 		}
 		if (!up) {
 			image = loader.load("Game/rockBottom");
-			yPosition = Window.REALHEIGHT - image.getHeight();
+			yPosition = Window.HEIGHT - image.getHeight();
 		}
 		
 		height = image.getHeight();

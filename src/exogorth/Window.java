@@ -1,14 +1,7 @@
 package exogorth;
 
-/**
- * The screen dimensions we use for the game. They're a global variable and will not be changed
- * anywhere.
- * 
- * @author Sophie
- *
- */
 public class Window {
-	public static final int WIDTH = 800, HEIGHT = 600, REALHEIGHT = HEIGHT-29;
+	public static final int WIDTH = 800, HEIGHT = 600;
 
 	// Menu-specific constants
 	public static final int BOXWIDTH = 350, BOXHEIGHT = 50;

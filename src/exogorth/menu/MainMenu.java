@@ -15,11 +15,11 @@ public class MainMenu extends MenuScreen {
 	public MainMenu() {
 		super("Exogorth - Hauptmenü");
 
-			header = loader.load("Menu/mainHeader");
-			playButton = loader.load("Menu/buttonPlay");
-			helpButton = loader.load("Menu/buttonHelp");
-			highscoreButton = loader.load("Menu/buttonHighscore");
-			creditsButton = loader.load("Menu/buttonCredits");
+		header = loader.load("Menu/mainHeader");
+		playButton = loader.load("Menu/buttonPlay");
+		helpButton = loader.load("Menu/buttonHelp");
+		highscoreButton = loader.load("Menu/buttonHighscore");
+		creditsButton = loader.load("Menu/buttonCredits");
 	}
 
 	@Override

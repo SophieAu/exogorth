@@ -3,26 +3,32 @@ package exogorth.level;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import exogorth.STATE;
 import exogorth.TheMain;
 import exogorth.level.characters.Enemy;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
 public class CollisionController {
-	public static ArrayList<Bullet> existingBullets = new ArrayList<>();
+	public static ArrayList<Bullet> existingBullets;
 	private Bullet tempBullet;
 
-	public static ArrayList<Enemy> existingEnemies = new ArrayList<>();
+	public static ArrayList<Enemy> existingEnemies;
 	private Enemy tempEnemy;
 
-	public synchronized void update() {
+	public CollisionController() {
+		existingBullets = new ArrayList<>();
+		existingEnemies = new ArrayList<>();
+	}
 
+	public synchronized void update() {
 		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
-			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet))
+			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
 				existingBullets.remove(i);
-			else
+				if (Level.boss.lives == 0) {
+					TheMain.level = new Level(2);
+				}
+			} else
 				tempBullet.update();
 			i++;
 		}
@@ -101,11 +107,11 @@ public class CollisionController {
 	}
 
 	public boolean bossBulletCollision(Bullet bullet) {
-		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER) {
+		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER && Level.boss.xPosition < 800) {
 			Level.boss.lives--;
 			System.out.println("Boss Lives: " + Level.boss.lives);
-			if (Level.boss.lives == 0)
-				TheMain.State = STATE.MAINMENU;
+			// if (Level.boss.lives == 0)
+			// Level.initLevelTwo();
 			return true;
 		}
 		return false;

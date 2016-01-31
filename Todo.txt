@@ -30,7 +30,7 @@
 	[X] enemies try not to hit rock
 	[X] hitting rock damages player
 
-[ ] LEVEL 2
+[X] LEVEL 2
 
 [ ] END BOSS 2
 
@@ -38,11 +38,11 @@
 
 
 
-[ ] DEATH
-	[ ] if(player.lives == 0)
+[X] DEATH
+	[X] if(player.lives == 0)
 		TheMain.State = STATE.DEATH
-	[ ] call new GameOverScreen
-	[ ] on GameOverScreen decide between "back to menu", "quit" and "new game"
+	[-] call new GameOverScreen
+	[-] on GameOverScreen decide between "back to menu", "quit" and "new game"
 
 [ ] POWER UPS
 

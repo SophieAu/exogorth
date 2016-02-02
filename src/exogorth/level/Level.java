@@ -42,7 +42,7 @@ public class Level extends JFrame {
 
 		System.out.println("Reset");
 		player = new Player(200, 300, playerXSpeed);
-		boss = new Boss(playerXSpeed);
+		boss = new Boss(levelNumber, playerXSpeed);
 		while (enemyCounter != 0)
 			bulletsAndEnemies.addEnemy(new Enemy(enemyXSpeed, playerXSpeed));
 	}

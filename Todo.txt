@@ -32,7 +32,7 @@
 
 [X] LEVEL 2
 
-[ ] END BOSS 2
+[X] END BOSS 2
 
 [ ] EXOGORTH
 

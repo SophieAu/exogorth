@@ -15,7 +15,7 @@ public class Walls {
 
 	public BufferedImage image;
 	private ImageLoader loader = ImageLoader.getInstance();
-	public int yPosition;
+	public int topOrBottom;
 	public int xPosition;
 	private int scrollingSpeed;
 
@@ -25,17 +25,17 @@ public class Walls {
 
 		if (up) {
 			image = loader.load("Game/rockTop");
-			yPosition = 0;
+			topOrBottom = 0;
 		}
 		if (!up) {
 			image = loader.load("Game/rockBottom");
-			yPosition = Window.HEIGHT - image.getHeight();
+			topOrBottom = Window.HEIGHT - image.getHeight();
 		}
 		
 		height = image.getHeight();
 		width = image.getWidth();
 		this.xPosition = xPosition;
-		collisionBox = new Rectangle(xPosition, yPosition, width, height);
+		collisionBox = new Rectangle(xPosition, topOrBottom, width, height);
 	}
 
 	public synchronized void update() {
@@ -44,6 +44,6 @@ public class Walls {
 	}
 
 	public synchronized void render(Graphics g) {
-		g.drawImage(image, xPosition, yPosition, null);
+		g.drawImage(image, xPosition, topOrBottom, null);
 	}
 }

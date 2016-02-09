@@ -15,6 +15,7 @@ public class Level extends JFrame {
 	public static final int LENGTH = 3000;
 	public static int progress;
 	static int level;
+	static int levelNumber;
 
 	private static LevelBackground background;
 	public static WallController wall;
@@ -27,6 +28,7 @@ public class Level extends JFrame {
 	private static int enemyXSpeed = 2;
 
 	public Level(int levelNumber) {
+		Level.levelNumber = levelNumber;
 		reset();
 	}
 
@@ -40,7 +42,7 @@ public class Level extends JFrame {
 
 		System.out.println("Reset");
 		player = new Player(200, 300, playerXSpeed);
-		boss = new Boss(playerXSpeed);
+		boss = new Boss(levelNumber, playerXSpeed);
 		while (enemyCounter != 0)
 			bulletsAndEnemies.addEnemy(new Enemy(enemyXSpeed, playerXSpeed));
 	}

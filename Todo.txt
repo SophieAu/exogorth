@@ -32,7 +32,7 @@
 
 [X] LEVEL 2
 
-[ ] END BOSS 2
+[X] END BOSS 2
 
 [ ] EXOGORTH
 
@@ -60,6 +60,7 @@
 [ ] FINAL TWEAKS
 	[ ] enemies colliding with each other
 		--> (both) change direction (simply turn around ySign)
+	[ ] change "speil start" in the main menu to "spiel starten"
 
 [ ] REMOVING CODE SMELL
 	[ ] consider making most non-private fields private and adding getters and setters

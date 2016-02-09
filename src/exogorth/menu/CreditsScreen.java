@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 @SuppressWarnings("serial")
 public class CreditsScreen extends MenuScreen {
-	private BufferedImage creditsHeader, credits; // Infobilder
+	private BufferedImage creditsHeader, credits;
 
 	public CreditsScreen() {
 		super("Exogorth - Credits");

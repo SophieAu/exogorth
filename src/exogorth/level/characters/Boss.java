@@ -3,8 +3,10 @@ package exogorth.level.characters;
 import java.awt.Rectangle;
 import java.util.Random;
 
+import exogorth.TheMain;
 import exogorth.Window;
 import exogorth.level.GameCharacter;
+import exogorth.level.Level;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
 
@@ -13,14 +15,20 @@ public class Boss extends GameCharacter {
 	private Random random = new Random();
 	public int yDirection;
 	private int directionChangeCountdown;
+	private int levelNumber;
 
-	public Boss(int xSpeed) {
+	public Boss(int levelNumber, int xSpeed) {
 		super(-xSpeed);
+		this.levelNumber = levelNumber;
 		ySpeed = 0;
 		reloadTime = 25;
-		lives = 20;
-
-		image = loader.load("Game/bossOne");
+		if (levelNumber == 1) {
+			lives = 20;
+			image = loader.load("Game/bossOne");
+		} else if (levelNumber == 2) {
+			lives = 30;
+			image = loader.load("Game/bossTwo");
+		}
 		xPosition = Window.WIDTH;
 		yPosition = random.nextInt(Window.HEIGHT - image.getHeight());
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
@@ -64,5 +72,12 @@ public class Boss extends GameCharacter {
 		// FOR NOW ONLY THE CIRCLEBULLET PATTERN
 		reload = random.nextInt(10) - random.nextInt(10);
 		bulletList.addBullet(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
+	}
+
+	public void death() {
+		if (levelNumber == 1)
+			TheMain.level = new Level(2);
+		else if (levelNumber == 2)
+			Level.backToMenu();
 	}
 }

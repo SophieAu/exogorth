@@ -15,11 +15,11 @@ public class TheMain extends Canvas {
 	public static STATE State = STATE.MAINMENU;
 	public static Level level;
 	public static JFrame currentScreen;
+	public static boolean isFirstStart;
 	public static boolean running = false;
 	private BufferStrategy bufferStrategy;
 	private Thread renderer;
 	private Thread updater;
-	public static boolean isFirstStart;
 
 	public static void main(String args[]) {
 		TheMain game = new TheMain();

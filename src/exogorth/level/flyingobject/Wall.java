@@ -8,7 +8,7 @@ import java.util.Random;
 import exogorth.ImageLoader;
 import exogorth.Window;
 
-public class Walls {
+public class Wall {
 	public static int width = 800, height = 100;
 	public Rectangle collisionBox;
 	private Random random = new Random();
@@ -19,7 +19,7 @@ public class Walls {
 	public int xPosition;
 	private int scrollingSpeed;
 
-	public Walls(int xSpeed, int xPosition) {
+	public Wall(int xSpeed, int xPosition) {
 		this.scrollingSpeed = xSpeed;
 		boolean up = random.nextInt(2) == 0;
 

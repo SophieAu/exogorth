@@ -3,17 +3,17 @@ package exogorth.level;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import exogorth.level.flyingobject.Walls;
+import exogorth.level.flyingobject.Wall;
 
 public class WallController {
-	ArrayList<Walls> wallArray = new ArrayList<>(36);
-	public static Walls currentFirst;
-	public static Walls currentSecond;
+	ArrayList<Wall> wallArray = new ArrayList<>(36);
+	public static Wall currentFirst;
+	public static Wall currentSecond;
 	int wallArraySize;
 
 	public WallController(int playerXSpeed) {
-		for (int i = 0; i < Level.LENGTH/Walls.width; i++)
-			wallArray.add(new Walls(playerXSpeed, 800));
+		for (int i = 0; i < Level.LENGTH/Wall.width; i++)
+			wallArray.add(new Wall(playerXSpeed, 800));
 		
 		wallArraySize = wallArray.size();
 		currentFirst = wallArray.get(0);
@@ -27,7 +27,7 @@ public class WallController {
 			if (currentFirst.xPosition <= 0 && wallArraySize >= 2)
 				currentSecond.update();
 
-			if (currentFirst.xPosition + Walls.width <= 0 && wallArraySize > 2){
+			if (currentFirst.xPosition + Wall.width <= 0 && wallArraySize > 2){
 				wallArray.remove(currentFirst);
 				currentFirst = currentSecond;
 				currentSecond = wallArray.get(1);

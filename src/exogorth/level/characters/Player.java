@@ -9,7 +9,7 @@ import exogorth.level.Level;
 import exogorth.level.WallController;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
-import exogorth.level.flyingobject.Walls;
+import exogorth.level.flyingobject.Wall;
 
 public class Player extends GameCharacter {
 	private int damageGracePeriod = 120;
@@ -67,7 +67,7 @@ public class Player extends GameCharacter {
 		collisionBox.y = yPosition;
 
 		if (wallCollision())
-			yPosition = yPosition <= 400 ? Walls.height : Window.HEIGHT - Walls.height - image.getHeight();
+			yPosition = yPosition <= 400 ? Wall.height : Window.HEIGHT - Wall.height - image.getHeight();
 
 		collisionBox.y = yPosition;
 

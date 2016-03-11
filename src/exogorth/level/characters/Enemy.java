@@ -10,7 +10,7 @@ import exogorth.level.Level;
 import exogorth.level.WallController;
 import exogorth.level.flyingobject.Bullet;
 import exogorth.level.flyingobject.TYPE;
-import exogorth.level.flyingobject.Walls;
+import exogorth.level.flyingobject.Wall;
 
 public class Enemy extends GameCharacter {
 	private ENEMYTYPE EnemyType;
@@ -41,7 +41,7 @@ public class Enemy extends GameCharacter {
 
 		xPositionFactor = (int) (Level.LENGTH * ((double) xSpeed / playerXSpeed));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
-		yPosition = (random.nextInt(Window.HEIGHT - image.getHeight() - 2 * Walls.height) + Walls.height);
+		yPosition = (random.nextInt(Window.HEIGHT - image.getHeight() - 2 * Wall.height) + Wall.height);
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
@@ -81,7 +81,7 @@ public class Enemy extends GameCharacter {
 			ySign *= -1;
 		}
 		if (wallCollision())
-			ySign = yPosition <= 400 ? 1 : -1; // TODO: Die 400 ist eher nicht so ideal
+			ySign = yPosition <= Window.HEIGHT/2 ? 1 : -1;
 
 		directionChangeCountdown--;
 	}

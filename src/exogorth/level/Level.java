@@ -44,7 +44,7 @@ public class Level extends JFrame {
 		player = new Player(200, 300, playerXSpeed);
 		boss = new Boss(levelNumber, playerXSpeed);
 		while (enemyCounter != 0)
-			bulletsAndEnemies.addEnemy(new Enemy(enemyXSpeed, playerXSpeed));
+			bulletsAndEnemies.add(new Enemy(enemyXSpeed, playerXSpeed));
 	}
 
 	public synchronized void update() {

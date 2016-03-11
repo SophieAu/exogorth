@@ -34,7 +34,7 @@ public class Player extends GameCharacter {
 	protected void shooting() {
 		if (!reloading() && Keyboard.pressedKey(KeyEvent.VK_SPACE)) {
 			reload = 0;
-			bulletList.addBullet(new Bullet(xPosition + image.getWidth(), yPosition + (image.getHeight() / 2), bulletSpeed, TYPE.PLAYER));
+			bulletList.add(new Bullet(xPosition + image.getWidth(), yPosition + (image.getHeight() / 2), bulletSpeed, TYPE.PLAYER));
 		}
 	}
 

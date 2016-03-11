@@ -51,9 +51,12 @@ public class Enemy extends GameCharacter {
 
 		if (this.EnemyType == ENEMYTYPE.CIRCLE) {
 			reload = random.nextInt(10) - random.nextInt(10);
-			bulletList.addBullet(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
+			bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
 		}
-		// TODO: IMPLEMENT TRIANGLE PATTERN HERE
+		
+		if (this.EnemyType == ENEMYTYPE.TRIANGLE) {
+			// TODO: IMPLEMENT TRIANGLE PATTERN HERE
+		}
 	}
 
 	@Override

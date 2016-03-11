@@ -71,7 +71,7 @@ public class Boss extends GameCharacter {
 
 		// FOR NOW ONLY THE CIRCLEBULLET PATTERN
 		reload = random.nextInt(10) - random.nextInt(10);
-		bulletList.addBullet(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
+		bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
 	}
 
 	public void death() {

@@ -48,11 +48,11 @@ public class CollisionController {
 		return (enemy.outOfBounds() || playerEnemyCollision(enemy) || enemy.lives <= 0);
 	}
 
-	public void addBullet(Bullet bullet) {
+	public void add(Bullet bullet) {
 		existingBullets.add(bullet);
 	}
 
-	public void addEnemy(Enemy enemy) {
+	public void add(Enemy enemy) {
 		existingEnemies.add(enemy);
 	}
 

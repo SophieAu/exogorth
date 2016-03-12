@@ -1,0 +1,63 @@
+Refactoring Ideas
+
+
+package: level
+	Keyboard
+	Level
+	LevelBackground
+
+	CollisionController
+	EnemyController
+	BulletController
+	WallController // this might become a "simple" wall class
+	
+	package characters
+		CharacterInterface
+		Boss
+		Enemy
+		Exogorth
+		Player
+		ENEMYTYPE
+		
+	package: FlyingObject
+		Bullet
+		Wall
+		BULLETOWNER
+		
+		
+Make sure that wallCollision is actually put into CollisionController and out of Player and Enemy
+- both might have a border-collision function and use that
+	basically:
+	borderCollision(int currentXPosition)
+		if currentX < Level.height/2
+			whatever
+			
+		if currentX > Level.height/2
+			something else
+			
+			
+			
+CollisionController should really only check for the intersects and then call the methods
+	if(player.collides(enemy)
+		enemy.hit
+		player.hit
+		
+	if(player.collides(bullet)
+		player.hit
+		bullet.remove
+		
+	if(player.collides(wall)
+		player.boundary
+		player.hit
+		
+	if(enemy.collides.enemy)
+		enemie1.changeDirection
+		enemy2.changeDirection
+		
+	if enemy.collides(wall)
+		enemy.changeDirection
+	
+	if(enemy.collides(bullet)
+		if(bullet is his own)
+			continue
+		enemy.hit

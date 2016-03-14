@@ -61,3 +61,8 @@ CollisionController should really only check for the intersects and then call th
 		if(bullet is his own)
 			continue
 		enemy.hit
+		
+		
+		
+alternative to enemy.collides(enemy):
+	when creating the enemies, make sure that they are apart. e.g. one enemy every 100+-50 pixels. add this as a pattern in the enemy constrcutor

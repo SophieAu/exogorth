@@ -20,7 +20,7 @@ public class CollisionController {
 	}
 
 	public synchronized void update() {
-		for (int i = 0; i < existingBullets.size();) {
+		for (int i = 0; i < existingBullets.size();) { //for(Bullet tempBullet : existingBullets)
 			tempBullet = existingBullets.get(i);
 			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
 				existingBullets.remove(i);

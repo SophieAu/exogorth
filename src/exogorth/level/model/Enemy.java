@@ -38,12 +38,12 @@ public class Enemy extends GameCharacter {
 		if (reloading())
 			return;
 
-		if (this.enemyType == ENEMYTYPE.CIRCLE) {
+		if (enemyType == ENEMYTYPE.CIRCLE) {
 			reload = random.nextInt(10) - random.nextInt(10);
 			bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, BULLETTYPE.CIRCLE));
 		}
 		
-		if (this.enemyType == ENEMYTYPE.TRIANGLE) {
+		if (enemyType == ENEMYTYPE.TRIANGLE) {
 			// TODO: IMPLEMENT TRIANGLE PATTERN HERE
 		}
 	}

@@ -1,16 +1,12 @@
-package exogorth.level.characters;
+package exogorth.level.model;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
 import exogorth.Window;
-import exogorth.level.GameCharacter;
 import exogorth.level.Level;
-import exogorth.level.WallController;
-import exogorth.level.flyingobject.Bullet;
-import exogorth.level.flyingobject.TYPE;
-import exogorth.level.flyingobject.Wall;
+import exogorth.level.controller.WallController;
 
 public class Enemy extends GameCharacter {
 	private ENEMYTYPE EnemyType;
@@ -51,7 +47,7 @@ public class Enemy extends GameCharacter {
 
 		if (this.EnemyType == ENEMYTYPE.CIRCLE) {
 			reload = random.nextInt(10) - random.nextInt(10);
-			bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
+			bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, BULLETTYPE.CIRCLEBULLET));
 		}
 		
 		if (this.EnemyType == ENEMYTYPE.TRIANGLE) {

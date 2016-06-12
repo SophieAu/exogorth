@@ -1,9 +1,10 @@
-package exogorth.level;
+package exogorth.level.controller;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import exogorth.level.flyingobject.Wall;
+import exogorth.level.Level;
+import exogorth.level.model.Wall;
 
 public class WallController {
 	ArrayList<Wall> wallArray = new ArrayList<>(36);

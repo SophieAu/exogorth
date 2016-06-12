@@ -1,11 +1,12 @@
-package exogorth.level;
+package exogorth.level.controller;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import exogorth.level.characters.Enemy;
-import exogorth.level.flyingobject.Bullet;
-import exogorth.level.flyingobject.TYPE;
+import exogorth.level.Level;
+import exogorth.level.model.BULLETTYPE;
+import exogorth.level.model.Bullet;
+import exogorth.level.model.Enemy;
 
 public class CollisionController {
 	public static ArrayList<Bullet> existingBullets;
@@ -20,26 +21,27 @@ public class CollisionController {
 	}
 
 	public synchronized void update() {
-		for (int i = 0; i < existingBullets.size();) { //for(Bullet tempBullet : existingBullets)
+		for (int i = 0; i < existingBullets.size();) {
 			tempBullet = existingBullets.get(i);
 			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
-				existingBullets.remove(i);
+				existingBullets.remove(tempBullet);
 				if (Level.boss.lives == 0)
 					Level.boss.death();
-			} else
+			} else {
 				tempBullet.update();
-			i++;
+				i++;
+			}
 		}
 
 		for (int i = 0; i < existingEnemies.size();) {
 			tempEnemy = existingEnemies.get(i);
-			if (enemyCollision(tempEnemy))
+			if (enemyCollision(tempEnemy)) {
 				existingEnemies.remove(tempEnemy);
-			else
+			} else {
 				tempEnemy.update();
-			i++;
+				i++;
+			}
 		}
-
 	}
 
 	private boolean enemyCollision(Enemy enemy) {
@@ -59,7 +61,7 @@ public class CollisionController {
 	public boolean playerBulletCollision(Bullet bullet) {
 		if (!Level.player.collisionBox.intersects(bullet.collisionBox))
 			return false;
-		if (bullet.Owner == TYPE.CIRCLEBULLET)
+		if (bullet.Owner == BULLETTYPE.CIRCLEBULLET)
 			Level.player.hit();
 		return true;
 	}
@@ -76,7 +78,7 @@ public class CollisionController {
 		for (int i = 0; i < bullets.size(); i++) {
 			Bullet tempBullet = bullets.get(i);
 
-			if (enemy.collisionBox.intersects(tempBullet.collisionBox) && tempBullet.Owner == TYPE.PLAYER) {
+			if (enemy.collisionBox.intersects(tempBullet.collisionBox) && tempBullet.Owner == BULLETTYPE.PLAYER) {
 				enemy.lives--;
 				bullets.remove(i);
 				return;
@@ -105,7 +107,7 @@ public class CollisionController {
 	}
 
 	public boolean bossBulletCollision(Bullet bullet) {
-		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == TYPE.PLAYER && Level.boss.xPosition < 800) {
+		if (Level.boss.collisionBox.intersects(bullet.collisionBox) && bullet.Owner == BULLETTYPE.PLAYER && Level.boss.xPosition < 800) {
 			Level.boss.lives--;
 			System.out.println("Boss Lives: " + Level.boss.lives);
 			// if (Level.boss.lives == 0)

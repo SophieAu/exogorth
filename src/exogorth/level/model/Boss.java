@@ -1,14 +1,11 @@
-package exogorth.level.characters;
+package exogorth.level.model;
 
 import java.awt.Rectangle;
 import java.util.Random;
 
 import exogorth.TheMain;
 import exogorth.Window;
-import exogorth.level.GameCharacter;
 import exogorth.level.Level;
-import exogorth.level.flyingobject.Bullet;
-import exogorth.level.flyingobject.TYPE;
 
 public class Boss extends GameCharacter {
 	int startPosition;
@@ -71,7 +68,7 @@ public class Boss extends GameCharacter {
 
 		// FOR NOW ONLY THE CIRCLEBULLET PATTERN
 		reload = random.nextInt(10) - random.nextInt(10);
-		bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, TYPE.CIRCLEBULLET));
+		bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, BULLETTYPE.CIRCLEBULLET));
 	}
 
 	public void death() {

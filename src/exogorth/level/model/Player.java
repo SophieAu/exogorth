@@ -1,15 +1,11 @@
-package exogorth.level.characters;
+package exogorth.level.model;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import exogorth.Window;
-import exogorth.level.GameCharacter;
 import exogorth.level.Keyboard;
 import exogorth.level.Level;
-import exogorth.level.WallController;
-import exogorth.level.flyingobject.Bullet;
-import exogorth.level.flyingobject.TYPE;
-import exogorth.level.flyingobject.Wall;
+import exogorth.level.controller.WallController;
 
 public class Player extends GameCharacter {
 	private int damageGracePeriod = 120;
@@ -34,7 +30,7 @@ public class Player extends GameCharacter {
 	protected void shooting() {
 		if (!reloading() && Keyboard.pressedKey(KeyEvent.VK_SPACE)) {
 			reload = 0;
-			bulletList.add(new Bullet(xPosition + image.getWidth(), yPosition + (image.getHeight() / 2), bulletSpeed, TYPE.PLAYER));
+			bulletList.add(new Bullet(xPosition + image.getWidth(), yPosition + (image.getHeight() / 2), bulletSpeed, BULLETTYPE.PLAYER));
 		}
 	}
 

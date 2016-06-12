@@ -1,4 +1,4 @@
-package exogorth.level;
+package exogorth.level.model;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -6,18 +6,21 @@ import java.awt.image.BufferedImage;
 
 import exogorth.ImageLoader;
 import exogorth.Window;
+import exogorth.level.Level;
+import exogorth.level.controller.CollisionController;
 
 public class GameCharacter {
 	protected ImageLoader loader = ImageLoader.getInstance();
-	protected BufferedImage image;
+	public BufferedImage image;
 	public Rectangle collisionBox;
 	protected CollisionController bulletList;
-	protected int xPosition, yPosition;
+	public int xPosition;
+	protected int yPosition;
 	public int xSpeed, ySpeed;
 	protected int reload = 0;
 	protected int reloadTime;
 	protected int bulletSpeed;
-	protected int lives;
+	public int lives;
 
 	public GameCharacter(int xPosition, int yPosition, int xSpeed) {
 		this(xSpeed);

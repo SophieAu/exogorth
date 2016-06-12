@@ -1,4 +1,4 @@
-package exogorth.level.flyingobject;
+package exogorth.level.model;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;

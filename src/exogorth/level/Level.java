@@ -5,9 +5,12 @@ import javax.swing.JFrame;
 
 import exogorth.STATE;
 import exogorth.TheMain;
-import exogorth.level.characters.Boss;
-import exogorth.level.characters.Enemy;
-import exogorth.level.characters.Player;
+import exogorth.level.controller.CollisionController;
+import exogorth.level.controller.WallController;
+import exogorth.level.model.Boss;
+import exogorth.level.model.Enemy;
+import exogorth.level.model.LevelBackground;
+import exogorth.level.model.Player;
 import exogorth.menu.MainMenu;
 
 @SuppressWarnings("serial")

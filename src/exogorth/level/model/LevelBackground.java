@@ -1,4 +1,4 @@
-package exogorth.level;
+package exogorth.level.model;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -25,6 +25,5 @@ public class LevelBackground {
 	public synchronized void render(Graphics g) {
 		g.drawImage(image, xPosition, 0, null);
 		g.drawImage(image, xPosition + image.getWidth(), 0, null);
-		
 	}
 }

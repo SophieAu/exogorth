@@ -1,4 +1,4 @@
-package exogorth.level.flyingobject;
+package exogorth.level.model;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -7,29 +7,27 @@ import java.util.ArrayList;
 
 import exogorth.ImageLoader;
 import exogorth.Window;
-import exogorth.level.CollisionController;
-import exogorth.level.characters.Enemy;
-import exogorth.level.flyingobject.TYPE;
+import exogorth.level.controller.CollisionController;
 
 public class Bullet {
 	public int xPosition;
 	private int yPosition;
 	private int bulletSpeed;
-	public TYPE Owner;
+	public BULLETTYPE Owner;
 	public Rectangle collisionBox;
 
 	public BufferedImage image;
 	private ImageLoader loader = ImageLoader.getInstance();
 
-	public Bullet(int xPosition, int yPosition, int bulletSpeed, TYPE Owner) {
+	public Bullet(int xPosition, int yPosition, int bulletSpeed, BULLETTYPE Owner) {
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 		this.Owner = Owner;
 
-		if (this.Owner == TYPE.PLAYER) {
+		if (this.Owner == BULLETTYPE.PLAYER) {
 			this.bulletSpeed = bulletSpeed;
 			image = loader.load("Game/bulletPlayer");
-		} else if (this.Owner == TYPE.CIRCLEBULLET) {
+		} else if (this.Owner == BULLETTYPE.CIRCLEBULLET) {
 			this.bulletSpeed = -bulletSpeed;
 			image = loader.load("Game/bulletEnemy");
 		}

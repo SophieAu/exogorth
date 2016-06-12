@@ -17,10 +17,8 @@ public class Wall {
 	private ImageLoader loader = ImageLoader.getInstance();
 	public int topOrBottom;
 	public int xPosition;
-	private int scrollingSpeed;
 
-	public Wall(int xSpeed, int xPosition) {
-		this.scrollingSpeed = xSpeed;
+	public Wall(int xPosition) {
 		boolean up = random.nextInt(2) == 0;
 
 		if (up) {
@@ -39,7 +37,7 @@ public class Wall {
 	}
 
 	public synchronized void update() {
-		xPosition -= scrollingSpeed;
+		xPosition -= Settings.SCROLLSPEED;
 		collisionBox.x = xPosition;
 	}
 

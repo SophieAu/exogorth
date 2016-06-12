@@ -14,7 +14,7 @@ public class WallController {
 
 	public WallController() {
 		for (int i = 0; i < Settings.LEVELLENGTH / Wall.width; i++)
-			wallArray.add(new Wall(Settings.SCROLLSPEED, 800));
+			wallArray.add(new Wall(800));
 
 		wallArraySize = wallArray.size();
 		currentFirst = wallArray.get(0);

@@ -27,7 +27,7 @@ public class Bullet {
 		if (this.Owner == BULLETTYPE.PLAYER) {
 			this.bulletSpeed = bulletSpeed;
 			image = loader.load("Game/bulletPlayer");
-		} else if (this.Owner == BULLETTYPE.CIRCLEBULLET) {
+		} else if (this.Owner == BULLETTYPE.CIRCLE) {
 			this.bulletSpeed = -bulletSpeed;
 			image = loader.load("Game/bulletEnemy");
 		}

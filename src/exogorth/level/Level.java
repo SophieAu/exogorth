@@ -17,7 +17,6 @@ import exogorth.menu.MainMenu;
 @SuppressWarnings("serial")
 public class Level extends JFrame {
 	public static int progress;
-	static int level;
 	static int levelNumber;
 
 	private static LevelBackground background;

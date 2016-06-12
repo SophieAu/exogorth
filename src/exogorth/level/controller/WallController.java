@@ -22,25 +22,25 @@ public class WallController {
 	}
 
 	public synchronized void update() {
-		if (wallArraySize > 0) {
+		if (wallArraySize > 0)
 			currentFirst.update();
 
-			if (currentFirst.xPosition <= 0 && wallArraySize >= 2)
-				currentSecond.update();
+		if (currentFirst.xPosition <= 0 && wallArraySize >= 2)
+			currentSecond.update();
 
-			if (currentFirst.xPosition + Wall.width <= 0 && wallArraySize > 2) {
-				wallArray.remove(currentFirst);
-				currentFirst = currentSecond;
-				currentSecond = wallArray.get(1);
-				wallArraySize--;
-			}
+		if (currentFirst.xPosition + Wall.width <= 0 && wallArraySize > 2) {
+			wallArray.remove(currentFirst);
+			currentFirst = currentSecond;
+			currentSecond = wallArray.get(1);
+			wallArraySize--;
 		}
+
 	}
 
 	public synchronized void render(Graphics g) {
 		if (wallArraySize > 0)
 			currentFirst.render(g);
-		
+
 		if (currentFirst.xPosition <= 0 && wallArraySize > 1)
 			currentSecond.render(g);
 	}

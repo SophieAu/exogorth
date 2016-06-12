@@ -15,7 +15,7 @@ public class Boss extends GameCharacter {
 	private int levelNumber;
 
 	public Boss(int levelNumber) {
-		super(Settings.SCROLLSPEED);
+		super(-Settings.SCROLLSPEED);
 		this.levelNumber = levelNumber;
 		ySpeed = 0;
 		reloadTime = 25;

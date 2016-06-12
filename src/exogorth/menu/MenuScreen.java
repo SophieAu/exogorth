@@ -17,7 +17,7 @@ public class MenuScreen extends JFrame {
 	private BufferedImage background, exitButton;
 	protected ImageLoader loader = ImageLoader.getInstance();
 	protected static int buttonXLeft = (Window.WIDTH - Window.BOXWIDTH) / 2, buttonXRight = (Window.WIDTH + Window.BOXWIDTH) / 2;
-	static int exitBoxY = 500;
+	protected static int exitBoxY = 500;
 
 	public MenuScreen(String title) {
 		background = loader.load("Background");

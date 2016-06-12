@@ -10,10 +10,7 @@ import exogorth.level.model.Enemy;
 
 public class CollisionController {
 	public static ArrayList<Bullet> existingBullets;
-	private Bullet tempBullet;
-
 	public static ArrayList<Enemy> existingEnemies;
-	private Enemy tempEnemy;
 
 	public CollisionController() {
 		existingBullets = new ArrayList<>();
@@ -22,7 +19,7 @@ public class CollisionController {
 
 	public synchronized void update() {
 		for (int i = 0; i < existingBullets.size();) {
-			tempBullet = existingBullets.get(i);
+			Bullet tempBullet = existingBullets.get(i);
 			if (tempBullet.outOfBounds() || playerBulletCollision(tempBullet) || bossBulletCollision(tempBullet)) {
 				existingBullets.remove(tempBullet);
 				if (Level.boss.lives == 0)
@@ -34,7 +31,7 @@ public class CollisionController {
 		}
 
 		for (int i = 0; i < existingEnemies.size();) {
-			tempEnemy = existingEnemies.get(i);
+			Enemy tempEnemy = existingEnemies.get(i);
 			if (enemyCollision(tempEnemy)) {
 				existingEnemies.remove(tempEnemy);
 			} else {
@@ -61,7 +58,7 @@ public class CollisionController {
 	public boolean playerBulletCollision(Bullet bullet) {
 		if (!Level.player.collisionBox.intersects(bullet.collisionBox))
 			return false;
-		if (bullet.Owner == BULLETTYPE.CIRCLEBULLET)
+		if (bullet.Owner == BULLETTYPE.CIRCLE)
 			Level.player.hit();
 		return true;
 	}

@@ -26,7 +26,7 @@ public class Level extends JFrame {
 	public static Boss boss;
 	public static CollisionController bulletsAndEnemies;
 
-	public static int enemyCounter, circleCounter, triangleCounter;
+	public static int enemyCounter;
 
 	public Level(int levelNumber) {
 		this.levelNumber = levelNumber;
@@ -42,9 +42,11 @@ public class Level extends JFrame {
 		player = new Player(200, 300);
 		boss = new Boss(levelNumber);
 
-		enemyCounter = 50;
-		circleCounter = Level.enemyCounter / 2;
-		triangleCounter = Level.enemyCounter / 2;
+		if (levelNumber == 1)
+			enemyCounter = Settings.LEVELONEENEMIES;
+		if (levelNumber == 2)
+			enemyCounter = Settings.LEVELTWOENEMIES;
+
 		for (int i = 0; i < enemyCounter; i += 2) {
 			bulletsAndEnemies.add(new Enemy(ENEMYTYPE.CIRCLE));
 			bulletsAndEnemies.add(new Enemy(ENEMYTYPE.TRIANGLE));

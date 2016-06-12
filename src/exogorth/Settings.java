@@ -16,4 +16,7 @@ public class Settings {
 	public static final int BOSSONELIVES = 20;
 	public static final int BOSSTWOLIVES = 30;
 	public static final int PLAYERLIVES = 3;
+	
+	public static final int LEVELONEENEMIES = 50;
+	public static final int LEVELTWOENEMIES = 50;
 }

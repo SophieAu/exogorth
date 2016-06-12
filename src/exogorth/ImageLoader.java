@@ -21,13 +21,12 @@ public class ImageLoader {
 	// End of Singleton Pattern-------------------------------------------
 
 	public BufferedImage load(String path) {
-		BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource("/Images/" + path + ".png"));
+			return ImageIO.read(getClass().getResource("/Images/" + path + ".png"));
 		} catch (IOException e) {
 			System.out.println("Image file not found.");
 			e.printStackTrace();
 		}
-		return image;
+		return null;
 	}
 }

@@ -5,32 +5,25 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import exogorth.Settings;
-import exogorth.level.Level;
 import exogorth.level.controller.WallController;
 
 public class Enemy extends GameCharacter {
-	private ENEMYTYPE EnemyType;
+	private ENEMYTYPE enemyType;
 	private Random random = new Random();
 	public int ySign;
 	private int directionChangeCountdown;
-	private int randomType;
 	private int xPositionFactor;
 
-	public Enemy() {
+	public Enemy(ENEMYTYPE enemyType) {
 		super(Settings.ENEMYSPEED);
-		randomType = random.nextInt(2);
+		random.nextInt(2);
 
-		if ((randomType == 0 || Level.triangleCounter == 0) && Level.circleCounter != 0) {
-			EnemyType = ENEMYTYPE.CIRCLE;
+		if(enemyType == ENEMYTYPE.CIRCLE)
 			image = loader.load("Game/enemyCircle");
-			Level.circleCounter--;
-		} else if ((randomType == 1 || Level.circleCounter == 0) && Level.triangleCounter != 0) {
-			EnemyType = ENEMYTYPE.TRIANGLE;
+		else if(enemyType == ENEMYTYPE.TRIANGLE)
 			image = loader.load("Game/enemyTriangle");
-			Level.triangleCounter--;
-		}
-		Level.enemyCounter--;
 
+		this.enemyType = enemyType;
 		reloadTime = 25;
 		bulletSpeed = 7;
 		lives = 2;
@@ -45,12 +38,12 @@ public class Enemy extends GameCharacter {
 		if (reloading())
 			return;
 
-		if (this.EnemyType == ENEMYTYPE.CIRCLE) {
+		if (this.enemyType == ENEMYTYPE.CIRCLE) {
 			reload = random.nextInt(10) - random.nextInt(10);
 			bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, BULLETTYPE.CIRCLE));
 		}
 		
-		if (this.EnemyType == ENEMYTYPE.TRIANGLE) {
+		if (this.enemyType == ENEMYTYPE.TRIANGLE) {
 			// TODO: IMPLEMENT TRIANGLE PATTERN HERE
 		}
 	}

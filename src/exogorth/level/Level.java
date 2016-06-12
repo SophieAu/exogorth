@@ -17,7 +17,7 @@ import exogorth.menu.MainMenu;
 @SuppressWarnings("serial")
 public class Level extends JFrame {
 	public static int progress;
-	static int levelNumber;
+	int levelNumber;
 
 	private static LevelBackground background;
 	public static WallController wall;
@@ -28,11 +28,11 @@ public class Level extends JFrame {
 	public static int enemyCounter, circleCounter, triangleCounter;
 
 	public Level(int levelNumber) {
-		Level.levelNumber = levelNumber;
+		this.levelNumber = levelNumber;
 		reset();
 	}
 
-	private static void reset() {
+	private void reset() {
 		enemyCounter = 50;
 		circleCounter = Level.enemyCounter / 2;
 		triangleCounter = Level.enemyCounter / 2;

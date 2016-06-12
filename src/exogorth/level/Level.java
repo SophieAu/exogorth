@@ -33,19 +33,21 @@ public class Level extends JFrame {
 		reset();
 	}
 
+	// bulletsAndEnemies list needs to be initialized before calling the player and boss or it will
+	// crash the game because no bullets can be added.
 	private void reset() {
-		bulletsAndEnemies = new CollisionController();
-		background = new LevelBackground();
-		wall = new WallController();
-
-		System.out.println("Reset");
-		player = new Player(200, 300);
-		boss = new Boss(levelNumber);
+		System.out.println("Reset"); // DEBUG--------------------------------------
 
 		if (levelNumber == 1)
 			enemyCounter = Settings.LEVELONEENEMIES;
 		if (levelNumber == 2)
 			enemyCounter = Settings.LEVELTWOENEMIES;
+		bulletsAndEnemies = new CollisionController(enemyCounter);
+
+		background = new LevelBackground();
+		wall = new WallController();
+		player = new Player(200, 300);
+		boss = new Boss(levelNumber);
 
 		for (int i = 0; i < enemyCounter; i += 2) {
 			bulletsAndEnemies.add(new Enemy(ENEMYTYPE.CIRCLE));

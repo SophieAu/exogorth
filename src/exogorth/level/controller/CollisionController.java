@@ -12,9 +12,9 @@ public class CollisionController {
 	public static ArrayList<Bullet> existingBullets;
 	public static ArrayList<Enemy> existingEnemies;
 
-	public CollisionController() {
+	public CollisionController(int enemyNumber) {
 		existingBullets = new ArrayList<>();
-		existingEnemies = new ArrayList<>();
+		existingEnemies = new ArrayList<>(enemyNumber);
 	}
 
 	public synchronized void update() {

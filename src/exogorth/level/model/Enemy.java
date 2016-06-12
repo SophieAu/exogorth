@@ -16,7 +16,6 @@ public class Enemy extends GameCharacter {
 
 	public Enemy(ENEMYTYPE enemyType) {
 		super(Settings.ENEMYSPEED);
-		random.nextInt(2);
 
 		if(enemyType == ENEMYTYPE.CIRCLE)
 			image = loader.load("Game/enemyCircle");

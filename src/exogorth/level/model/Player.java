@@ -13,7 +13,7 @@ public class Player extends GameCharacter {
 	// private boolean doubleDamage;
 
 	public Player(int xPosition, int yPosition, int xSpeed) {
-		super(xPosition, yPosition, xSpeed);
+		super(xSpeed);
 
 		Level.progress = xPosition;
 		bulletSpeed = 7;
@@ -23,6 +23,9 @@ public class Player extends GameCharacter {
 		gracePeriodCounter = damageGracePeriod;
 
 		image = loader.load("Game/player");
+
+		this.xPosition = xPosition;
+		this.yPosition = yPosition;
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 

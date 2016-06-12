@@ -22,19 +22,9 @@ public class GameCharacter {
 	protected int bulletSpeed;
 	public int lives;
 
-	public GameCharacter(int xPosition, int yPosition, int xSpeed) {
-		this(xSpeed);
-		this.xPosition = xPosition;
-		this.yPosition = yPosition;
-	}
-
 	public GameCharacter(int xSpeed) {
-		this();
 		this.xSpeed = xSpeed;
 		ySpeed = xSpeed - 2;
-	}
-
-	public GameCharacter() {
 		bulletList = Level.bulletsAndEnemies;
 	}
 

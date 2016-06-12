@@ -38,12 +38,11 @@ public class WallController {
 	}
 
 	public synchronized void render(Graphics g) {
-		if (wallArraySize > 0) {
+		if (wallArraySize > 0)
 			currentFirst.render(g);
-
-			if (currentFirst.xPosition <= 0 && wallArraySize > 1)
-				currentSecond.render(g);
-		}
+		
+		if (currentFirst.xPosition <= 0 && wallArraySize > 1)
+			currentSecond.render(g);
 	}
 
 }

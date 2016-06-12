@@ -35,7 +35,7 @@ public class Enemy extends GameCharacter {
 		bulletSpeed = 7;
 		lives = 2;
 
-		xPositionFactor = (int) (Settings.LENGTH * ((double) xSpeed / playerXSpeed));
+		xPositionFactor = (int) (Settings.LEVELLENGTH * ((double) xSpeed / playerXSpeed));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
 		yPosition = (random.nextInt(Settings.HEIGHT - image.getHeight() - 2 * Wall.height) + Wall.height);
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());

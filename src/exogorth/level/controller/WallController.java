@@ -13,7 +13,7 @@ public class WallController {
 	int wallArraySize;
 
 	public WallController(int playerXSpeed) {
-		for (int i = 0; i < Settings.LENGTH/Wall.width; i++)
+		for (int i = 0; i < Settings.LEVELLENGTH/Wall.width; i++)
 			wallArray.add(new Wall(playerXSpeed, 800));
 		
 		wallArraySize = wallArray.size();

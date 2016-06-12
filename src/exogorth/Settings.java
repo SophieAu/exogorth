@@ -9,6 +9,6 @@ public class Settings {
 	public static final int BOXYSPACE = 80;
 	
 	//Level-specific constants
-	public static final int LENGTH = 3000;
+	public static final int LEVELLENGTH = 3000;
 	
 }

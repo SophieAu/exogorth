@@ -51,12 +51,12 @@ public class Level extends JFrame {
 	}
 
 	public synchronized void update() {
-		if (progress < Settings.LENGTH)
+		if (progress < Settings.LEVELLENGTH)
 			background.update();
 		wall.update();
 		player.update();
 		bulletsAndEnemies.update();
-		if (progress > Settings.LENGTH)
+		if (progress > Settings.LEVELLENGTH)
 			boss.update();
 	}
 
@@ -65,7 +65,7 @@ public class Level extends JFrame {
 		wall.render(g);
 		bulletsAndEnemies.render(g);
 		player.render(g);
-		if (progress > Settings.LENGTH)
+		if (progress > Settings.LEVELLENGTH)
 			boss.render(g);
 	}
 

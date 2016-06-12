@@ -20,9 +20,8 @@ public class ImageLoader {
 	}
 	// End of Singleton Pattern-------------------------------------------
 
-	private BufferedImage image;
-
 	public BufferedImage load(String path) {
+		BufferedImage image = null;
 		try {
 			image = ImageIO.read(getClass().getResource("/Images/" + path + ".png"));
 		} catch (IOException e) {

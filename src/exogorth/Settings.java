@@ -11,7 +11,7 @@ public class Settings {
 	//Level-specific constants
 	public static final int LEVELLENGTH = 3000;
 	public static final int SCROLLSPEED = 4;
-	public static final int ENEMYSCROLLSPEED = 2;
+	public static final int ENEMYSPEED = 2;
 	
 	public static final int BOSSONELIVES = 20;
 	public static final int BOSSTWOLIVES = 30;

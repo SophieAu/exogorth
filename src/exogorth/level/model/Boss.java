@@ -20,10 +20,10 @@ public class Boss extends GameCharacter {
 		ySpeed = 0;
 		reloadTime = 25;
 		if (levelNumber == 1) {
-			lives = 20;
+			lives = Settings.BOSSONELIVES;
 			image = loader.load("Game/bossOne");
 		} else if (levelNumber == 2) {
-			lives = 30;
+			lives = Settings.BOSSTWOLIVES;
 			image = loader.load("Game/bossTwo");
 		}
 		xPosition = Settings.WIDTH;

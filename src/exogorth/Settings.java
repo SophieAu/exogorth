@@ -13,4 +13,7 @@ public class Settings {
 	public static final int SCROLLSPEED = 4;
 	public static final int ENEMYSCROLLSPEED = 2;
 	
+	public static final int BOSSONELIVES = 20;
+	public static final int BOSSTWOLIVES = 30;
+	public static final int PLAYERLIVES = 3;
 }

@@ -18,7 +18,7 @@ public class Player extends GameCharacter {
 		Level.progress = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
-		lives = 3;
+		lives = Settings.PLAYERLIVES;
 		ySpeed = xSpeed;
 		gracePeriodCounter = damageGracePeriod;
 

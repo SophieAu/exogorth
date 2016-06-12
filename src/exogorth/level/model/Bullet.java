@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import exogorth.ImageLoader;
-import exogorth.Window;
+import exogorth.Settings;
 import exogorth.level.controller.CollisionController;
 
 public class Bullet {
@@ -44,7 +44,7 @@ public class Bullet {
 	}
 
 	public boolean outOfBounds() {
-		return (((xPosition + image.getWidth()) < 0) || (xPosition > Window.WIDTH + image.getWidth()));
+		return (((xPosition + image.getWidth()) < 0) || (xPosition > Settings.WIDTH + image.getWidth()));
 	}
 
 	public boolean collision() {

@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import exogorth.ImageLoader;
-import exogorth.Window;
+import exogorth.Settings;
 import exogorth.level.Level;
 import exogorth.level.controller.CollisionController;
 
@@ -47,7 +47,7 @@ public class GameCharacter {
 	}
 
 	public synchronized void render(Graphics g) {
-		if (xPosition < Window.WIDTH)
+		if (xPosition < Settings.WIDTH)
 			g.drawImage(image, xPosition, yPosition, null);
 	}
 

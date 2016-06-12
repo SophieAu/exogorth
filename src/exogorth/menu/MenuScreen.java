@@ -9,14 +9,14 @@ import javax.swing.JFrame;
 
 import exogorth.ImageLoader;
 import exogorth.STATE;
-import exogorth.Window;
+import exogorth.Settings;
 import exogorth.TheMain;
 
 @SuppressWarnings("serial")
 public class MenuScreen extends JFrame {
 	private BufferedImage background, exitButton;
 	protected ImageLoader loader = ImageLoader.getInstance();
-	protected static int buttonXLeft = (Window.WIDTH - Window.BOXWIDTH) / 2, buttonXRight = (Window.WIDTH + Window.BOXWIDTH) / 2;
+	protected static int buttonXLeft = (Settings.WIDTH - Settings.BOXWIDTH) / 2, buttonXRight = (Settings.WIDTH + Settings.BOXWIDTH) / 2;
 	protected static int exitBoxY = 500;
 
 	public MenuScreen(String title) {
@@ -30,11 +30,11 @@ public class MenuScreen extends JFrame {
 		g.setColor(Color.white);
 		super.paint(g);
 
-		Rectangle exitBox = new Rectangle(Window.BOXX, exitBoxY, Window.BOXWIDTH, Window.BOXHEIGHT);
-		int exitButtonY = (int) (exitBoxY + ((Window.BOXHEIGHT - exitButton.getHeight()) / 2)) + 1;
+		Rectangle exitBox = new Rectangle(Settings.BOXX, exitBoxY, Settings.BOXWIDTH, Settings.BOXHEIGHT);
+		int exitButtonY = (int) (exitBoxY + ((Settings.BOXHEIGHT - exitButton.getHeight()) / 2)) + 1;
 
 		g.drawImage(background, 0, 0, null);
 		g2d.draw(exitBox);
-		g.drawImage(exitButton, (Window.WIDTH - exitButton.getWidth()) / 2, exitButtonY, null);
+		g.drawImage(exitButton, (Settings.WIDTH - exitButton.getWidth()) / 2, exitButtonY, null);
 	}
 }

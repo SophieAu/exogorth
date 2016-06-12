@@ -3,7 +3,7 @@ package exogorth.level.controller;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import exogorth.level.Level;
+import exogorth.Settings;
 import exogorth.level.model.Wall;
 
 public class WallController {
@@ -13,7 +13,7 @@ public class WallController {
 	int wallArraySize;
 
 	public WallController(int playerXSpeed) {
-		for (int i = 0; i < Level.LENGTH/Wall.width; i++)
+		for (int i = 0; i < Settings.LENGTH/Wall.width; i++)
 			wallArray.add(new Wall(playerXSpeed, 800));
 		
 		wallArraySize = wallArray.size();

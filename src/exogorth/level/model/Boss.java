@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import exogorth.TheMain;
-import exogorth.Window;
+import exogorth.Settings;
 import exogorth.level.Level;
 
 public class Boss extends GameCharacter {
@@ -26,16 +26,16 @@ public class Boss extends GameCharacter {
 			lives = 30;
 			image = loader.load("Game/bossTwo");
 		}
-		xPosition = Window.WIDTH;
-		yPosition = random.nextInt(Window.HEIGHT - image.getHeight());
+		xPosition = Settings.WIDTH;
+		yPosition = random.nextInt(Settings.HEIGHT - image.getHeight());
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
 	protected void movement() {
-		if (xPosition <= Window.WIDTH)
+		if (xPosition <= Settings.WIDTH)
 			yMovementPattern();
 
-		if (xPosition > (Window.WIDTH - image.getWidth() / 2))
+		if (xPosition > (Settings.WIDTH - image.getWidth() / 2))
 			xPosition += xSpeed;
 
 		collisionBox.x = xPosition;
@@ -55,8 +55,8 @@ public class Boss extends GameCharacter {
 		}
 
 		yPosition += 2 * yDirection;
-		if (yPosition < 0 || yPosition + collisionBox.height > Window.HEIGHT) {
-			yPosition = yPosition <= 0 ? 0 : (Window.HEIGHT - collisionBox.height);
+		if (yPosition < 0 || yPosition + collisionBox.height > Settings.HEIGHT) {
+			yPosition = yPosition <= 0 ? 0 : (Settings.HEIGHT - collisionBox.height);
 			yDirection *= -1;
 		}
 		directionChangeCountdown--;

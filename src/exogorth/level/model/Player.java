@@ -2,7 +2,7 @@ package exogorth.level.model;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import exogorth.Window;
+import exogorth.Settings;
 import exogorth.level.Keyboard;
 import exogorth.level.Level;
 import exogorth.level.controller.WallController;
@@ -44,7 +44,7 @@ public class Player extends GameCharacter {
 				xPosition = 0;
 		}
 
-		if ((Keyboard.pressedKey(KeyEvent.VK_RIGHT) || Keyboard.pressedKey(KeyEvent.VK_D)) & xPosition <= ((Window.WIDTH * 2) / 3))
+		if ((Keyboard.pressedKey(KeyEvent.VK_RIGHT) || Keyboard.pressedKey(KeyEvent.VK_D)) & xPosition <= ((Settings.WIDTH * 2) / 3))
 			xPosition += xSpeed;
 
 		if (Keyboard.pressedKey(KeyEvent.VK_UP) || Keyboard.pressedKey(KeyEvent.VK_W)) {
@@ -55,15 +55,15 @@ public class Player extends GameCharacter {
 
 		if (Keyboard.pressedKey(KeyEvent.VK_DOWN) || Keyboard.pressedKey(KeyEvent.VK_S)) {
 			yPosition += ySpeed;
-			if (yPosition + collisionBox.height > Window.HEIGHT)
-				yPosition = Window.HEIGHT - collisionBox.height;
+			if (yPosition + collisionBox.height > Settings.HEIGHT)
+				yPosition = Settings.HEIGHT - collisionBox.height;
 		}
 
 		collisionBox.x = xPosition;
 		collisionBox.y = yPosition;
 
 		if (wallCollision())
-			yPosition = yPosition <= 400 ? Wall.height : Window.HEIGHT - Wall.height - image.getHeight();
+			yPosition = yPosition <= 400 ? Wall.height : Settings.HEIGHT - Wall.height - image.getHeight();
 
 		collisionBox.y = yPosition;
 

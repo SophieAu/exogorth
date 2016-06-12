@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 
-import exogorth.Window;
+import exogorth.Settings;
 import exogorth.level.Level;
 import exogorth.level.controller.WallController;
 
@@ -35,9 +35,9 @@ public class Enemy extends GameCharacter {
 		bulletSpeed = 7;
 		lives = 2;
 
-		xPositionFactor = (int) (Level.LENGTH * ((double) xSpeed / playerXSpeed));
+		xPositionFactor = (int) (Settings.LENGTH * ((double) xSpeed / playerXSpeed));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
-		yPosition = (random.nextInt(Window.HEIGHT - image.getHeight() - 2 * Wall.height) + Wall.height);
+		yPosition = (random.nextInt(Settings.HEIGHT - image.getHeight() - 2 * Wall.height) + Wall.height);
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());
 	}
 
@@ -59,7 +59,7 @@ public class Enemy extends GameCharacter {
 	protected void movement() {
 		xPosition -= xSpeed;
 
-		if (xPosition <= Window.WIDTH)
+		if (xPosition <= Settings.WIDTH)
 			yMovementPatter();
 
 		collisionBox.x = xPosition;
@@ -75,12 +75,12 @@ public class Enemy extends GameCharacter {
 		}
 
 		yPosition += 2 * ySign;
-		if (yPosition < 0 || yPosition + collisionBox.height > Window.HEIGHT) {
-			yPosition = yPosition <= 0 ? 0 : (Window.HEIGHT - collisionBox.height);
+		if (yPosition < 0 || yPosition + collisionBox.height > Settings.HEIGHT) {
+			yPosition = yPosition <= 0 ? 0 : (Settings.HEIGHT - collisionBox.height);
 			ySign *= -1;
 		}
 		if (wallCollision())
-			ySign = yPosition <= Window.HEIGHT/2 ? 1 : -1;
+			ySign = yPosition <= Settings.HEIGHT/2 ? 1 : -1;
 
 		directionChangeCountdown--;
 	}
@@ -96,7 +96,7 @@ public class Enemy extends GameCharacter {
 
 	@Override
 	public void render(Graphics g) {
-		if (xPosition <= Window.WIDTH)
+		if (xPosition <= Settings.WIDTH)
 			super.render(g);
 	}
 }

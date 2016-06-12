@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import exogorth.STATE;
-import exogorth.Window;
+import exogorth.Settings;
 import exogorth.level.Level;
 import exogorth.TheMain;
 
@@ -24,7 +24,7 @@ public class MouseInput implements MouseListener {
 	}
 
 	private void mousePressedMainMenu(MouseEvent e, int mouseY) {
-		if (mouseY >= MainMenu.playBoxY && mouseY <= (MainMenu.playBoxY + Window.BOXHEIGHT)) {
+		if (mouseY >= MainMenu.playBoxY && mouseY <= (MainMenu.playBoxY + Settings.BOXHEIGHT)) {
 			if (!TheMain.isFirstStart)
 				TheMain.level = new Level(1);
 			TheMain.State = STATE.GAME;
@@ -33,30 +33,30 @@ public class MouseInput implements MouseListener {
 			return;
 		}
 
-		if (mouseY >= MainMenu.helpBoxY && mouseY <= (MainMenu.helpBoxY + Window.BOXHEIGHT)) {
+		if (mouseY >= MainMenu.helpBoxY && mouseY <= (MainMenu.helpBoxY + Settings.BOXHEIGHT)) {
 			TheMain.State = STATE.MENUSCREENS;
 			TheMain.currentScreen = new HelpScreen();
 			return;
 		}
 
-		if (mouseY >= MainMenu.highscoreBoxY && mouseY <= (MainMenu.highscoreBoxY + Window.BOXHEIGHT)) {
+		if (mouseY >= MainMenu.highscoreBoxY && mouseY <= (MainMenu.highscoreBoxY + Settings.BOXHEIGHT)) {
 			TheMain.State = STATE.MENUSCREENS;
 			TheMain.currentScreen = new HighscoreScreen();
 			return;
 		}
 
-		if (mouseY >= MainMenu.creditsBoxY && mouseY <= (MainMenu.creditsBoxY + Window.BOXHEIGHT)) {
+		if (mouseY >= MainMenu.creditsBoxY && mouseY <= (MainMenu.creditsBoxY + Settings.BOXHEIGHT)) {
 			TheMain.State = STATE.MENUSCREENS;
 			TheMain.currentScreen = new CreditsScreen();
 			return;
 		}
 
-		if (mouseY >= MenuScreen.exitBoxY && mouseY <= (MenuScreen.exitBoxY + Window.BOXHEIGHT))
+		if (mouseY >= MenuScreen.exitBoxY && mouseY <= (MenuScreen.exitBoxY + Settings.BOXHEIGHT))
 			System.exit(0);
 	}
 
 	private void mousePressedOtherScreens(MouseEvent e, int mouseY) {
-		if (mouseY >= MenuScreen.exitBoxY && mouseY <= (MenuScreen.exitBoxY + Window.BOXHEIGHT)) {
+		if (mouseY >= MenuScreen.exitBoxY && mouseY <= (MenuScreen.exitBoxY + Settings.BOXHEIGHT)) {
 			TheMain.State = STATE.MAINMENU;
 			TheMain.currentScreen = new MainMenu();
 		}

@@ -34,7 +34,7 @@ public class TheMain extends Canvas {
 		frame.add(game);
 		frame.setUndecorated(true);
 		frame.pack();
-		frame.setSize(Window.WIDTH, Window.HEIGHT);
+		frame.setSize(Settings.WIDTH, Settings.HEIGHT);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);

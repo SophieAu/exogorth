@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import exogorth.ImageLoader;
-import exogorth.Window;
+import exogorth.Settings;
 
 public class Wall {
 	public static int width = 800, height = 100;
@@ -29,7 +29,7 @@ public class Wall {
 		}
 		if (!up) {
 			image = loader.load("Game/rockBottom");
-			topOrBottom = Window.HEIGHT - image.getHeight();
+			topOrBottom = Settings.HEIGHT - image.getHeight();
 		}
 		
 		height = image.getHeight();

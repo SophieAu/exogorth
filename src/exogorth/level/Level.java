@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 
 import exogorth.STATE;
 import exogorth.TheMain;
+import exogorth.Settings;
 import exogorth.level.controller.CollisionController;
 import exogorth.level.controller.WallController;
 import exogorth.level.model.Boss;
@@ -15,7 +16,6 @@ import exogorth.menu.MainMenu;
 
 @SuppressWarnings("serial")
 public class Level extends JFrame {
-	public static final int LENGTH = 3000;
 	public static int progress;
 	static int level;
 	static int levelNumber;
@@ -51,12 +51,12 @@ public class Level extends JFrame {
 	}
 
 	public synchronized void update() {
-		if (progress < LENGTH)
+		if (progress < Settings.LENGTH)
 			background.update();
 		wall.update();
 		player.update();
 		bulletsAndEnemies.update();
-		if (progress > LENGTH)
+		if (progress > Settings.LENGTH)
 			boss.update();
 	}
 
@@ -65,7 +65,7 @@ public class Level extends JFrame {
 		wall.render(g);
 		bulletsAndEnemies.render(g);
 		player.render(g);
-		if (progress > LENGTH)
+		if (progress > Settings.LENGTH)
 			boss.render(g);
 	}
 

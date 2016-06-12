@@ -33,9 +33,6 @@ public class Level extends JFrame {
 	}
 
 	private void reset() {
-		enemyCounter = 50;
-		circleCounter = Level.enemyCounter / 2;
-		triangleCounter = Level.enemyCounter / 2;
 		bulletsAndEnemies = new CollisionController();
 		background = new LevelBackground(Settings.SCROLLSPEED);
 		wall = new WallController(Settings.SCROLLSPEED);
@@ -43,6 +40,10 @@ public class Level extends JFrame {
 		System.out.println("Reset");
 		player = new Player(200, 300, Settings.SCROLLSPEED);
 		boss = new Boss(levelNumber, Settings.SCROLLSPEED);
+
+		enemyCounter = 50;
+		circleCounter = Level.enemyCounter / 2;
+		triangleCounter = Level.enemyCounter / 2;
 		while (enemyCounter != 0)
 			bulletsAndEnemies.add(new Enemy(Settings.ENEMYSCROLLSPEED, Settings.SCROLLSPEED));
 	}

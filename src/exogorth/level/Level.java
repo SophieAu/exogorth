@@ -27,8 +27,6 @@ public class Level extends JFrame {
 	public static CollisionController bulletsAndEnemies;
 
 	public static int enemyCounter, circleCounter, triangleCounter;
-	private static int playerXSpeed = 4;
-	private static int enemyXSpeed = 2;
 
 	public Level(int levelNumber) {
 		Level.levelNumber = levelNumber;
@@ -40,14 +38,14 @@ public class Level extends JFrame {
 		circleCounter = Level.enemyCounter / 2;
 		triangleCounter = Level.enemyCounter / 2;
 		bulletsAndEnemies = new CollisionController();
-		background = new LevelBackground(playerXSpeed);
-		wall = new WallController(playerXSpeed);
+		background = new LevelBackground(Settings.SCROLLSPEED);
+		wall = new WallController(Settings.SCROLLSPEED);
 
 		System.out.println("Reset");
-		player = new Player(200, 300, playerXSpeed);
-		boss = new Boss(levelNumber, playerXSpeed);
+		player = new Player(200, 300, Settings.SCROLLSPEED);
+		boss = new Boss(levelNumber, Settings.SCROLLSPEED);
 		while (enemyCounter != 0)
-			bulletsAndEnemies.add(new Enemy(enemyXSpeed, playerXSpeed));
+			bulletsAndEnemies.add(new Enemy(Settings.ENEMYSCROLLSPEED, Settings.SCROLLSPEED));
 	}
 
 	public synchronized void update() {

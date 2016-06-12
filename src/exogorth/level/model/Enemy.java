@@ -17,9 +17,9 @@ public class Enemy extends GameCharacter {
 	public Enemy(ENEMYTYPE enemyType) {
 		super(Settings.ENEMYSPEED);
 
-		if(enemyType == ENEMYTYPE.CIRCLE)
+		if (enemyType == ENEMYTYPE.CIRCLE)
 			image = loader.load("Game/enemyCircle");
-		else if(enemyType == ENEMYTYPE.TRIANGLE)
+		else if (enemyType == ENEMYTYPE.TRIANGLE)
 			image = loader.load("Game/enemyTriangle");
 
 		this.enemyType = enemyType;
@@ -41,7 +41,7 @@ public class Enemy extends GameCharacter {
 			reload = random.nextInt(10) - random.nextInt(10);
 			bulletList.add(new Bullet(xPosition, yPosition + (image.getHeight() / 2), 7, BULLETTYPE.CIRCLE));
 		}
-		
+
 		if (enemyType == ENEMYTYPE.TRIANGLE) {
 			// TODO: IMPLEMENT TRIANGLE PATTERN HERE
 		}
@@ -72,7 +72,7 @@ public class Enemy extends GameCharacter {
 			ySign *= -1;
 		}
 		if (wallCollision())
-			ySign = yPosition <= Settings.HEIGHT/2 ? 1 : -1;
+			ySign = yPosition <= Settings.HEIGHT / 2 ? 1 : -1;
 
 		directionChangeCountdown--;
 	}

@@ -87,8 +87,8 @@ public class Player extends GameCharacter {
 
 	public void damage() {
 		lives--;
-//		if (lives == 0)
-//			death();
+		// if (lives == 0)
+		// death();
 		System.out.println("Lives left: " + lives);
 	}
 
@@ -99,7 +99,7 @@ public class Player extends GameCharacter {
 			gracePeriodCounter++;
 	}
 
-	//turned off for testing purposes (see lines 91, 92)
+	// turned off for testing purposes (see lines 91, 92)
 	@SuppressWarnings("unused")
 	private void death() {
 		System.out.println("YOU JUST DIED");

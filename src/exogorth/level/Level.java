@@ -48,11 +48,7 @@ public class Level extends JFrame {
 		for (int i = 0; i < enemyCounter; i += 2) {
 			bulletsAndEnemies.add(new Enemy(ENEMYTYPE.CIRCLE));
 			bulletsAndEnemies.add(new Enemy(ENEMYTYPE.TRIANGLE));
-			System.out.println("created circle: " + i);
-			System.out.println("created triangle: " + (i + 1));
 		}
-	//	while (enemyCounter != 0)
-		//	bulletsAndEnemies.add(new Enemy());
 	}
 
 	public synchronized void update() {

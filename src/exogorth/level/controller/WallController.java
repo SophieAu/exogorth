@@ -13,9 +13,9 @@ public class WallController {
 	int wallArraySize;
 
 	public WallController() {
-		for (int i = 0; i < Settings.LEVELLENGTH/Wall.width; i++)
+		for (int i = 0; i < Settings.LEVELLENGTH / Wall.width; i++)
 			wallArray.add(new Wall(Settings.SCROLLSPEED, 800));
-		
+
 		wallArraySize = wallArray.size();
 		currentFirst = wallArray.get(0);
 		currentSecond = wallArray.get(1);
@@ -28,7 +28,7 @@ public class WallController {
 			if (currentFirst.xPosition <= 0 && wallArraySize >= 2)
 				currentSecond.update();
 
-			if (currentFirst.xPosition + Wall.width <= 0 && wallArraySize > 2){
+			if (currentFirst.xPosition + Wall.width <= 0 && wallArraySize > 2) {
 				wallArray.remove(currentFirst);
 				currentFirst = currentSecond;
 				currentSecond = wallArray.get(1);
@@ -48,47 +48,43 @@ public class WallController {
 
 }
 
-
-
-//package exogorth.level;
+// package exogorth.level;
 //
-//import java.awt.Graphics;
-//import java.awt.image.BufferedImage;
+// import java.awt.Graphics;
+// import java.awt.image.BufferedImage;
 //
-//import exogorth.ImageLoader;
+// import exogorth.ImageLoader;
 //
-//public class LevelBackground {
-//	private int xPosition = 0;
-//	private int scrollingSpeed;
-//	private int wallCounter;
-//	private ImageLoader loader = ImageLoader.getInstance();
-//	private BufferedImage image;
+// public class LevelBackground {
+// private int xPosition = 0;
+// private int scrollingSpeed;
+// private int wallCounter;
+// private ImageLoader loader = ImageLoader.getInstance();
+// private BufferedImage image;
 //
-//	public LevelBackground(int scrollingSpeed) {
-//		this.scrollingSpeed = scrollingSpeed;
-//		image = loader.load("background");
-//		wallCounter = 2;
-//	}
+// public LevelBackground(int scrollingSpeed) {
+// this.scrollingSpeed = scrollingSpeed;
+// image = loader.load("background");
+// wallCounter = 2;
+// }
 //
-//	public synchronized void update() {
-//		xPosition -= scrollingSpeed;
-//		if (xPosition < -image.getWidth()){
-//			xPosition = 0;
-//			topOrBottom1 = topOrBottom2
-//			image1 = image2;
-//			topOrBottom2 = random.nextInt(2) == 0 ? 0 : Window.HEIGHT - image.getHeight();
-//			image2 = topOrBottom==0 ? imageTop : imageBottom
-//			wallCounter++;
-//		}
-//	}
+// public synchronized void update() {
+// xPosition -= scrollingSpeed;
+// if (xPosition < -image.getWidth()){
+// xPosition = 0;
+// topOrBottom1 = topOrBottom2
+// image1 = image2;
+// topOrBottom2 = random.nextInt(2) == 0 ? 0 : Window.HEIGHT - image.getHeight();
+// image2 = topOrBottom==0 ? imageTop : imageBottom
+// wallCounter++;
+// }
+// }
 //
-//	public synchronized void render(Graphics g) {
-//		while(wallCounter <= Level.length / image.getWidth()){
-//			g.drawImage(image1, xPosition, topOrBottom1, null);
-//			g.drawImage(image2, xPosition + image.getWidth(), topOrBottom2, null);
-//		}
-//		
-//	}
-//}
-
-
+// public synchronized void render(Graphics g) {
+// while(wallCounter <= Level.length / image.getWidth()){
+// g.drawImage(image1, xPosition, topOrBottom1, null);
+// g.drawImage(image2, xPosition + image.getWidth(), topOrBottom2, null);
+// }
+//
+// }
+// }

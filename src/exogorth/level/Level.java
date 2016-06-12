@@ -45,7 +45,7 @@ public class Level extends JFrame {
 		circleCounter = Level.enemyCounter / 2;
 		triangleCounter = Level.enemyCounter / 2;
 		while (enemyCounter != 0)
-			bulletsAndEnemies.add(new Enemy(Settings.ENEMYSCROLLSPEED, Settings.SCROLLSPEED));
+			bulletsAndEnemies.add(new Enemy());
 	}
 
 	public synchronized void update() {

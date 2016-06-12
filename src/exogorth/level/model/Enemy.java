@@ -16,8 +16,8 @@ public class Enemy extends GameCharacter {
 	private int randomType;
 	private int xPositionFactor;
 
-	public Enemy(int xSpeed, int playerXSpeed) {
-		super(xSpeed);
+	public Enemy() {
+		super(Settings.ENEMYSCROLLSPEED);
 		randomType = random.nextInt(2);
 
 		if ((randomType == 0 || Level.triangleCounter == 0) && Level.circleCounter != 0) {
@@ -35,7 +35,7 @@ public class Enemy extends GameCharacter {
 		bulletSpeed = 7;
 		lives = 2;
 
-		xPositionFactor = (int) (Settings.LEVELLENGTH * ((double) xSpeed / playerXSpeed));
+		xPositionFactor = (int) (Settings.LEVELLENGTH * ((double) Settings.ENEMYSCROLLSPEED / Settings.SCROLLSPEED));
 		xPosition = (random.nextInt(xPositionFactor - image.getWidth() - 1000) + 1000);
 		yPosition = (random.nextInt(Settings.HEIGHT - image.getHeight() - 2 * Wall.height) + Wall.height);
 		collisionBox = new Rectangle(xPosition, yPosition, image.getWidth(), image.getHeight());

@@ -12,9 +12,9 @@ public class WallController {
 	public static Wall currentSecond;
 	int wallArraySize;
 
-	public WallController(int playerXSpeed) {
+	public WallController() {
 		for (int i = 0; i < Settings.LEVELLENGTH/Wall.width; i++)
-			wallArray.add(new Wall(playerXSpeed, 800));
+			wallArray.add(new Wall(Settings.SCROLLSPEED, 800));
 		
 		wallArraySize = wallArray.size();
 		currentFirst = wallArray.get(0);

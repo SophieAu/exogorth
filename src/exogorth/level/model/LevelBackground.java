@@ -4,20 +4,19 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import exogorth.ImageLoader;
+import exogorth.Settings;
 
 public class LevelBackground {
 	private int xPosition = 0;
-	private int scrollingSpeed;
 	private ImageLoader loader = ImageLoader.getInstance();
 	private BufferedImage image;
 
-	public LevelBackground(int scrollingSpeed) {
-		this.scrollingSpeed = scrollingSpeed;
+	public LevelBackground() {
 		image = loader.load("background");
 	}
 
 	public synchronized void update() {
-		xPosition -= scrollingSpeed;
+		xPosition -= Settings.SCROLLSPEED;
 		if (xPosition < -image.getWidth())
 			xPosition = 0;
 	}

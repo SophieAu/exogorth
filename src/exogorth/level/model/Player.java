@@ -12,14 +12,14 @@ public class Player extends GameCharacter {
 	public int gracePeriodCounter;
 	// private boolean doubleDamage;
 
-	public Player(int xPosition, int yPosition, int xSpeed) {
-		super(xSpeed);
+	public Player(int xPosition, int yPosition) {
+		super(Settings.SCROLLSPEED);
 
 		Level.progress = xPosition;
 		bulletSpeed = 7;
 		reloadTime = 20;
 		lives = Settings.PLAYERLIVES;
-		ySpeed = xSpeed;
+		ySpeed = Settings.SCROLLSPEED;
 		gracePeriodCounter = damageGracePeriod;
 
 		image = loader.load("Game/player");

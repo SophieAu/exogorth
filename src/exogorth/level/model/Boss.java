@@ -14,8 +14,8 @@ public class Boss extends GameCharacter {
 	private int directionChangeCountdown;
 	private int levelNumber;
 
-	public Boss(int levelNumber, int xSpeed) {
-		super(-xSpeed);
+	public Boss(int levelNumber) {
+		super(Settings.SCROLLSPEED);
 		this.levelNumber = levelNumber;
 		ySpeed = 0;
 		reloadTime = 25;

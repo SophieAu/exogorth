@@ -13,9 +13,9 @@ public class ImageLoader {
 	}
 
 	public static synchronized ImageLoader getInstance() {
-		if (ImageLoader.loader == null) {
+		if (ImageLoader.loader == null)
 			ImageLoader.loader = new ImageLoader();
-		}
+
 		return ImageLoader.loader;
 	}
 	// End of Singleton Pattern-------------------------------------------

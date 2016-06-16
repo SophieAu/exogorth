@@ -15,25 +15,21 @@ public class Wall {
 
 	public BufferedImage image;
 	private ImageLoader loader = ImageLoader.getInstance();
-	public int topOrBottom;
-	public int xPosition;
+	public int xPosition, yPosition;
 
 	public Wall(int xPosition) {
-		boolean up = random.nextInt(2) == 0;
-
-		if (up) {
+		if (random.nextInt(2) == 0) {
 			image = loader.load("Game/rockTop");
-			topOrBottom = 0;
-		}
-		if (!up) {
+			yPosition = 0;
+		} else {
 			image = loader.load("Game/rockBottom");
-			topOrBottom = Settings.HEIGHT - image.getHeight();
+			yPosition = Settings.HEIGHT - image.getHeight();
 		}
-		
+
 		height = image.getHeight();
 		width = image.getWidth();
 		this.xPosition = xPosition;
-		collisionBox = new Rectangle(xPosition, topOrBottom, width, height);
+		collisionBox = new Rectangle(xPosition, yPosition, width, height);
 	}
 
 	public synchronized void update() {
@@ -42,6 +38,6 @@ public class Wall {
 	}
 
 	public synchronized void render(Graphics g) {
-		g.drawImage(image, xPosition, topOrBottom, null);
+		g.drawImage(image, xPosition, yPosition, null);
 	}
 }

@@ -25,9 +25,7 @@ public class Level extends JFrame {
 	public static Player player;
 	public static Boss boss;
 	public static CollisionController bulletsAndEnemies;
-
-	public static int enemyCounter;
-
+	
 	public Level(int levelNumber) {
 		this.levelNumber = levelNumber;
 		reset();
@@ -38,6 +36,7 @@ public class Level extends JFrame {
 	private void reset() {
 		System.out.println("Reset"); // DEBUG--------------------------------------
 
+		int enemyCounter = 0;
 		if (levelNumber == 1)
 			enemyCounter = Settings.LEVELONEENEMIES;
 		if (levelNumber == 2)

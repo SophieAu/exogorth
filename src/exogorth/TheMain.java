@@ -18,8 +18,7 @@ public class TheMain extends Canvas {
 	public static boolean isFirstStart;
 	public static boolean running = false;
 	private BufferStrategy bufferStrategy;
-	private Thread renderer;
-	private Thread updater;
+	private Thread renderer, updater;
 
 	public static void main(String args[]) {
 		TheMain game = new TheMain();
@@ -60,7 +59,7 @@ public class TheMain extends Canvas {
 					render();
 				stop(renderer);
 			}
-		});
+		}, "renderer");
 	}
 
 	private void initUpdater() {
@@ -82,7 +81,7 @@ public class TheMain extends Canvas {
 				}
 				stop(updater);
 			}
-		});
+		}, "updater");
 	}
 
 	private void startGameLoop() {

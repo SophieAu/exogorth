@@ -1,14 +1,13 @@
 package exogorth.menu;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import exogorth.STATE;
 import exogorth.Settings;
 import exogorth.level.Level;
 import exogorth.TheMain;
 
-public class MouseInput implements MouseListener {
+public class MouseInput extends MouseAdapter {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -60,21 +59,5 @@ public class MouseInput implements MouseListener {
 			TheMain.State = STATE.MAINMENU;
 			TheMain.currentScreen = new MainMenu();
 		}
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
 	}
 }
